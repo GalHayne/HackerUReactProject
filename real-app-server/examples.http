@@ -1,0 +1,30 @@
+@local=http://localhost:3900/api
+
+
+### create user 
+POST {{local}}/users
+Content-Type: application/json
+
+{
+    "name": "daniel",
+    "email": "d@gmail.com",
+    "password": "aaaaaaaa",
+    "biz": true
+}
+
+### login user
+POST {{local}}/auth
+Content-Type: application/json
+
+{
+    "email": "d@gmail.com",
+    "password": "aaaaaaaa"
+}
+
+### get logged in user's data
+GET {{local}}/users/me
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDViYWRlMTdmNmNhYWVlYmQwNmY3ZmYiLCJiaXoiOnRydWUsImlhdCI6MTY4MzcyOTk3Nn0.jWTXZbtM-nMYUI0_8a-iMRFPyLYkAq9MyUnhwcTyIlg
+
+### get all cards
+GET {{local}}/cards
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDViYWRlMTdmNmNhYWVlYmQwNmY3ZmYiLCJiaXoiOnRydWUsImlhdCI6MTY4MzcyOTk3Nn0.jWTXZbtM-nMYUI0_8a-iMRFPyLYkAq9MyUnhwcTyIlg
