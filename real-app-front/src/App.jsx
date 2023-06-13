@@ -14,7 +14,6 @@ import SignUp from "./components/signup";
 import SignOut from "./components/signout";
 import SignUpBiz from "./components/signupBiz";
 import MyCards from "./components/myCards";
-import ProtectedRoute from "./components/common/protectedRoute";
 import CardsCreate from "./components/cardsCreate";
 import CardsDelete from "./components/cardsDelete";
 import CardsEdit from "./components/cardsEdit";
@@ -43,14 +42,12 @@ function App() {
                 <MyCards />
             }
           />
-
           <Route
             path="my-cards/delete/:id"
             element={
                 <CardsDelete />
             }
           />
-
           <Route
             path="my-cards/edit/:id"
             element={
@@ -60,9 +57,7 @@ function App() {
           <Route
             path="create-card"
             element={
-  
                 <CardsCreate />
-
             }
           />
         </Routes>
