@@ -21,6 +21,14 @@ router.get("/cards", auth, async (req, res) => {
   res.send(cards);
 });
 
+router.get("/users", auth, async (req, res) => {
+
+  if (req.user.biz === true){
+    const users = await User.find();    
+    res.send(users);
+  }
+});
+
 router.patch("/cards", auth, async (req, res) => {
   const { error } = validateCards(req.body);
   if (error) res.status(400).send(error.details[0].message);
