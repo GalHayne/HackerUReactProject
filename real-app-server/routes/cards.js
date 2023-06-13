@@ -5,20 +5,15 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
-  // if (!req.user.biz) {
-  //   res.status(401).send("Access Denied");
-  //   return;
-  // }
 
   if (req.user.biz === true){
-    const cards = Card.cards.find()
-
-    console.log(cards);
-    
+    const cards = await Card.find();    
+    res.send(cards);
+  }else{
+    const cards = await Card.find({ user_id: req.user._id });
+    res.send(cards);
   }
-
-  const cards = await Card.find({ user_id: req.user._id });
-  res.send(cards);
+  res.status(200);  
 });
 
 router.delete("/:id", auth, async (req, res) => {
