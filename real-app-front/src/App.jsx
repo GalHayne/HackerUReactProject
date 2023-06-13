@@ -47,18 +47,14 @@ function App() {
           <Route
             path="my-cards/delete/:id"
             element={
-              <ProtectedRoute onlyBiz>
                 <CardsDelete />
-              </ProtectedRoute>
             }
           />
 
           <Route
             path="my-cards/edit/:id"
             element={
-              <ProtectedRoute onlyBiz>
                 <CardsEdit />
-              </ProtectedRoute>
             }
           />
           <Route
