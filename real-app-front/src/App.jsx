@@ -17,6 +17,7 @@ import MyCards from "./components/myCards";
 import CardsCreate from "./components/cardsCreate";
 import CardsDelete from "./components/cardsDelete";
 import CardsEdit from "./components/cardsEdit";
+import Users from "./components/users";
 
 function App() {
   return (
@@ -36,30 +37,11 @@ function App() {
           <Route path="sign-up" element={<SignUp redirect="/sign-in" />} />
           <Route path="sign-in" element={<SignIn redirect="/" />} />
           <Route path="sign-out" element={<SignOut redirect="/" />} />
-          <Route
-            path="my-cards"
-            element={
-                <MyCards />
-            }
-          />
-          <Route
-            path="my-cards/delete/:id"
-            element={
-                <CardsDelete />
-            }
-          />
-          <Route
-            path="my-cards/edit/:id"
-            element={
-                <CardsEdit />
-            }
-          />
-          <Route
-            path="create-card"
-            element={
-                <CardsCreate />
-            }
-          />
+          <Route path="my-cards" element={<MyCards />} />
+          <Route path="users" element={<Users />} />
+          <Route path="my-cards/delete/:id" element={<CardsDelete />} />
+          <Route path="my-cards/edit/:id" element={<CardsEdit />} />
+          <Route path="create-card" element={<CardsCreate />} />
         </Routes>
       </main>
       <Footer />

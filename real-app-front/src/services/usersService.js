@@ -39,12 +39,17 @@ export function getUser() {
   }
 }
 
+export function getAllUsers() {
+  return httpService.get("/users");
+}
+
 const usersService = {
   createUser,
   loginUser,
   logout,
   getJWT,
   getUser,
+  getAllUsers,
 };
 
 export default usersService;

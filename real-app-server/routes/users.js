@@ -21,12 +21,11 @@ router.get("/cards", auth, async (req, res) => {
   res.send(cards);
 });
 
-router.get("/users", auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
 
-  if (req.user.biz === true){
     const users = await User.find();    
     res.send(users);
-  }
+  
 });
 
 router.patch("/cards", auth, async (req, res) => {

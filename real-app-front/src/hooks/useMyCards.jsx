@@ -8,7 +8,6 @@ export const useMyCards = () => {
   useEffect(() => {
     const getCards = async () => {
       const { data } = await cardsService.getAll();
-      console.log(data);
       setCards(data);
     };
 
