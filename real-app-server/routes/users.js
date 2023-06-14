@@ -23,9 +23,34 @@ router.get("/cards", auth, async (req, res) => {
 
 router.get("/", auth, async (req, res) => {
 
-    const users = await User.find();    
-    res.send(users);
-  
+  const users = await User.find();
+  res.send(users);
+
+});
+
+router.delete("/:id", auth, async (req, res) => {
+  const user = await User.findOneAndRemove({
+    _id: req.params.id,
+  });
+  if (!user)
+    return res.status(404).send("The user with the given ID was not found.");
+  res.send(user);
+
+});
+
+router.put("/:id", auth, async (req, res) => {
+  let user = await User.findOne(
+    { _id: req.params.id }
+  );
+
+  if (!user)
+    return res.status(404).send("The user with the given ID was not found.");
+
+  user.biz = !user.biz;
+
+  user.save();
+
+  res.send(user);
 });
 
 router.patch("/cards", auth, async (req, res) => {

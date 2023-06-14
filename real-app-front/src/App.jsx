@@ -52,8 +52,23 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="my-cards/delete/:id" element={<CardsDelete />} />
-          <Route path="my-cards/edit/:id" element={<CardsEdit />} />
+          <Route
+            path="my-cards/delete/:id"
+            element={
+              <ProtectedRoute onlyBiz>
+                <CardsDelete />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="my-cards/edit/:id"
+            element=
+            {
+              <ProtectedRoute onlyBiz>
+                <CardsEdit />
+              </ProtectedRoute>
+            }
+          />
           <Route path="create-card" element={<CardsCreate />} />
         </Routes>
       </main>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Card = ({
-  card: { card, _id, bizName, bizDescription, bizAddress, bizPhone, bizImage },
+  card: { _id, bizName, bizDescription, bizAddress, bizPhone, bizImage },
 }) => {
   return (
     <div className="card" style={{ width: "18rem" }}>
