@@ -21,14 +21,19 @@ const Users = () => {
   }, []);
 
   const renderUsers = users?.map((user) => {
-    return <div key={user._id}>
-      <ul>
-        <li> {JSON.stringify(user.biz)}</li>
-        <li>{user.createdAt}</li>
-        <li>{user.email}</li>
-        <li>{user.name}</li>
-      </ul>
-    </div>
+    return (
+      <tbody key={user._id}>
+        <tr className="text-center">
+          <th scope="row">{user._id}</th>
+          <td>{user.name}</td>
+          <td>{user.email}</td>
+          <td>{JSON.stringify(user.biz)}</td>
+          {!user.biz && <td><button className="btn btn-primary text-light rounded border">🎓</button></td>}
+
+        </tr>
+      </tbody>
+
+    )
   })
 
 
@@ -38,7 +43,23 @@ const Users = () => {
         title="Users"
         description="your users are in the table below"
       />
-      {renderUsers}
+
+      <table className="table">
+        <thead>
+          <tr className="text-center">
+            <th scope="col">User ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">business</th>
+            <th scope="col">Make Admin</th>
+          </tr>
+        </thead>
+        {renderUsers}
+
+      </table>
+
+
+
 
     </>
   );
