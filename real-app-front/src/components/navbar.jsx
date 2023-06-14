@@ -39,6 +39,11 @@ const Navbar = () => {
                 </NavLink>
               </li>
             )}
+            {user?.biz && <li className="nav-item">
+              <NavLink className="nav-link" to="/users">
+                CRM
+              </NavLink>
+            </li>}
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-md-0">
             {user ? (
@@ -48,11 +53,6 @@ const Navbar = () => {
                     Sign Out
                   </NavLink>
                 </li>
-                {user.biz && <li className="nav-item">
-                  <NavLink className="nav-link" to="/users">
-                    CRM
-                  </NavLink>
-                </li>}
               </>
             ) : (
               <>

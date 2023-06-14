@@ -28,8 +28,7 @@ const Users = () => {
           <td>{user.name}</td>
           <td>{user.email}</td>
           <td>{JSON.stringify(user.biz)}</td>
-          {!user.biz && <td><button className="btn btn-primary text-light rounded border">🎓</button></td>}
-
+          {!user.biz ? <td><button className="btn btn-primary text-light rounded border">🎓</button></td> : <td></td>}
         </tr>
       </tbody>
 
