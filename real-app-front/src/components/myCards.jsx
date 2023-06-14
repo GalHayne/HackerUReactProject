@@ -21,7 +21,7 @@ const MyCards = () => {
         {!cards.length ? (
           <p>no cards...</p>
         ) : (
-          cards.map((card) => { <Card key={card._id} card={card} /> })
+          cards.map((card) => <Card key={card._id} card={card} />)
         )}
 
       </div>

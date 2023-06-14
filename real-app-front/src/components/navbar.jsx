@@ -43,16 +43,16 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto mb-2 mb-md-0">
             {user ? (
               <>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/sign-out">
-                  Sign Out
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/users">
-                  Users
-                </NavLink>
-              </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/sign-out">
+                    Sign Out
+                  </NavLink>
+                </li>
+                {user.biz && <li className="nav-item">
+                  <NavLink className="nav-link" to="/users">
+                    CRM
+                  </NavLink>
+                </li>}
               </>
             ) : (
               <>
@@ -70,8 +70,6 @@ const Navbar = () => {
                   <NavLink className="nav-link" to="/sign-up-biz">
                     Sign Up Business
                   </NavLink>
-                
-
                 </li>
               </>
             )}

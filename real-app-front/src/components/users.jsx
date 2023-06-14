@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import PageHeader from "./common/pageHeader";
 import usersService from "../services/usersService";
+import { useAuth } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Users = () => {
 
   const [users, setUsers] = useState();
+
 
   useEffect(() => {
     const getUsers = async () => {
@@ -38,6 +42,7 @@ const Users = () => {
 
     </>
   );
+
 };
 
 export default Users;
