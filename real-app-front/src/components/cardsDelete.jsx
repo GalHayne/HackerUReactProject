@@ -7,8 +7,6 @@ const CardsDelete = () => {
   const { id } = useParams();
 
   useEffect(() => {
-
-    
     const deleteCard = async () => {
       await cardsService.deleteCard(id);
       navigate("/my-cards");

@@ -62,7 +62,6 @@ const CardsEdit = () => {
 
   useEffect(() => {
     if (!card) return;
-    console.log(card);
 
     const { bizName, bizDescription, bizAddress, bizPhone, bizImage } = card;
 
