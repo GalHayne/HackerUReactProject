@@ -7,7 +7,7 @@ import Joi from "joi";
 import { useFormik } from "formik";
 import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Navigate,useNavigate } from "react-router-dom";
 import PageHeader from "./common/pageHeader";
 
 const UserDeatils = () => {
@@ -54,6 +54,7 @@ const UserDeatils = () => {
     },
   });
 
+
   const getMe = async () => {
     const res = await axios.get(`http://localhost:3900/api/users/${user._id}`)
     setUserDetails(res.data[0]);
@@ -61,7 +62,10 @@ const UserDeatils = () => {
   }
 
   useEffect(() => {
-    getMe();
+    if (user){
+      getMe();
+    }
+    
   },[])
 
   const handleToggleShowEdit = () => {
@@ -72,6 +76,10 @@ const UserDeatils = () => {
 
   const handleCancle = () => {
     handleToggleShowEdit()
+  }
+
+  if (!user){
+    return <Navigate to="/" />;
   }
 
   return (
