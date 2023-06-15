@@ -1,4 +1,4 @@
-const Input = ({ label, name, error, width = "w-25", placeholder= "",...rest }) => {
+const Input = ({ label, name, error, width = "w-100", placeholder= "",...rest }) => {
   return (
     <div className="form-group my-1">
       <label htmlFor={name}>

@@ -9,3 +9,9 @@
   cursor: pointer;
 }
 
+.center-div{
+  width: 25%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
