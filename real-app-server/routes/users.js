@@ -51,8 +51,6 @@ router.get("/:id", auth, async (req, res) => {
   }else{
     res.status(404);
   }
-
-
 });
 
 router.put("/:id", auth, async (req, res) => {
