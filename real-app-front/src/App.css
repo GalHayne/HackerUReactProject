@@ -1,0 +1,11 @@
+.connectNow{
+  margin-left: auto;
+  margin-right: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background-image: linear-gradient(to bottom, #6554AF , #9575DE);
+  transition: 0.4s;
+  cursor: pointer;
+}
+

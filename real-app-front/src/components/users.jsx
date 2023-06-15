@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import PageHeader from "./common/pageHeader";
 import usersService from "../services/usersService";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/auth.context";
 
 
 const Users = () => {
 
-  const [users, setUsers] = useState();
+  const { user } = useAuth();
 
-  const navigate = useNavigate();
+  const userId = user._id;
+
+  console.log(userId);
+
+  const [users, setUsers] = useState();
 
   const getUsers = async () => {
     const { data } = await usersService.getAllUsers();
@@ -23,12 +26,12 @@ const Users = () => {
   }, []);
 
   const handleDeleteUser = async (_id) => {
-    const res = await axios.delete(`http://localhost:3900/api/users/${_id}`)
+    await axios.delete(`http://localhost:3900/api/users/${_id}`)
     getUsers();
   }
 
   const handleToggleUser = async (_id) => {
-    const res = await axios.put(`http://localhost:3900/api/users/${_id}`)
+    await axios.put(`http://localhost:3900/api/users/${_id}`)
     getUsers();
   }
 
@@ -36,6 +39,7 @@ const Users = () => {
     return (
       <tbody key={user._id}>
         <tr className="text-center">
+          <th className="">{userId === user._id ? <div title="connected now" className="connectNow"></div> : <div></div>}</th>
           <th scope="row">{user._id}</th>
           <td>{user.name}</td>
           <td>{user.email}</td>
@@ -59,6 +63,7 @@ const Users = () => {
       <table className="table">
         <thead>
           <tr className="text-center">
+            <th>Connect Now</th>
             <th scope="col">User ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
