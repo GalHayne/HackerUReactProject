@@ -33,14 +33,25 @@ router.delete("/:id", auth, async (req, res) => {
   const user = await User.findOneAndRemove({
     _id: req.params.id,
   });
-
   
   await Card.deleteMany({user_id:req.params.id})
-
-  // })
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
   res.send(user);
+
+});
+
+router.get("/:id", auth, async (req, res) => {
+
+  const user = await User.find({_id: req.params.id})
+
+  if (user){
+    res.status(200);
+    res.send(user);
+  }else{
+    res.status(404);
+  }
+
 
 });
 
@@ -55,6 +66,24 @@ router.put("/:id", auth, async (req, res) => {
   user.biz = !user.biz;
 
   user.save();
+
+  res.send(user);
+});
+
+router.put("/updateDetails/:id", auth, async (req, res) => {
+  let user = await User.findOne(
+    { _id: req.params.id }
+  );
+
+  if (!user)
+    return res.status(404).send("The user with the given ID was not found.");
+
+  user.email = req.body.email
+  user.name = req.body.name
+
+  user.save();
+
+  console.log(user);
 
   res.send(user);
 });
@@ -74,6 +103,7 @@ router.patch("/cards", auth, async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
+  console.log("req:",req);
   const user = await User.findById(req.user._id).select("-password");
   res.send(user);
 });

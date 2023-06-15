@@ -1,4 +1,4 @@
-const Input = ({ label, name, error, ...rest }) => {
+const Input = ({ label, name, error, width = "w-25", placeholder= "",...rest }) => {
   return (
     <div className="form-group my-1">
       <label htmlFor={name}>
@@ -6,10 +6,11 @@ const Input = ({ label, name, error, ...rest }) => {
         {rest.required && <span className="text-danger ms-1">*</span>}
       </label>
       <input
+      placeholder={placeholder}
         {...rest}
         id={name}
         name={name}
-        className={["form-control", error && "is-invalid"]
+        className={["form-control", error && "is-invalid", width]
           .filter(Boolean)
           .join(" ")}
       />

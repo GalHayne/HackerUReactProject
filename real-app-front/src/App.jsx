@@ -19,6 +19,7 @@ import CardsDelete from "./components/cardsDelete";
 import CardsEdit from "./components/cardsEdit";
 import Users from "./components/users";
 import ProtectedRoute from "./components/common/protectedRoute";
+import UserDeatils from "./components/userDetails";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="sign-up" element={<SignUp redirect="/sign-in" />} />
           <Route path="sign-in" element={<SignIn redirect="/" />} />
           <Route path="sign-out" element={<SignOut redirect="/" />} />
+          <Route path="user-details" element={<UserDeatils redirect="/" />} />
           <Route
             path="my-cards"
             element={

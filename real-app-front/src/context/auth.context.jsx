@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 import usersService from "../services/usersService";
 
 const fn_error_context_must_be_used = () => {
