@@ -11,8 +11,6 @@ const Users = () => {
 
   const userId = user._id;
 
-  console.log(userId);
-
   const [users, setUsers] = useState();
 
   const getUsers = async () => {
