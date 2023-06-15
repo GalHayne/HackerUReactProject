@@ -26,8 +26,7 @@ const Users = () => {
 
   const handleDeleteUser = async (_id) => {
     const res = await axios.delete(`http://localhost:3900/api/users/${_id}`)
-    // console.log(res);
-    toast.success(`The user ${res.data.name} has been successfully deleted`)
+    toast.success(`The user ${res.data.name} and his cards has been successfully deleted`)
     getUsers();
   }
 
