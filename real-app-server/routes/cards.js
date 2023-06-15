@@ -6,13 +6,11 @@ const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
 
-  if (req.user.biz === true) {
-    const cards = await Card.find();
-    res.send(cards);
-  } else {
-    const cards = await Card.find({ user_id: req.user._id });
-    res.send(cards);
-  }
+
+  const cards = await Card.find();
+  res.send(cards);
+
+
   res.status(200);
 });
 

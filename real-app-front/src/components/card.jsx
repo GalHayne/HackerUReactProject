@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth.context";
+
 
 const Card = ({
-  card: { _id, bizName, bizDescription, bizAddress, bizPhone, bizImage },
+  card: { _id, bizName, bizDescription, bizAddress, bizPhone, bizImage, user_id },
 }) => {
+
+  const { user } = useAuth();
+
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src={bizImage} className="card-img-top" alt={bizName} />
@@ -15,12 +20,29 @@ const Card = ({
           <li className="list-group-item">{bizPhone}</li>
         </ul>
 
-        <Link to={`/my-cards/edit/${_id}`} className="card-link">
-          edit
-        </Link>
-        <Link to={`/my-cards/delete/${_id}`} className="card-link">
-          delete
-        </Link>
+        {user.biz ?
+          <>
+            <Link to={`/my-cards/edit/${_id}`} className="card-link">
+              edit
+            </Link>
+            <Link to={`/my-cards/delete/${_id}`} className="card-link">
+              delete
+            </Link>
+          </>
+          :
+          <>
+            {user_id === user._id ?
+              <div>
+                <Link to={`/my-cards/edit/${_id}`} className="card-link">
+                  edit
+                </Link>
+                <Link to={`/my-cards/delete/${_id}`} className="card-link">
+                  delete
+                </Link>
+              </div> : <div></div>}
+          </>
+        }
+
       </div>
     </div>
   );
