@@ -46,8 +46,7 @@ const CardsCreate = () => {
           body.bizImage = bizImage;
         }
         const res = cardsService.createCard(body);
-        res.then((data) => { toast.success(`${data.data.bizName}'s card was created successfully`) })
-        navigate("/my-cards");
+        res.then((data) => { toast.success(`${data.data.bizName}'s card was created successfully`); navigate("/my-cards"); })
       } catch ({ response }) {
         if (response && response.status === 400) {
           setError(response.data);

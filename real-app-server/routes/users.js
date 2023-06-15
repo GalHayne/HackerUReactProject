@@ -29,9 +29,15 @@ router.get("/", auth, async (req, res) => {
 });
 
 router.delete("/:id", auth, async (req, res) => {
+  
   const user = await User.findOneAndRemove({
     _id: req.params.id,
   });
+
+  
+  await Card.deleteMany({user_id:req.params.id})
+
+  // })
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
   res.send(user);

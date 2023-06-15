@@ -12,7 +12,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const { user, createUser, login } = useAuth();
+  const { user, createUser } = useAuth();
 
   const form = useFormik({
     validateOnMount: true,

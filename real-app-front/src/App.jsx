@@ -23,7 +23,7 @@ import ProtectedRoute from "./components/common/protectedRoute";
 function App() {
   return (
     <div className="app d-flex flex-column min-vh-100">
-      <ToastContainer />
+      <ToastContainer position="bottom-right"/>
       <header>
         <Navbar />
       </header>

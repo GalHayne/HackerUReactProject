@@ -60,6 +60,7 @@ const Users = () => {
       <PageHeader
         title="Users"
         description="All users registered in the system are in the table below. You can turn a regular user into an administrator and only regular users can be deleted"
+        note="Note that when you delete a user, all their cards will also be deleted for the deleted user"
       />
 
       <table className="table">
