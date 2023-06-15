@@ -50,7 +50,7 @@ const CardsEdit = () => {
         }
 
         cardsService.updateCard(id, body);
-        toast("Card Edited Successfully 👏🏾👏🏾");
+        toast.success("Card Edited Successfully");
         navigate("/my-cards");
       } catch ({ response }) {
         if (response && response.status === 400) {

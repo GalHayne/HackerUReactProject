@@ -33,7 +33,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route
             path="sign-up-biz"
-            element={<SignUpBiz redirect="/my-cards" />}
+            element={<SignUpBiz redirect="/sign-in" />}
           />
           <Route path="sign-up" element={<SignUp redirect="/sign-in" />} />
           <Route path="sign-in" element={<SignIn redirect="/" />} />
@@ -55,25 +55,21 @@ function App() {
           <Route
             path="my-cards/delete/:id"
             element={
-              <ProtectedRoute onlyBiz>
-                <CardsDelete />
-              </ProtectedRoute>
+              <CardsDelete />
             }
           />
           <Route
             path="my-cards/edit/:id"
             element=
             {
-              <ProtectedRoute onlyBiz>
-                <CardsEdit />
-              </ProtectedRoute>
+              <CardsEdit />
             }
           />
           <Route path="create-card" element={<CardsCreate />} />
         </Routes>
       </main>
       <Footer />
-    </div>
+    </div >
   );
 }
 

@@ -6,6 +6,7 @@ import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/input";
 import PageHeader from "./common/pageHeader";
 import cardsService from "../services/cardsService";
+import { toast } from "react-toastify";
 
 const CardsCreate = () => {
   const [error, setError] = useState("");
@@ -44,8 +45,8 @@ const CardsCreate = () => {
         if (bizImage) {
           body.bizImage = bizImage;
         }
-
-        cardsService.createCard(body);
+        const res = cardsService.createCard(body);
+        res.then((data) => { toast.success(`${data.data.bizName}'s card was created successfully`) })
         navigate("/my-cards");
       } catch ({ response }) {
         if (response && response.status === 400) {

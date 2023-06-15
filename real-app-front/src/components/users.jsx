@@ -3,6 +3,7 @@ import PageHeader from "./common/pageHeader";
 import usersService from "../services/usersService";
 import axios from "axios";
 import { useAuth } from "../context/auth.context";
+import { toast } from "react-toastify";
 
 
 const Users = () => {
@@ -24,12 +25,15 @@ const Users = () => {
   }, []);
 
   const handleDeleteUser = async (_id) => {
-    await axios.delete(`http://localhost:3900/api/users/${_id}`)
+    const res = await axios.delete(`http://localhost:3900/api/users/${_id}`)
+    // console.log(res);
+    toast.success(`The user ${res.data.name} has been successfully deleted`)
     getUsers();
   }
 
   const handleToggleUser = async (_id) => {
-    await axios.put(`http://localhost:3900/api/users/${_id}`)
+    const res = await axios.put(`http://localhost:3900/api/users/${_id}`)
+    toast.success(`The user ${res.data.name} became a admin`)
     getUsers();
   }
 
@@ -55,7 +59,7 @@ const Users = () => {
     <>
       <PageHeader
         title="Users"
-        description="your users are in the table below"
+        description="All users registered in the system are in the table below. You can turn a regular user into an administrator and only regular users can be deleted"
       />
 
       <table className="table">
@@ -65,7 +69,7 @@ const Users = () => {
             <th scope="col">User ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">business</th>
+            <th scope="col">Is Admin</th>
             <th scope="col">Make Admin</th>
             <th scope="col">Delete User</th>
           </tr>

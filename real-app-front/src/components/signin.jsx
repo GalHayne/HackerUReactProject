@@ -6,6 +6,7 @@ import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/input";
 import PageHeader from "./common/pageHeader";
 import { useAuth } from "../context/auth.context";
+import { toast } from "react-toastify";
 
 const SignIn = ({ redirect = "/" }) => {
   const [error, setError] = useState("");
@@ -31,11 +32,17 @@ const SignIn = ({ redirect = "/" }) => {
     }),
     async onSubmit(values) {
       try {
-        await login(values);
-        navigate(redirect);
-      } catch ({ response }) {
-        if (response && response.status === 400) {
-          setError(response.data);
+        const res = await login(values);
+        if (res) {
+          navigate(redirect);
+          toast.success(`You have successfully connected to the system`);
+        } else {
+
+          toast.error(`Problem connecting to the server`);
+        }
+      } catch (err) {
+        if (err) {
+          setError(err);
         }
       }
     },

@@ -6,6 +6,7 @@ import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/auth.context";
+import { toast } from "react-toastify";
 
 const SignUp = ({ redirect = "/" }) => {
   const [error, setError] = useState("");
@@ -32,7 +33,8 @@ const SignUp = ({ redirect = "/" }) => {
     }),
     async onSubmit(values) {
       try {
-        await createUser({ ...values, biz: false });
+        const res = await createUser({ ...values, biz: false });
+        toast.success(`${res.data.name} you have successfully registered to the site, you are transferred to the login page`)
         navigate(redirect);
       } catch ({ response }) {
         if (response && response.status === 400) {
