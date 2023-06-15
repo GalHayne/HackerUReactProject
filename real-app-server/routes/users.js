@@ -82,9 +82,7 @@ router.put("/updateDetails/:id", auth, async (req, res) => {
   user.name = req.body.name
 
   user.save();
-
   console.log(user);
-
   res.send(user);
 });
 

@@ -24,7 +24,6 @@ const UserDeatils = () => {
     validateOnMount: true,
     initialValues: {
       email: "",
-      password: "",
       name: "",
     },
     validate: formikValidateUsingJoi({
@@ -35,11 +34,9 @@ const UserDeatils = () => {
         .required()
         .email({ tlds: { allow: false } })
         .label("Email"),
-        password: Joi.string().min(6).max(1024).required().label("Password"),
     }),
     async onSubmit(values) {
       try {
-        console.log(values);
         const res = await axios.put(`http://localhost:3900/api/users/updateDetails/${user._id}`,{
           email: values.email,
           name: values.name,
@@ -87,7 +84,9 @@ const UserDeatils = () => {
       }
     />
       <img className="rounded-circle w-25" src={userImg} alt="Logo" />
-      {!showEdit && <p>User Name: {userDetails.name}</p>}
+      {!showEdit && <div className="m-3"><p>User Name: {userDetails.name}</p>
+      <p>Email: {userDetails.email}</p></div>
+      }
        {!showEdit && <button className='rounded border w-25 min-vw-25 p-2 btn btn-secondary' onClick={handleToggleShowEdit}>Edit profile</button>}
        {showEdit && <form onSubmit={form.handleSubmit} noValidate>
         {error && <div className="alert alert-danger">{error}</div>}
@@ -99,14 +98,6 @@ const UserDeatils = () => {
           required
           placeholder={userDetails.email}
           error={form.touched.email && form.errors.email}
-          />
-        <Input
-          {...form.getFieldProps("password")}
-          type="password"
-          label="Password"
-          required
-          placeholder='********'
-          error={form.touched.password && form.errors.password}
           />
         <Input
           {...form.getFieldProps("name")}
