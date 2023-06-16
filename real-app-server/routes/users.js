@@ -84,6 +84,26 @@ router.put("/updateDetails/:id", auth, async (req, res) => {
   res.send(user);
 });
 
+router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
+  let card = await Card.findOne({ _id: req.params.card_id });
+  let user = await User.findOne({ _id: req.params.user_id });
+
+  if (user && card){ 
+    user.favoriteCard.push(card);
+    user.save();
+    res.send(user).status(201);
+  }else{
+    res.status(404)
+    res.send('error cant find the cards or user')
+  }
+});
+
+router.get("/FavoriteCard/:_id", auth, async (req, res) => {
+  let user = await User.findOne({ _id: req.params._id });
+
+  res.send(user);
+});
+
 router.patch("/cards", auth, async (req, res) => {
   const { error } = validateCards(req.body);
   if (error) res.status(400).send(error.details[0].message);

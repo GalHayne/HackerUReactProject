@@ -99,6 +99,7 @@ const UserDeatils = () => {
        {showEdit && <form onSubmit={form.handleSubmit} noValidate>
         {error && <div className="alert alert-danger">{error}</div>}
 
+      <div className="w-25">
         <Input
           {...form.getFieldProps("email")}
           type="email"
@@ -114,7 +115,8 @@ const UserDeatils = () => {
           required
           placeholder={userDetails.name}
           error={form.touched.name && form.errors.name}
-        />
+          />
+      </div>
         
         <div className="my-2 d-flex justify-content-around w-25">
           <button
