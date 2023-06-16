@@ -98,6 +98,30 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
   }
 });
 
+router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
+  let user = await User.findOne({ _id: req.params.user_id });
+  let card = await Card.findOne({ _id: req.params.card_id });
+
+  if (user && card){
+    let index;
+    
+    for (let i = 0; i < user.favoriteCard.length; ++i){
+    if(JSON.stringify(card._id) === JSON.stringify(user.favoriteCard[i]._id)){
+      index = i;
+    }
+  }
+
+  user.favoriteCard.splice(index,1);
+  user.save();
+  res.send(user);
+  res.status(201);
+}else{
+  res.status(400);
+
+}
+  
+});
+
 router.get("/FavoriteCard/:_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params._id });
 

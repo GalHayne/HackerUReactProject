@@ -33,12 +33,23 @@ const MyCards = () => {
       try {
         await axios.put(`http://localhost:3900/api/users/addFavoriteCard/${card_id}/${user._id}`,{
         })
-      toast.success(`The card move to favorite`)
-      getFavoriteCards();
-      toast.error('server error cant move this card favorite cards')
+        toast.success(`The card move to favorite`)
+        getFavoriteCards();
       
-    } catch (error) {
-        
+    } catch (error) {   
+      toast.error('server error cant move to favorite cards')
+    }
+  }
+
+    const removeFromfavorite = async (card_id) => {
+      try {
+        await axios.put(`http://localhost:3900/api/users/removeFavoriteCard/${card_id}/${user._id}`,{
+        })
+        toast.success(`The card remove from favorite`)
+        getFavoriteCards();
+      
+    } catch (error) {   
+      toast.error('server error cant remove this card from favorite cards')
     }
   }
 
@@ -52,8 +63,11 @@ const MyCards = () => {
       <div className="row">
         <Link to="/create-card">Create a New Card</Link>
       </div>
+      <div className="d-flex justify-content-end mb-3" >
+        <button type="button" className="btn btn-primary w-25">Show only favorite cards </button>
+      </div>
 
-      <div className="row">
+      <div className="d-flex justify-content-between m-3">
         {!cards.length ? (
           <p>no cards...</p>
         ) : (
@@ -65,7 +79,7 @@ const MyCards = () => {
             }
            })
           
-            return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite}
+            return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
           />})
         )}
 
