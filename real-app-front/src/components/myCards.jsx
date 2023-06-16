@@ -25,21 +25,21 @@ const MyCards = () => {
       })
       setFavoriteCards(res.data.favoriteCard);
     } catch (error) {
-        console.log(error); 
+        toast.error('server error cant favorite cards')
+      }
     }
-  }
-
-  const MoveTofavorite = async (card_id) => {
-    try {
-      await axios.put(`http://localhost:3900/api/users/addFavoriteCard/${card_id}/${user._id}`,{
-      })
+    
+    const MoveTofavorite = async (card_id) => {
+      try {
+        await axios.put(`http://localhost:3900/api/users/addFavoriteCard/${card_id}/${user._id}`,{
+        })
       toast.success(`The card move to favorite`)
       getFavoriteCards();
+      toast.error('server error cant move this card favorite cards')
       
     } catch (error) {
-        console.log(error); 
+        
     }
-
   }
 
   return (

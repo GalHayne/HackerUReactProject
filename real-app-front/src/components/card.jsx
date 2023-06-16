@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
-import axios from 'axios';
 
 const Card = ({
   card: { _id, bizName, bizDescription, bizAddress, bizPhone, bizImage, user_id },

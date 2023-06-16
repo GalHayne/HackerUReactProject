@@ -37,11 +37,10 @@ const UserDeatils = () => {
     }),
     async onSubmit(values) {
       try {
-        const res = await axios.put(`http://localhost:3900/api/users/updateDetails/${user._id}`,{
+        await axios.put(`http://localhost:3900/api/users/updateDetails/${user._id}`,{
           email: values.email,
           name: values.name,
         })
-        console.log(res);
         toast.success(`The user information has been updated successfully`)
         navigate("/");
         
@@ -65,7 +64,6 @@ const UserDeatils = () => {
     if (user){
       getMe();
     }
-    
   },[])
 
   const handleToggleShowEdit = () => {

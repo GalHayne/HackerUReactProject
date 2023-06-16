@@ -34,7 +34,6 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
     async onSubmit(values) {
       try {
         const res = await createUser({ ...values, biz: true });
-        console.log('userCreate:', res);
         if (res) {
           toast.success(`${res.data.name} you have successfully registered to the site, you are transferred to the login page`)
         }
