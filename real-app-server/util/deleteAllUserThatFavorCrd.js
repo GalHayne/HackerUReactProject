@@ -6,7 +6,6 @@ const deleteAllUserThatFavorCrd = async (card) => {
 let userIdx;
 
   if (card) {
-
     for (let i = 0 ; i < card.userFavorite.length; ++i){
       const currentUser = card.userFavorite[i];
       const user = await User.findOne({_id: currentUser});

@@ -5,6 +5,7 @@ const { User, validate, validateCards } = require("../models/user");
 const { Card } = require("../models/card");
 const auth = require("../middleware/auth");
 const router = express.Router();
+const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd")
 
 const getCards = async (cardsArray) => {
   const cards = await Card.find({ bizNumber: { $in: cardsArray } });
@@ -29,18 +30,22 @@ router.get("/", auth, async (req, res) => {
 });
 
 router.delete("/:id", auth, async (req, res) => {
+  const cards = await Card.find({user_id:req.params.id});
+
+  cards.forEach(card => deleteAllUserThatFavorCrd(card));
   
-  const user = await User.findOneAndRemove({
+  await Card.deleteMany({user_id:req.params.id})
+
+  const user = await User.deleteOne({
     _id: req.params.id,
   });
 
-  if (!user)
-    return res.status(404).send("The user with the given ID was not found.");
-
-  const cards = await Card.find({user_id:req.params.id});
-  
-  await Card.deleteMany({user_id:req.params.id})
-  res.send(user);
+  if (!user){
+    user.save()
+    res.send(user).status(201);
+  } else{
+    res.send('error cant delete this user').status(404);
+  }
 
 });
 
