@@ -1,6 +1,7 @@
 const express = require("express");
 const _ = require("lodash");
 const { Card, validateCard, generateBizNumber } = require("../models/card");
+const { User } = require("../models/user");
 const auth = require("../middleware/auth");
 const router = express.Router();
 

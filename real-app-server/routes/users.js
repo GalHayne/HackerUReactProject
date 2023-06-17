@@ -89,7 +89,9 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.user_id });
 
   if (user && card){ 
-    user.favoriteCard.push(card);
+    user.favoriteCard.push(card._id);
+    card.userFavorite.push(user._id);
+    card.save();
     user.save();
     res.send(user).status(201);
   }else{
@@ -111,10 +113,20 @@ router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
     }
   }
 
-  user.favoriteCard.splice(index,1);
-  user.save();
-  res.send(user);
-  res.status(201);
+    user.favoriteCard.splice(index,1);
+    user.save();
+    
+    for (let i = 0; i < card.userFavorite.length; ++i){
+      if(JSON.stringify(user._id) === JSON.stringify(card.userFavorite[i])){
+        index = i;
+      }
+    }
+    
+    card.userFavorite.splice(index,1);
+    card.save();
+  
+    res.send(user);
+    res.status(201);
 }else{
   res.status(400);
 

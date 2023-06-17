@@ -11,19 +11,19 @@ import { toast } from "react-toastify";
 const MyCards = () => {
   const cards = useMyCards();
 
-  const [favoriteCards,setFavoriteCards] =useState([]);
+  const [favoriteCardsId,setFavoriteCardsId] =useState([]);
 
   const { user } = useAuth();
 
   useEffect(() => {
-    getFavoriteCards();
+    getFavoriteCardsId();
   }, [])
 
-  const getFavoriteCards = async () => {
+  const getFavoriteCardsId = async () => {
     try {
       const res = await axios.get(`http://localhost:3900/api/users/FavoriteCard/${user._id}`,{
       })
-      setFavoriteCards(res.data.favoriteCard);
+      setFavoriteCardsId(res.data.favoriteCard);
     } catch (error) {
         toast.error('server error cant favorite cards')
       }
@@ -34,7 +34,7 @@ const MyCards = () => {
         await axios.put(`http://localhost:3900/api/users/addFavoriteCard/${card_id}/${user._id}`,{
         })
         toast.success(`The card move to favorite`)
-        getFavoriteCards();
+        getFavoriteCardsId();
       
     } catch (error) {   
       toast.error('server error cant move to favorite cards')
@@ -46,7 +46,7 @@ const MyCards = () => {
         await axios.put(`http://localhost:3900/api/users/removeFavoriteCard/${card_id}/${user._id}`,{
         })
         toast.success(`The card remove from favorite`)
-        getFavoriteCards();
+        getFavoriteCardsId();
       
     } catch (error) {   
       toast.error('server error cant remove this card from favorite cards')
@@ -73,8 +73,8 @@ const MyCards = () => {
         ) : (
           cards.map((card) => {
             let isFavoriteCard = false;
-           favoriteCards.some(favoriteCard => {
-            if (favoriteCard._id === card._id){
+           favoriteCardsId.some(favoriteCardId => {
+            if (favoriteCardId === card._id){
               isFavoriteCard = true;
             }
            })

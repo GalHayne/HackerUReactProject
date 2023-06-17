@@ -40,6 +40,10 @@ const cardSchema = new mongoose.Schema({
     maxlength: 99999999999,
     unique: true,
   },
+  userFavorite:{
+    type: Array,
+    required: true,
+  },
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
