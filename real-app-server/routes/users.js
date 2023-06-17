@@ -33,10 +33,13 @@ router.delete("/:id", auth, async (req, res) => {
   const user = await User.findOneAndRemove({
     _id: req.params.id,
   });
-  
-  await Card.deleteMany({user_id:req.params.id})
+
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
+
+  const cards = await Card.find({user_id:req.params.id});
+  
+  await Card.deleteMany({user_id:req.params.id})
   res.send(user);
 
 });
@@ -80,7 +83,6 @@ router.put("/updateDetails/:id", auth, async (req, res) => {
   user.name = req.body.name
 
   user.save();
-  console.log(user);
   res.send(user);
 });
 
@@ -160,7 +162,6 @@ router.patch("/cards", auth, async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
-  console.log("req:",req);
   const user = await User.findById(req.user._id).select("-password");
   res.send(user);
 });

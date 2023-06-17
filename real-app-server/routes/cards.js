@@ -4,12 +4,11 @@ const { Card, validateCard, generateBizNumber } = require("../models/card");
 const { User } = require("../models/user");
 const auth = require("../middleware/auth");
 const router = express.Router();
+const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd")
 
 router.get("/",  async (req, res) => {
 
   const cards = await Card.find();
-  console.log(cards);
-
   res.send(cards);
   res.status(200);
 });
@@ -19,23 +18,9 @@ router.delete("/:card_id", auth, async (req, res) => {
     _id: req.params.card_id,
   });
 
-  let userIdx;
-
   if (card) {
-
-    for (let i = 0 ; i < card.userFavorite.length; ++i){
-      const currentUser = card.userFavorite[i];
-      const user = await User.findOne({_id: currentUser});
-      
-      for (let j = 0; j < user.favoriteCard.length; ++j){
-        if (JSON.stringify(card._id) === JSON.stringify(user.favoriteCard[j])){
-          userIdx = j;
-          break;
-        }
-      }
-      user.favoriteCard.splice(userIdx,1);
-      user.save();
-    }
+    const res = deleteAllUserThatFavorCrd(card)
+    console.log(res);
   }
     
   const deleteCard = await Card.findOneAndRemove({
