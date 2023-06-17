@@ -11,19 +11,21 @@ import { toast } from "react-toastify";
 const MyCards = () => {
   const cards = useMyCards();
 
-  const [favoriteCardsId,setFavoriteCardsId] =useState([]);
+  const [onlyFavorite,setOnlyFavorite] = useState(false);
+
+  const [favoriteCards,setFavoriteCards] =useState([]);
 
   const { user } = useAuth();
 
   useEffect(() => {
-    getFavoriteCardsId();
+    getFavoriteCards();
   }, [])
 
-  const getFavoriteCardsId = async () => {
+  const getFavoriteCards = async () => {
     try {
       const res = await axios.get(`http://localhost:3900/api/users/FavoriteCard/${user._id}`,{
       })
-      setFavoriteCardsId(res.data.favoriteCard);
+      setFavoriteCards(res.data.favoriteCard);
     } catch (error) {
         toast.error('server error cant favorite cards')
       }
@@ -34,7 +36,7 @@ const MyCards = () => {
         await axios.put(`http://localhost:3900/api/users/addFavoriteCard/${card_id}/${user._id}`,{
         })
         toast.success(`The card move to favorite`)
-        getFavoriteCardsId();
+        getFavoriteCards();
       
     } catch (error) {   
       toast.error('server error cant move to favorite cards')
@@ -46,7 +48,7 @@ const MyCards = () => {
         await axios.put(`http://localhost:3900/api/users/removeFavoriteCard/${card_id}/${user._id}`,{
         })
         toast.success(`The card remove from favorite`)
-        getFavoriteCardsId();
+        getFavoriteCards();
       
     } catch (error) {   
       toast.error('server error cant remove this card from favorite cards')
@@ -64,25 +66,40 @@ const MyCards = () => {
         <Link to="/create-card">Create a New Card</Link>
       </div>
       <div className="d-flex justify-content-end mb-3" >
-        <button type="button" className="btn btn-primary w-25">Show only favorite cards </button>
+        {!onlyFavorite ? <button disabled={cards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show only favorite cards </button> 
+        :
+        <button disabled={favoriteCards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show all cards </button> 
+        }
       </div>
+      
 
       <div className="d-flex justify-content-between m-3">
-        {!cards.length ? (
-          <p>no cards...</p>
-        ) : (
+        {!cards.length ? (<p>no cards...</p>) 
+        : onlyFavorite === false ? (
           cards.map((card) => {
             let isFavoriteCard = false;
-           favoriteCardsId.some(favoriteCardId => {
-            if (favoriteCardId === card._id){
+           favoriteCards.some(favoriteCard => {
+            if (favoriteCard._id === card._id){
               isFavoriteCard = true;
             }
            })
           
             return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
           />})
-        )}
-
+        )
+        : (
+          favoriteCards.map((card) => {
+            let isFavoriteCard = false;
+           favoriteCards.some(favoriteCard => {
+            if (favoriteCard._id === card._id){
+              isFavoriteCard = true;
+            }
+           })
+          
+            return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
+          />})
+        )
+      }
       </div>
     </>
   );

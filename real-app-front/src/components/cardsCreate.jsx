@@ -1,15 +1,18 @@
 import { useFormik } from "formik";
 import Joi from "joi";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate,useNavigate } from "react-router-dom";
 import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/input";
 import PageHeader from "./common/pageHeader";
 import cardsService from "../services/cardsService";
 import { toast } from "react-toastify";
+import { useAuth } from "../context/auth.context";
 
 const CardsCreate = () => {
   const [error, setError] = useState("");
+
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -54,6 +57,12 @@ const CardsCreate = () => {
       }
     },
   });
+
+  if (!user) {
+    return <Navigate to="/" />;
+  }
+
+
   return (
     <>
       <PageHeader title="Create Card" description="Create Card" />

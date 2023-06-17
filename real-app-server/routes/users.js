@@ -89,7 +89,7 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.user_id });
 
   if (user && card){ 
-    user.favoriteCard.push(card._id);
+    user.favoriteCard.push(card);
     card.userFavorite.push(user._id);
     card.save();
     user.save();
