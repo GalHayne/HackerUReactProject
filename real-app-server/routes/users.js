@@ -133,7 +133,7 @@ router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
   res.status(400);
 
 }
-  
+
 });
 
 router.get("/FavoriteCard/:_id", auth, async (req, res) => {
