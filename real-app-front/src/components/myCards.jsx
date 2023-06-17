@@ -66,9 +66,9 @@ const MyCards = () => {
         <Link to="/create-card">Create a New Card</Link>
       </div>
       <div className="d-flex justify-content-end mb-3" >
-        {!onlyFavorite ? <button disabled={cards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show only favorite cards </button> 
+        {!onlyFavorite ? <button disabled={favoriteCards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show only favorite cards </button> 
         :
-        <button disabled={favoriteCards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show all cards </button> 
+        <button disabled={cards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show all cards </button> 
         }
       </div>
       
