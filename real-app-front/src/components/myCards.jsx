@@ -6,30 +6,32 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
-
+import {  Navigate } from "react-router-dom";
 
 const MyCards = () => {
-  const cards = useMyCards();
-
+  
   const [onlyFavorite,setOnlyFavorite] = useState(false);
-
-  const [favoriteCards,setFavoriteCards] =useState([]);
-
+  
+  const [favoriteCards,setFavoriteCards] = useState([]);
+  
   const { user } = useAuth();
 
+  const cards = useMyCards();
+  
   useEffect(() => {
-    getFavoriteCards();
+      getFavoriteCards();
   }, [])
 
   const getFavoriteCards = async () => {
-    try {
-      const res = await axios.get(`http://localhost:3900/api/users/FavoriteCard/${user._id}`,{
-      })
-      setFavoriteCards(res.data.favoriteCard);
-    } catch (error) {
+    if (user){
+      try {
+        const res = await axios.get(`http://localhost:3900/api/users/FavoriteCard/${user?._id}`)
+        setFavoriteCards(res.data.favoriteCard);
+      } catch (error) {
         toast.error('server error cant favorite cards')
       }
     }
+  }
     
     const MoveTofavorite = async (card_id) => {
       try {
@@ -53,6 +55,10 @@ const MyCards = () => {
     } catch (error) {   
       toast.error('server error cant remove this card from favorite cards')
     }
+  }
+
+  if (!user) {
+    return <Navigate to="/" />;
   }
 
   return (

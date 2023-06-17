@@ -137,7 +137,12 @@ router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
 router.get("/FavoriteCard/:_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params._id });
 
-  res.send(user);
+  if (user){
+    res.send(user);
+  }else{
+    res.send('no user connect')
+    res.status(401);
+  }
 });
 
 router.patch("/cards", auth, async (req, res) => {

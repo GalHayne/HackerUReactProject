@@ -5,13 +5,12 @@ const { User } = require("../models/user");
 const auth = require("../middleware/auth");
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
-
+router.get("/",  async (req, res) => {
 
   const cards = await Card.find();
+  console.log(cards);
+
   res.send(cards);
-
-
   res.status(200);
 });
 

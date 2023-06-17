@@ -5,8 +5,10 @@ const Card = ({
   card: { _id, bizName, bizDescription, bizAddress, bizPhone, bizImage, user_id },
   isFavoriteCard,
   MoveTofavorite,
-  removeFromfavorite
-}) => {
+  removeFromfavorite,
+}
+) => {
+
 
   const { user } = useAuth();
 

@@ -4,12 +4,16 @@ import cardsService from "../services/cardsService";
 export const useMyCards = () => {
   const [cards, setCards] = useState([]);
 
-
-  useEffect(() => {
-    const getCards = async () => {
+  const getCards = async () => {
+    try{
       const { data } = await cardsService.getAll();
       setCards(data);
-    };
+    } catch(err){
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
 
     getCards();
   }, []);
