@@ -15,13 +15,38 @@ router.get("/", auth, async (req, res) => {
   res.status(200);
 });
 
-router.delete("/:id", auth, async (req, res) => {
-  const card = await Card.findOneAndRemove({
-    _id: req.params.id,
+router.delete("/:card_id", auth, async (req, res) => {
+  const card = await Card.findOne({
+    _id: req.params.card_id,
   });
-  if (!card)
+
+  let userIdx;
+
+  if (card) {
+
+    for (let i = 0 ; i < card.userFavorite.length; ++i){
+      const currentUser = card.userFavorite[i];
+      const user = await User.findOne({_id: currentUser});
+      
+      for (let j = 0; j < user.favoriteCard.length; ++j){
+        if (JSON.stringify(card._id) === JSON.stringify(user.favoriteCard[j])){
+          userIdx = j;
+          break;
+        }
+      }
+      user.favoriteCard.splice(userIdx,1);
+      user.save();
+    }
+  }
+    
+  const deleteCard = await Card.findOneAndRemove({
+    _id: req.params.card_id,
+  });
+  if (!deleteCard)
     return res.status(404).send("The card with the given ID was not found.");
-  res.send(card);
+  res.send(deleteCard);
+  res.status(201);
+
 });
 
 router.put("/:id", auth, async (req, res) => {
