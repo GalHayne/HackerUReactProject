@@ -14,7 +14,6 @@ let userIdx;
 
           if (JSON.stringify(card._id) === JSON.stringify(user.favoriteCard[j]._id)){
             userIdx = j;
-            console.log(userIdx);
           }
         }
         user.favoriteCard.splice(userIdx,1);

@@ -5,7 +5,10 @@ const { User, validate, validateCards } = require("../models/user");
 const { Card } = require("../models/card");
 const auth = require("../middleware/auth");
 const router = express.Router();
-const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd")
+const {
+  deleteAllUserThatFavorCrd,
+} = require("../util/deleteAllUserThatFavorCrd");
+const { deleteCard } = require("../util/deleteCard");
 
 const getCards = async (cardsArray) => {
   const cards = await Card.find({ bizNumber: { $in: cardsArray } });
@@ -23,48 +26,48 @@ router.get("/cards", auth, async (req, res) => {
 });
 
 router.get("/", auth, async (req, res) => {
-
   const users = await User.find();
   res.send(users);
-
 });
 
 router.delete("/:id", auth, async (req, res) => {
-  const cards = await Card.find({user_id:req.params.id});
+  const cards = await Card.find({ user_id: req.params.id });
 
-  cards.forEach(card => deleteAllUserThatFavorCrd(card));
-  
-  await Card.deleteMany({user_id:req.params.id})
+  // console.log(cards);
 
-  const user = await User.deleteOne({
-    _id: req.params.id,
+  cards.forEach(card => {
+    // console.log(card);
+    deleteCard(card)
   });
 
-  if (!user){
-    user.save()
-    res.send(user).status(201);
-  } else{
-    res.send('error cant delete this user').status(404);
-  }
+  // await Card.deleteMany({user_id:req.params.id})
+
+  // const user = await User.deleteOne({
+  //   _id: req.params.id,
+  // });
+
+  // if (!user){
+  //   user.save()
+  //   res.send(user).status(201);
+  // } else{
+  //   res.send('error cant delete this user').status(404);
+  // }
 
 });
 
 router.get("/:id", auth, async (req, res) => {
+  const user = await User.find({ _id: req.params.id });
 
-  const user = await User.find({_id: req.params.id})
-
-  if (user){
+  if (user) {
     res.status(200);
     res.send(user);
-  }else{
+  } else {
     res.status(404);
   }
 });
 
 router.put("/:id", auth, async (req, res) => {
-  let user = await User.findOne(
-    { _id: req.params.id }
-  );
+  let user = await User.findOne({ _id: req.params.id });
 
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
@@ -77,15 +80,13 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 router.put("/updateDetails/:id", auth, async (req, res) => {
-  let user = await User.findOne(
-    { _id: req.params.id }
-  );
+  let user = await User.findOne({ _id: req.params.id });
 
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
 
-  user.email = req.body.email
-  user.name = req.body.name
+  user.email = req.body.email;
+  user.name = req.body.name;
 
   user.save();
   res.send(user);
@@ -95,15 +96,15 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
   let card = await Card.findOne({ _id: req.params.card_id });
   let user = await User.findOne({ _id: req.params.user_id });
 
-  if (user && card){ 
+  if (user && card) {
     user.favoriteCard.push(card);
     card.userFavorite.push(user._id);
     card.save();
     user.save();
     res.send(user).status(201);
-  }else{
-    res.status(404)
-    res.send('error cant find the cards or user')
+  } else {
+    res.status(404);
+    res.send("error cant find the cards or user");
   }
 });
 
@@ -111,43 +112,43 @@ router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.user_id });
   let card = await Card.findOne({ _id: req.params.card_id });
 
-  if (user && card){
+  if (user && card) {
     let index;
-    
-    for (let i = 0; i < user.favoriteCard.length; ++i){
-    if(JSON.stringify(card._id) === JSON.stringify(user.favoriteCard[i]._id)){
-      index = i;
-    }
-  }
 
-    user.favoriteCard.splice(index,1);
-    user.save();
-    
-    for (let i = 0; i < card.userFavorite.length; ++i){
-      if(JSON.stringify(user._id) === JSON.stringify(card.userFavorite[i])){
+    for (let i = 0; i < user.favoriteCard.length; ++i) {
+      if (
+        JSON.stringify(card._id) === JSON.stringify(user.favoriteCard[i]._id)
+      ) {
         index = i;
       }
     }
-    
-    card.userFavorite.splice(index,1);
+
+    user.favoriteCard.splice(index, 1);
+    user.save();
+
+    for (let i = 0; i < card.userFavorite.length; ++i) {
+      if (JSON.stringify(user._id) === JSON.stringify(card.userFavorite[i])) {
+        index = i;
+      }
+    }
+
+    card.userFavorite.splice(index, 1);
     card.save();
-  
+
     res.send(user);
     res.status(201);
-}else{
-  res.status(400);
-
-}
-
+  } else {
+    res.status(400);
+  }
 });
 
 router.get("/FavoriteCard/:_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params._id });
 
-  if (user){
+  if (user) {
     res.send(user);
-  }else{
-    res.send('no user connect')
+  } else {
+    res.send("no user connect");
     res.status(401);
   }
 });
