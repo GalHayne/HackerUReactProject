@@ -109,6 +109,7 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
 });
 
 router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
+  console.log(req.params.user_id);
   let user = await User.findOne({ _id: req.params.user_id });
   let card = await Card.findOne({ _id: req.params.card_id });
 

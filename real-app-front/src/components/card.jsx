@@ -9,7 +9,6 @@ const Card = ({
 }
 ) => {
 
-
   const { user } = useAuth();
 
   const handleMoveTofavorite = async (card_id) => {
@@ -22,7 +21,7 @@ const Card = ({
 
   return (
     <div className="card" style={{ width: "18rem" }}>
-      {!isFavoriteCard ? <div className="bg-transparent position-absolute end-0 m-2" title="add to favorite card" onClick={() => handleMoveTofavorite(_id)}><i className="bi bi-star"></i></div>:
+      {!isFavoriteCard ? <div className="bg-transparent position-absolute end-0 m-2" title="add to favorite card" onClick={() => handleMoveTofavorite(_id)}><i className="bi bi-star"></i></div> :
         <div className="bg-transparent position-absolute text-warning end-0 m-2" title="remove from favorite cards" onClick={() => handleRemoveFromfavorite(_id)}><i className="bi bi-star-fill"></i></div>
       }
       <img src={bizImage} className="card-img-top my-4 p-2 rounded-circle" alt={bizName} />
