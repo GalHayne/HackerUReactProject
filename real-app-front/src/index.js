@@ -9,11 +9,15 @@ import "bootstrap/dist/js/bootstrap.bundle";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import AuthProvider from "./context/auth.context";
 
+import { Provider } from './context/dark.context';
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <Provider value={{}}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Provider>
   </BrowserRouter>
 );

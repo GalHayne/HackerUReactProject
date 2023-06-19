@@ -15,3 +15,24 @@
   margin-left: auto;
 }
 
+
+
+
+#light{
+ background-color:  #f8f9fa;
+ color: rgb(36, 36, 36);
+}
+
+#dark{
+  background-color: #46045e;
+  color: rgb(190, 190, 190);
+}
+
+.navbar-light{
+  background-color: #46045e;
+}
+
+#footer-dark{
+  background-color:  #212529;
+  
+}
