@@ -52,22 +52,19 @@ router.put("/:id", auth, async (req, res) => {
     req.body
   );
 
-  const users = card.userFavorite;
   for (let i = 0; i < card.userFavorite.length; ++i) {
     const currentUserId = card.userFavorite[i];
-    const user = await User.find({ _id: currentUserId })
-    for (let j = 0; j < user[0].favoriteCard.length; ++j) {
-      if (JSON.stringify(req.params.id) === JSON.stringify(user[0].favoriteCard[j]._id)) {
-        console.log(true, j);
-        // console.log(i, '-', user[0].favoriteCard);
-        user[0].favoriteCard.splice(j, 1);
-        // card = await Card.findOne({ _id: req.params.id, user_id: req.user._id });
-        // user[i].favoriteCard.push(card);
-
+    const user = await User.findOne({ _id: currentUserId });
+    for (let j = 0; j < user.favoriteCard.length; ++j) {
+      if (JSON.stringify(req.params.id) === JSON.stringify(user.favoriteCard[j]._id)) {
+        const cardUpdate = await Card.findOne({ _id: req.params.id });
+        if (cardUpdate){
+        user.favoriteCard.splice(j, 1,cardUpdate); 
+        user.save();
+        }
       }
     }
   }
-
 
   if (!card)
     return res.status(404).send("The card with the given ID was not found.");
