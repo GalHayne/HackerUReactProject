@@ -1,10 +1,9 @@
 const express = require("express");
 const _ = require("lodash");
 const { Card, validateCard, generateBizNumber } = require("../models/card");
-const { User } = require("../models/user");
 const auth = require("../middleware/auth");
 const router = express.Router();
-const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd")
+const { deleteCard } = require("../util/deleteCard");
 
 router.get("/", async (req, res) => {
 
@@ -44,10 +43,7 @@ router.put("/:id", auth, async (req, res) => {
   const { error } = validateCard(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let card = await Card.findOneAndUpdate(
-    { _id: req.params.id },
-    req.body
-  );
+  let card = await Card.findOneAndUpdate({ _id: req.params.id }, req.body);
   if (!card)
     return res.status(404).send("The card with the given ID was not found.");
 
