@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd")
 
-router.get("/",  async (req, res) => {
+router.get("/", async (req, res) => {
 
   const cards = await Card.find();
   res.send(cards);
@@ -14,22 +14,29 @@ router.get("/",  async (req, res) => {
 });
 
 router.delete("/:card_id", auth, async (req, res) => {
+
   const card = await Card.findOne({
     _id: req.params.card_id,
   });
 
   if (card) {
-    const res = deleteAllUserThatFavorCrd(card)
-    console.log(res);
-  }
-    
-  const deleteCard = await Card.findOneAndRemove({
-    _id: req.params.card_id,
-  });
-  if (!deleteCard)
+    const results = deleteAllUserThatFavorCrd(card)
+    results.then(async () => {
+
+      const deleteCard = await Card.findOneAndRemove({
+        _id: req.params.card_id,
+      });
+
+      if (!deleteCard) {
+        return res.status(404).send("The card with the given ID was not found.");
+      }
+      res.send(deleteCard);
+      res.status(201);
+    })
+  } else {
+
     return res.status(404).send("The card with the given ID was not found.");
-  res.send(deleteCard);
-  res.status(201);
+  }
 
 });
 
