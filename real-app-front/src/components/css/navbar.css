@@ -1,0 +1,20 @@
+.lightModeLi:hover{
+    background-color:  var(--li-hover-color);
+    border-radius: 10px;
+    color:  var(--drop-down-text-color);
+    padding: 3px;
+  }
+  
+  .darkModeLi:hover{
+    background-color:  var(--li-hover-color);
+    border-radius: 10px;
+    color:  var(--drop-down-text-color);
+    padding: 3px;
+  }
+  
+  .modeSelected{
+    background-color:  var(--blue-for-lightMode);
+    border-radius: 10px;
+    padding: 3px;
+    color: var(--drop-down-text-color);
+  }

@@ -66,18 +66,18 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto mb-2 mb-md-0">
             {user ? (
               <>
+               <li className="nav-item">
+                  <NavLink title="log out" className="nav-link" to="/sign-out">
+                    Sign Out
+                  </NavLink>
+                </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/user-details">
                     <div title="enter to user details">
                       <i className="bi bi-person"></i>
                     </div>
                   </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink title="log out" className="nav-link" to="/sign-out">
-                    Sign Out
-                  </NavLink>
-                </li>
+                </li>   
               </>
             ) : (
               <>
@@ -96,7 +96,9 @@ const Navbar = () => {
                     Sign Up Business
                   </NavLink>
                 </li>
-                <li className="nav-item dropdown">
+              </>
+            )}
+            <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
                     href="#"
@@ -141,8 +143,6 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </li>
-              </>
-            )}
           </ul>
         </div>
       </div>

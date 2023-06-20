@@ -1,41 +1,18 @@
 @import './components/css/dark.css';
 @import './components/css/light.css';
+@import './components/css/navbar.css';
+@import './components/css/users.css';
 
-.connectNow{
-  margin-left: auto;
-  margin-right: auto;
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  background-image: linear-gradient(to bottom, #6554AF , #9575DE);
-  transition: 0.4s;
-  cursor: pointer;
+:root{
+  --dark-backGroundColor: #212529;
+  --dark-colorText: #e8e8e8;
+  --li-hover-color: #a7a7a7;
+  --drop-down-text-color: #e8e8e8;
+  --blue-for-lightMode: #0d6efd
 }
 
 .center-div{
   width: 25%;
   margin-right: auto;
   margin-left: auto;
-}
-
-
-.lightModeLi:hover{
-  background-color:  #a7a7a7;
-  border-radius: 10px;
-  color:  #e8e8e8;
-  padding: 3px;
-}
-
-.darkModeLi:hover{
-  background-color:  #a7a7a7;
-  border-radius: 10px;
-  color:  #e8e8e8;
-  padding: 3px;
-}
-
-.modeSelected{
-  background-color:  #0d6efd;
-  border-radius: 10px;
-  padding: 3px;
-  color: #e8e8e8;
 }
