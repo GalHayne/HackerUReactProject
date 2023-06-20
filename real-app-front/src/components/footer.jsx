@@ -1,11 +1,9 @@
-import useDarkContext from "../hooks/useDarkModa-context";
-
 const Footer = () => {
 
   return (
     <div className="">
       <footer className="text-center">
-        <div className="p-2 footer">
+        <div className="p-1 icons to 1 footer">
           <section>
             <a className="icon m-1" href="#!" role="button">
               <i class="bi bi-linkedin"></i>
