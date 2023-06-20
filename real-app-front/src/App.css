@@ -2,6 +2,7 @@
 @import './components/css/light.css';
 @import './components/css/navbar.css';
 @import './components/css/users.css';
+@import './components/css/footer.css';
 
 :root{
   --dark-backGroundColor: #212529;
