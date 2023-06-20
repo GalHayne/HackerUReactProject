@@ -1,3 +1,6 @@
+@import './components/css/dark.css';
+@import './components/css/light.css';
+
 .connectNow{
   margin-left: auto;
   margin-right: auto;
@@ -13,4 +16,26 @@
   width: 25%;
   margin-right: auto;
   margin-left: auto;
+}
+
+
+.lightModeLi:hover{
+  background-color:  #a7a7a7;
+  border-radius: 10px;
+  color:  #e8e8e8;
+  padding: 3px;
+}
+
+.darkModeLi:hover{
+  background-color:  #a7a7a7;
+  border-radius: 10px;
+  color:  #e8e8e8;
+  padding: 3px;
+}
+
+.modeSelected{
+  background-color:  #0d6efd;
+  border-radius: 10px;
+  padding: 3px;
+  color: #e8e8e8;
 }

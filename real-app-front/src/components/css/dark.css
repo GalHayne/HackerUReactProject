@@ -1,0 +1,13 @@
+:root{
+    --dark-backGroundColor: #212529;
+    --dark-colorText: #e8e8e8;
+}
+
+#dark{
+    background-color: var(--dark-backGroundColor);
+    color: var(--dark-colorText)
+}
+
+#footer-dark{
+    background-color: #212529;
+}
