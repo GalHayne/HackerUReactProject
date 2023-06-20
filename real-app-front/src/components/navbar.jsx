@@ -1,14 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
+import ReactSwitch from "react-switch";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 const Navbar = () => {
   const { user } = useAuth();
 
+  const { toogleTheme, theme } = useDarkContext();
+
+  const classNameHeader =
+    theme === "dark"
+      ? "navbar navbar-expand-sm navbar-dark bg-dark"
+      : "navbar navbar-expand-sm navbar-light bg-light";
+
   return (
-    <nav
-      className="navbar navbar-expand-sm navbar-light bg-light shadow-sm"
-      aria-label="Fourth navbar example"
-    >
+    <nav className={classNameHeader} aria-label="Fourth navbar example">
       <div className="container">
         <Link className="navbar-brand" to="/">
           Real<i className="bi bi-geo-fill"></i>App
@@ -39,24 +45,36 @@ const Navbar = () => {
                 </NavLink>
               </li>
             )}
-            {user?.biz && <li className="nav-item">
-              <NavLink title="users manager" className="nav-link" to="/users">
-                CRM
-              </NavLink>
-            </li>}
+            {user?.biz && (
+              <li className="nav-item">
+                <NavLink title="users manager" className="nav-link" to="/users">
+                  CRM
+                </NavLink>
+              </li>
+            )}
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-md-0">
             {user ? (
               <>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/user-details">
-                    <div title="enter to user details"><i className="bi bi-person"></i></div>
+                    <div title="enter to user details">
+                      <i className="bi bi-person"></i>
+                    </div>
                   </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink title="log out" className="nav-link" to="/sign-out">
                     Sign Out
                   </NavLink>
+                </li>
+                <li>
+                  <div>
+                    <ReactSwitch
+                      onChange={toogleTheme}
+                      checked={theme === "dark"}
+                    />
+                  </div>
                 </li>
               </>
             ) : (
@@ -75,6 +93,14 @@ const Navbar = () => {
                   <NavLink className="nav-link" to="/sign-up-biz">
                     Sign Up Business
                   </NavLink>
+                </li>
+                <li>
+                  <div className="switch">
+                    <ReactSwitch
+                      onChange={toogleTheme}
+                      checked={theme === "dark"}
+                    />
+                  </div>
                 </li>
               </>
             )}
