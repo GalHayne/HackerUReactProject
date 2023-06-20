@@ -43,6 +43,26 @@ export function getAllUsers() {
   return httpService.get("/users");
 }
 
+export function getFavoriteCards(user) {
+  return httpService.get(`users/FavoriteCard/${user?._id}`);
+}
+
+export function addCardFromUserToFavorite(card_id, user_id) {
+  return httpService.put(`users/addFavoriteCard/${card_id}/${user_id}`);
+}
+
+export function removeCardFromFavoriteToUser(card_id, user_id) {
+  return httpService.put(`users/removeFavoriteCard/${card_id}/${user_id}`);
+}
+
+export function toggleUserPermissions(user_id) {
+  return httpService.put(`users/${user_id}`);
+}
+
+export function getMe(user_id) {
+  return httpService.get(`/users/${user_id}`);
+}
+
 const usersService = {
   createUser,
   loginUser,
@@ -50,6 +70,11 @@ const usersService = {
   getJWT,
   getUser,
   getAllUsers,
+  getFavoriteCards,
+  addCardFromUserToFavorite,
+  removeCardFromFavoriteToUser,
+  toggleUserPermissions,
+  getMe,
 };
 
 export default usersService;
