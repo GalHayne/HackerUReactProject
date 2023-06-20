@@ -6,8 +6,9 @@ function Provider({ children }) {
     
   const [theme, setTheme] = useState("light");
 
-  const toogleTheme = () => {
+  const toogleTheme = (state) => {
     setTheme((prev) => {
+      if (state === prev) return state;
       return prev === "light" ? "dark" : "light";
     });
   };

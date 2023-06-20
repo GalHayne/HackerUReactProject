@@ -1,12 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
-import ReactSwitch from "react-switch";
 import useDarkContext from "../hooks/useDarkModa-context";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user } = useAuth();
 
   const { toogleTheme, theme } = useDarkContext();
+
+  const [isLihgtSelected, setIsLihgtSelected] = useState(true);
+  const [isDarkSelected, setIsDarkSelected] = useState(false);
+
+  const modeIcon =
+    theme === "light" ? (
+      <i className="bi bi-brightness-high"></i>
+    ) : (
+      <i className="bi bi-moon"></i>
+    );
 
   const classNameHeader =
     theme === "dark"
@@ -68,14 +78,6 @@ const Navbar = () => {
                     Sign Out
                   </NavLink>
                 </li>
-                <li>
-                  <div>
-                    <ReactSwitch
-                      onChange={toogleTheme}
-                      checked={theme === "dark"}
-                    />
-                  </div>
-                </li>
               </>
             ) : (
               <>
@@ -94,13 +96,50 @@ const Navbar = () => {
                     Sign Up Business
                   </NavLink>
                 </li>
-                <li>
-                  <div className="switch">
-                    <ReactSwitch
-                      onChange={toogleTheme}
-                      checked={theme === "dark"}
-                    />
-                  </div>
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarScrollingDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {modeIcon}
+                  </a>
+                  <ul
+                    className="dropdown-menu p-3"
+                    aria-labelledby="navbarScrollingDropdown"
+                  >
+                    <li
+                      className={
+                        isLihgtSelected
+                          ? "lightModeLi p-2 modeSelected"
+                          : "lightModeLi p-2"
+                      }
+                      onClick={() => {
+                        toogleTheme("light");
+                        setIsLihgtSelected(true);
+                        setIsDarkSelected(false);
+                      }}
+                    >
+                      <i className="bi bi-brightness-high"></i>Light
+                    </li>
+                    <li
+                      className={
+                        isDarkSelected
+                          ? "my-2 darkModeLi p-2 modeSelected"
+                          : "my-2 darkModeLi p-2"
+                      }
+                      onClick={() => {
+                        toogleTheme("dark");
+                        setIsLihgtSelected(false);
+                        setIsDarkSelected(true);
+                      }}
+                    >
+                      <i className="bi bi-moon"></i>Drak
+                    </li>
+                  </ul>
                 </li>
               </>
             )}
