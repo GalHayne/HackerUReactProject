@@ -18,3 +18,8 @@
     padding: 3px;
     color: var(--drop-down-text-color);
   }
+
+  .active{
+    border-bottom: solid;
+    /* font-weight: bold; */
+  }
