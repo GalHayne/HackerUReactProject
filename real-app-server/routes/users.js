@@ -30,31 +30,6 @@ router.get("/", auth, async (req, res) => {
   res.send(users);
 });
 
-router.delete("/:id", auth, async (req, res) => {
-  const cards = await Card.find({ user_id: req.params.id });
-
-  // console.log(cards);
-
-  cards.forEach(card => {
-    // console.log(card);
-    deleteCard(card)
-  });
-
-  // await Card.deleteMany({user_id:req.params.id})
-
-  // const user = await User.deleteOne({
-  //   _id: req.params.id,
-  // });
-
-  // if (!user){
-  //   user.save()
-  //   res.send(user).status(201);
-  // } else{
-  //   res.send('error cant delete this user').status(404);
-  // }
-
-});
-
 router.get("/:id", auth, async (req, res) => {
   const user = await User.find({ _id: req.params.id });
 
@@ -145,7 +120,6 @@ router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
 
 router.get("/FavoriteCard/:_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params._id });
-
   if (user) {
     res.send(user);
   } else {

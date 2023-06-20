@@ -3,10 +3,10 @@ import PageHeader from "./common/pageHeader";
 import { useMyCards } from "../hooks/useMyCards";
 import Card from "./card";
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
 import { Navigate } from "react-router-dom";
+import usersService from "../services/usersService";
 
 const MyCards = () => {
 
@@ -18,25 +18,22 @@ const MyCards = () => {
 
   const cards = useMyCards();
 
+
   useEffect(() => {
     getFavoriteCards();
   }, [onlyFavorite])
 
   const getFavoriteCards = async () => {
     if (user) {
-      try {
-        const res = await axios.get(`http://localhost:3900/api/users/FavoriteCard/${user?._id}`)
-        setFavoriteCards(res.data.favoriteCard);
-      } catch (error) {
-        toast.error('server error cant favorite cards')
-      }
+      const res = usersService.getFavoriteCards(user);
+      res.then(response => setFavoriteCards(response.data.favoriteCard))
+        .catch(err => { toast.error('server error cant favorite cards') })
     }
   }
 
   const MoveTofavorite = async (card_id) => {
     try {
-      await axios.put(`http://localhost:3900/api/users/addFavoriteCard/${card_id}/${user._id}`, {
-      })
+      await usersService.addCardFromUserToFavorite(card_id, user._id)
       toast.success(`The card move to favorite`)
       getFavoriteCards();
 
@@ -47,11 +44,9 @@ const MyCards = () => {
 
   const removeFromfavorite = async (card_id) => {
     try {
-      await axios.put(`http://localhost:3900/api/users/removeFavoriteCard/${card_id}/${user._id}`, {
-      })
+      await usersService.removeCardFromFavoriteToUser(card_id, user._id);
       toast.success(`The card remove from favorite`)
       getFavoriteCards();
-
     } catch (error) {
       toast.error('server error cant remove this card from favorite cards')
     }
@@ -64,8 +59,8 @@ const MyCards = () => {
   return (
     <>
       <PageHeader
-        title="My Cards"
-        description="your cards are in the list below"
+        title={!onlyFavorite ? "My Cards" : 'Favorite Cards'}
+        description={!onlyFavorite ? "your cards are in the list below" : "your favorite cards are in the list below"}
       />
 
       <div className="row">
