@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="">
       <footer className="text-center">
-        <div className="p-4 footer">
+        <div className="p-2 footer">
           <section>
             <a className="icon m-1" href="#!" role="button">
               <i class="bi bi-linkedin"></i>
