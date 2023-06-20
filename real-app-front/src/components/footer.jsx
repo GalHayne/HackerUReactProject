@@ -6,19 +6,19 @@ const Footer = () => {
         <div className="p-1 icons to 1 footer">
           <section>
             <a className="icon m-1" href="#!" role="button">
-              <i class="bi bi-linkedin"></i>
+              <i className="bi bi-linkedin"></i>
             </a>
             <a  className="icon m-1" href="#!" role="button">
-              <i class="bi bi-github"></i>
+              <i className="bi bi-github"></i>
             </a>
             <a  className="icon m-1" href="#!" role="button">
-            <i class="bi bi-whatsapp"></i>
+            <i className="bi bi-whatsapp"></i>
             </a>
             <a  className="icon m-1" href="#!" role="button">
-            <i class="bi bi-facebook"></i>
+            <i className="bi bi-facebook"></i>
             </a>
             <a  className="icon m-1" href="#!" role="button">
-            <i class="bi bi-instagram"></i>
+            <i className="bi bi-instagram"></i>
             </a>
           </section>
         </div>
