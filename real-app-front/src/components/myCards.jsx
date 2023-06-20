@@ -67,14 +67,14 @@ const MyCards = () => {
         <Link to="/create-card">Create a New Card</Link>
       </div>
       <div className="d-flex justify-content-end mb-3" >
-        {!onlyFavorite ? <button disabled={favoriteCards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show only favorite cards </button>
+        {!onlyFavorite ? <button disabled={favoriteCards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Favorite cards </button>
           :
-          <button type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Show all cards </button>
+          <button type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>All cards </button>
         }
       </div>
 
 
-      <div className="d-flex justify-content-between m-3">
+      <div className="d-flex justify-content-center m-3 flex-wrap">
         {!cards.length ? (<p>no cards...</p>)
           : onlyFavorite === false ? (
             cards.map((card) => {
