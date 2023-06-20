@@ -2,16 +2,37 @@ import useDarkContext from "../hooks/useDarkModa-context";
 
 const Footer = () => {
 
-  const { theme} = useDarkContext();
-
   return (
-    <footer className="pt-3 py-2 text-center" id={`footer-${theme}`}>
-      <span>
-        Real<i className="bi bi-geo-fill"></i>App
-      </span>
-      <span className="mx-2">&copy;</span>
-      <span>{new Date().getFullYear()}</span>
-    </footer>
+    <div className="">
+      <footer className="text-center">
+        <div className="p-4 footer">
+          <section>
+            <a className="icon m-1" href="#!" role="button">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a  className="icon m-1" href="#!" role="button">
+              <i class="bi bi-github"></i>
+            </a>
+            <a  className="icon m-1" href="#!" role="button">
+            <i class="bi bi-whatsapp"></i>
+            </a>
+            <a  className="icon m-1" href="#!" role="button">
+            <i class="bi bi-facebook"></i>
+            </a>
+            <a  className="icon m-1" href="#!" role="button">
+            <i class="bi bi-instagram"></i>
+            </a>
+          </section>
+        </div>
+
+        <div
+          className="text-center p-3"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+        >
+          © 2023 Copyright: Gal Hayne
+        </div>
+      </footer>
+    </div>
   );
 };
 
