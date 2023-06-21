@@ -8,6 +8,7 @@ import usersService from "../services/usersService";
 import { Navigate, useNavigate } from "react-router-dom";
 import useDarkContext from "../hooks/useDarkModa-context";
 import Carousel from 'react-elastic-carousel';
+import TypeDisplay from "./typeDisplay";
 
 const MyCards = () => {
 
@@ -56,6 +57,10 @@ const MyCards = () => {
     } catch (error) {
       toast.error('server error cant remove this card from favorite cards')
     }
+  }
+
+  const handleGalleryStyleChange = () => {
+    setCardGalleryStyle(prev => !prev)
   }
 
   const breakPoints = [
@@ -114,13 +119,7 @@ const MyCards = () => {
         }
       </div>
 
-      Type Display Card:
-      <div className="form-check">
-        <input className="form-check-input" onChange={() => setCardGalleryStyle((prev) => !prev)} type="checkbox" value="" id="flexCheckDefault" />
-        <label className="form-check-label" htmlFor="flexCheckDefault">
-          Slider <i className="bi bi-sliders"></i>
-        </label>
-      </div>
+      <TypeDisplay setCardGalleryStyle={handleGalleryStyleChange}/>
 
       {
         cardGalleryStyle ?
@@ -128,9 +127,11 @@ const MyCards = () => {
             {renderCards}
           </div>
           :
-          <Carousel breakPoints={breakPoints}>
+          <div className="text-center mt-5">
+          {cards.length !== 0 ? <Carousel breakPoints={breakPoints}>
             {renderCards}
-          </Carousel>
+          </Carousel> : <p>no cards...</p>} 
+          </div>
       }
     </>
   );
