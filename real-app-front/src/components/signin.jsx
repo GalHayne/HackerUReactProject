@@ -7,9 +7,12 @@ import Input from "./common/input";
 import PageHeader from "./common/pageHeader";
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 const SignIn = ({ redirect = "/" }) => {
   const [error, setError] = useState("");
+
+  const { theme } = useDarkContext();
 
   const { login, user } = useAuth();
 
@@ -61,7 +64,7 @@ const SignIn = ({ redirect = "/" }) => {
         />
       </div>
 
-      <div className="center-div shadow p-3">
+      <div className={`center-div ${theme} shadow p-3`}>
         <form onSubmit={form.handleSubmit} noValidate>
           {error && <div className="alert alert-danger">{error}</div>}
 
@@ -85,7 +88,7 @@ const SignIn = ({ redirect = "/" }) => {
             <button
               type="submit"
               disabled={!form.isValid}
-              className="btn btn-primary"
+              className={`btn btn-primary ${theme}`}
             >
               Sign In
             </button>

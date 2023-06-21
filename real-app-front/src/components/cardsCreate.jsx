@@ -8,9 +8,12 @@ import PageHeader from "./common/pageHeader";
 import cardsService from "../services/cardsService";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/auth.context";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 const CardsCreate = () => {
   const [error, setError] = useState("");
+
+  const { theme } = useDarkContext();
 
   const { user } = useAuth();
 
@@ -64,7 +67,7 @@ const CardsCreate = () => {
 
 
   return (
-    <div className="center-div shadow p-3">
+    <div className={`center-div ${theme} shadow p-3`}>
       <PageHeader title="Create Card" />
       <form onSubmit={form.handleSubmit} noValidate>
         {error && <div className="alert alert-danger">{error}</div>}
@@ -108,7 +111,7 @@ const CardsCreate = () => {
           <button
             type="submit"
             disabled={!form.isValid}
-            className="btn btn-primary"
+            className={`btn btn-primary ${theme}`}
           >
             Create Card
           </button>

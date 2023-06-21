@@ -1,12 +1,3 @@
-:root{
-    --dark-backGroundColor: #212529;
-    --dark-colorText: #e8e8e8;
-    --li-hover-color: #a7a7a7;
-    --drop-down-text-color: #e8e8e8;
-    --blue-for-lightMode: #0d6efd;
-    --icons-color:#868585 ;
-    --icons-color-hover:#050505 ;
-  }
 
 .icon{
     color: var(--icons-color);

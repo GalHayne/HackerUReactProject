@@ -6,6 +6,7 @@ import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
 import usersService from "../services/usersService";
 import { Navigate, useNavigate } from "react-router-dom";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 const MyCards = () => {
 
@@ -16,6 +17,8 @@ const MyCards = () => {
   const { user } = useAuth();
 
   const cards = useMyCards();
+
+  const { theme } = useDarkContext();
 
   const navigate = useNavigate();
 
@@ -64,7 +67,7 @@ const MyCards = () => {
       />
 
       <div className="d-flex justify-content-between mb-3" >
-        <button type="button" className="btn btn-primary" onClick={() => navigate('/create-card')} title="Add new card">Add new card</button>
+        <button type="button" className={`btn btn-primary ${theme}`} onClick={() => navigate('/create-card')} title="Add new card">Add new card</button>
         {!onlyFavorite ? <button disabled={favoriteCards.length === 0} type="button" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" onClick={() => setOnlyFavorite((prev) => !prev)}>Favorite cards </button>
           :
           <button type="button" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" onClick={() => setOnlyFavorite((prev) => !prev)}>All cards </button>

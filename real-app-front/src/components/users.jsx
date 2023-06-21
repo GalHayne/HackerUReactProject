@@ -3,11 +3,14 @@ import PageHeader from "./common/pageHeader";
 import usersService from "../services/usersService";
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 
 const Users = () => {
 
   const { user } = useAuth();
+
+  const { theme } = useDarkContext();
 
   const userId = user._id;
 
@@ -48,6 +51,7 @@ const Users = () => {
     )
   })
 
+  let tableMode = (theme === 'dark') ? 'light' : 'dark'
 
   return (
     <>
@@ -57,7 +61,7 @@ const Users = () => {
         note="Note that when you delete a user, all their cards will also be deleted for the deleted user"
       />
 
-      <table className="table table-dark table-striped">
+      <table className={`table table-${tableMode} table-striped`}>
         <thead>
           <tr className="text-center">
             <th>Connect Now</th>
@@ -69,15 +73,9 @@ const Users = () => {
           </tr>
         </thead>
         {renderUsers}
-
       </table>
-
-
-
-
     </>
   );
-
 };
 
 export default Users;
