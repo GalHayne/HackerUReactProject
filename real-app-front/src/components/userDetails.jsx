@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
 import PageHeader from "./common/pageHeader";
 import usersService from "../services/usersService";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 const UserDeatils = () => {
 
@@ -20,6 +21,8 @@ const UserDeatils = () => {
   const navigate = useNavigate();
 
   const { user } = useAuth();
+
+  const { theme } = useDarkContext();
 
   const form = useFormik({
     validateOnMount: true,
@@ -91,10 +94,10 @@ const UserDeatils = () => {
         }
       />
       <img className="rounded-circle w-25" src={userImg} alt="Logo" />
-      {!showEdit && <div className="m-3"><p>User Name: {userDetails.name}</p>
-        <p>Email: {userDetails.email}</p></div>
+      {!showEdit && <div className="m-3"><p><span>User Name: </span>{userDetails.name}</p>
+        <p> <span>Email: </span>{userDetails.email}</p></div>
       }
-      {!showEdit && <button className='rounded border w-25 min-vw-25 p-2 btn btn-secondary' onClick={handleToggleShowEdit}>Edit profile</button>}
+      {!showEdit && <button className={`rounded w-25 p-2 btn btn-primary ${theme}`} style={{ minWidth: "100px" }} onClick={handleToggleShowEdit}>Edit profile</button>}
       {showEdit && <form onSubmit={form.handleSubmit} noValidate>
         {error && <div className="alert alert-danger">{error}</div>}
 
@@ -122,12 +125,12 @@ const UserDeatils = () => {
             value={userDetails}
             type="submit"
             disabled={!form.isValid}
-            className="btn btn-primary m-2"
+            className={`btn btn-primary  ${theme} m-2`}
           >
             Update
           </button>
           <button
-            className="btn btn-secondary m-2"
+            className="btn btn-danger m-2"
             onClick={handleCancle}
           >
             Cancle

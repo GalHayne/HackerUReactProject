@@ -1,9 +1,3 @@
-:root{
-    --light-backGroundColor: #f8f9fa;
-    --light-colorText: #1a1a1a;
-    
-}
-
 #light{
     background-color:var(--light-backGroundColor);
     color: var(--light-colorText)

@@ -1,0 +1,28 @@
+:root{
+  --light-backGroundColor: #f8f9fa;
+  --dark-backGroundColor: #212529;
+  --gray-backGroundColor: #494d51;
+  --dark-colorText: #e8e8e8;
+  --li-hover-color: #a7a7a7;
+  --li-hover-color2: #696767;
+  --card-bgColor-light: #d3d2d2;
+  --card-bgColor-dark: #3f4144;
+  --drop-down-text-color: #e8e8e8;
+  --blue-for-lightMode: #0d6efd;
+  --icons-color:#868585 ;
+  --icons-color-hover:#050505 ;
+}
+
+.bi.bi-android2{
+    color: var(--li-hover-color);
+}
+
+.bi.bi-android2:hover{
+    color: var(--li-hover-color2);
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+}

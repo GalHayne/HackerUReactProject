@@ -7,9 +7,12 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 const SignUpBiz = ({ redirect = "/sign-in" }) => {
   const [error, setError] = useState("");
+
+  const { theme } = useDarkContext();
 
   const navigate = useNavigate();
   const { user, createUser } = useAuth();
@@ -59,7 +62,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
         />
       </div>
 
-      <div className="center-div shadow p-3">
+      <div className={`center-div ${theme} shadow p-3`}>
         <form className="p-3" onSubmit={form.handleSubmit} noValidate>
           {error && <div className="alert alert-danger">{error}</div>}
 
@@ -89,7 +92,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
             <button
               type="submit"
               disabled={!form.isValid}
-              className="btn btn-primary"
+              className={`btn btn-primary ${theme}`}
             >
               Sign Up
             </button>

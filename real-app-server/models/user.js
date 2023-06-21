@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 2,
-    maxlength: 255,
+    maxlength: 12,
   },
   email: {
     type: String,
@@ -56,7 +56,7 @@ function validateUser(user) {
 function validateCards(data) {
   const schema = Joi.object({
     cards: Joi.array().min(1).required(),
-    favoriteCard:Joi.array().min(1).required(), 
+    favoriteCard: Joi.array().min(1).required(),
   });
 
   return schema.validate(data);

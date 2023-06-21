@@ -8,9 +8,12 @@ import PageHeader from "./common/pageHeader";
 import cardsService from "../services/cardsService";
 import { useCard } from "../hooks/useCard";
 import { toast } from "react-toastify";
+import useDarkContext from "../hooks/useDarkModa-context";
 
 const CardsEdit = () => {
   const [error, setError] = useState("");
+
+  const { theme } = useDarkContext();
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -75,7 +78,7 @@ const CardsEdit = () => {
   }, [card]);
 
   return (
-    <div className="center-div shadow p-3">
+    <div className={`center-div ${theme} shadow p-3`}>
       <PageHeader title="Edit Card" />
 
       <form onSubmit={form.handleSubmit} noValidate>
@@ -120,7 +123,7 @@ const CardsEdit = () => {
           <button
             type="submit"
             disabled={!form.isValid}
-            className="btn btn-primary"
+            className={`btn btn-primary ${theme}`}
           >
             Edit Card
           </button>
