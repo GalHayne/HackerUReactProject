@@ -93,7 +93,7 @@ const UserDeatils = () => {
           </>
         }
       />
-      <img className="rounded-circle w-25" src={userImg} alt="Logo" />
+      <img className="rounded-circle" style={{width: "150px"}} src={userImg} alt="Logo" />
       {!showEdit && <div className="m-3"><p><span>User Name: </span>{userDetails.name}</p>
         <p> <span>Email: </span>{userDetails.email}</p></div>
       }
