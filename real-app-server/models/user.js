@@ -27,6 +27,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  block: {
+    type: Boolean,
+    required: true,
+  },
+  timeBlock: {
+    type: Date,
+    default: null,
+  },
   createdAt: { type: Date, default: Date.now },
   cards: Array,
   favoriteCard: Array,
@@ -34,7 +42,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
-    { _id: this._id, biz: this.biz },
+    { _id: this._id, biz: this.biz, block: this.block },
     config.get("jwtKey")
   );
   return token;
@@ -48,6 +56,8 @@ function validateUser(user) {
     email: Joi.string().min(6).max(255).required().email(),
     password: Joi.string().min(6).max(1024).required(),
     biz: Joi.boolean().required(),
+    block: Joi.boolean().required(),
+    timeBlock: Joi.date(),
   });
 
   return schema.validate(user);
@@ -56,7 +66,7 @@ function validateUser(user) {
 function validateCards(data) {
   const schema = Joi.object({
     cards: Joi.array().min(1).required(),
-    favoriteCard: Joi.array().min(1).required(),
+    favoriteCard: Joi.optional(),
   });
 
   return schema.validate(data);

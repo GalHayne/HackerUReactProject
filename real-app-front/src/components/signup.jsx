@@ -36,7 +36,7 @@ const SignUp = ({ redirect = "/" }) => {
     }),
     async onSubmit(values) {
       try {
-        const res = await createUser({ ...values, biz: false });
+        const res = await createUser({ ...values, biz: false, block: false });
         toast.success(`${res.data.name} you have successfully registered to the site, you are transferred to the login page`)
         navigate(redirect);
       } catch ({ response }) {
