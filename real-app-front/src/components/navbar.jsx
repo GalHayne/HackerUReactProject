@@ -27,7 +27,7 @@ const Navbar = () => {
     <nav className={classNameHeader} aria-label="Fourth navbar example">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Hayne's <i class="bi bi-card-text"></i> Cards
+          Hayne's <i className="bi bi-card-text"></i> Cards
         </Link>
         <button
           className="navbar-toggler"

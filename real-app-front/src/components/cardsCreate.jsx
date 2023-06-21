@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Joi from "joi";
 import { useState } from "react";
-import { Navigate,useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/input";
 import PageHeader from "./common/pageHeader";
@@ -64,9 +64,8 @@ const CardsCreate = () => {
 
 
   return (
-    <>
-      <PageHeader title="Create Card" description="Create Card" />
-
+    <div className="center-div shadow p-3">
+      <PageHeader title="Create Card" />
       <form onSubmit={form.handleSubmit} noValidate>
         {error && <div className="alert alert-danger">{error}</div>}
 
@@ -115,7 +114,7 @@ const CardsCreate = () => {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

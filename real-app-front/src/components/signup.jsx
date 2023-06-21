@@ -50,50 +50,50 @@ const SignUp = ({ redirect = "/" }) => {
 
   return (
     <>
-    <div className="text-center">
-      <PageHeader
-        title="Sign Up with Real App"
-        description="Open a new account, it is free you yammani!"
+      <div className="text-center">
+        <PageHeader
+          title="Sign Up with Real App"
+          description="Open a new account, it is free you yammani!"
         />
       </div>
 
-    <div className="center-div">
-      <form onSubmit={form.handleSubmit} noValidate>
-        {error && <div className="alert alert-danger">{error}</div>}
+      <div className="center-div shadow p-3">
+        <form onSubmit={form.handleSubmit} noValidate>
+          {error && <div className="alert alert-danger">{error}</div>}
 
-        <Input
-          {...form.getFieldProps("email")}
-          type="email"
-          label="Email"
-          required
-          error={form.touched.email && form.errors.email}
+          <Input
+            {...form.getFieldProps("email")}
+            type="email"
+            label="Email"
+            required
+            error={form.touched.email && form.errors.email}
           />
-        <Input
-          {...form.getFieldProps("password")}
-          type="password"
-          label="Password"
-          required
-          error={form.touched.password && form.errors.password}
+          <Input
+            {...form.getFieldProps("password")}
+            type="password"
+            label="Password"
+            required
+            error={form.touched.password && form.errors.password}
           />
-        <Input
-          {...form.getFieldProps("name")}
-          type="text"
-          label="Name"
-          required
-          error={form.touched.name && form.errors.name}
+          <Input
+            {...form.getFieldProps("name")}
+            type="text"
+            label="Name"
+            required
+            error={form.touched.name && form.errors.name}
           />
 
-        <div className="my-2">
-          <button
-            type="submit"
-            disabled={!form.isValid}
-            className="btn btn-primary"
-          >
-            Sign Up
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="my-2">
+            <button
+              type="submit"
+              disabled={!form.isValid}
+              className="btn btn-primary"
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

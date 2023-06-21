@@ -75,8 +75,8 @@ const CardsEdit = () => {
   }, [card]);
 
   return (
-    <>
-      <PageHeader title="Edit Card" description="Edit Card" />
+    <div className="center-div shadow p-3">
+      <PageHeader title="Edit Card" />
 
       <form onSubmit={form.handleSubmit} noValidate>
         {error && <div className="alert alert-danger">{error}</div>}
@@ -126,7 +126,7 @@ const CardsEdit = () => {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
