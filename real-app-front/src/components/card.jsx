@@ -31,7 +31,7 @@ const Card = ({
   };
 
   return (
-    <div className={`d-flex flex-column justify-content-between card-desgin ${theme} m-2`} style={{ minWidth: "12rem", width: "15rem" }}>
+    <div className={`card-desgin m-3 ${theme}`} style={{ minWidth: "12rem", width: "20rem" }}>
       {!isFavoriteCard ? (
         <div
           className="bg-transparent position-relative end-0"
@@ -50,7 +50,7 @@ const Card = ({
         </div>
       )
       }
-      <div className="d-flex flex-row justify-content-around align-items-center">
+      <div className="align-items-center">
         <img
           src={bizImage}
           className=" card-img-top my-1 p-1 w-50 rounded-circle"
@@ -67,14 +67,14 @@ const Card = ({
       {user.biz ? (
         <div className="d-flex justify-content-between P-2">
           <button className={`btn btn-primary ${theme}`} onClick={() => navigate(`/my-cards/edit/${_id}`)}>Edit</button>
-          <button className="btn btn-danger" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
+          <button className="btn btn-secondary" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
         </div>
       ) : (
         <>
           {user_id === user._id ? (
             <div className="d-flex justify-content-between P-2">
               <button className={`btn btn-primary ${theme}`} onClick={() => navigate(`/my-cards/edit/${_id}`)}>Edit</button>
-              <button className="btn btn-danger" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
+              <button className="btn btn-secondary" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
             </div>
           ) : (
             <div></div>

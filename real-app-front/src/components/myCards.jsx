@@ -7,12 +7,15 @@ import { toast } from "react-toastify";
 import usersService from "../services/usersService";
 import { Navigate, useNavigate } from "react-router-dom";
 import useDarkContext from "../hooks/useDarkModa-context";
+import Carousel from 'react-elastic-carousel';
 
 const MyCards = () => {
 
   const [onlyFavorite, setOnlyFavorite] = useState(false);
 
   const [favoriteCards, setFavoriteCards] = useState([]);
+
+  const [cardGalleryStyle, setCardGalleryStyle] = useState(true);
 
   const { user } = useAuth();
 
@@ -55,6 +58,43 @@ const MyCards = () => {
     }
   }
 
+  const breakPoints = [
+    { width: 400, itemsToShow: 1 },
+    { width: 800, itemsToShow: 2 },
+    { width: 1100, itemsToShow: 3 },
+    { width: 1400, itemsToShow: 4 },
+    { width: 1800, itemsToShow: 5 },
+  ]
+
+  const renderCards = !cards.length ? (<p>no cards...</p>)
+    : onlyFavorite === false ? (
+      cards.map((card) => {
+        let isFavoriteCard = false;
+        favoriteCards.some(favoriteCard => {
+          if (favoriteCard._id === card._id) {
+            isFavoriteCard = true;
+          }
+        })
+
+        return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
+        />
+      })
+    )
+      : (
+        favoriteCards.map((card) => {
+          let isFavoriteCard = false;
+          favoriteCards.some(favoriteCard => {
+            if (favoriteCard._id === card._id) {
+              isFavoriteCard = true;
+            }
+          });
+
+          return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
+          />
+        })
+      )
+
+
   if (!user) {
     return <Navigate to="/" />;
   }
@@ -72,40 +112,26 @@ const MyCards = () => {
           :
           <button type="button" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" onClick={() => setOnlyFavorite((prev) => !prev)}>All cards </button>
         }
-
       </div>
 
-
-      <div className="d-flex justify-content-center m-3 flex-wrap">
-        {!cards.length ? (<p>no cards...</p>)
-          : onlyFavorite === false ? (
-            cards.map((card) => {
-              let isFavoriteCard = false;
-              favoriteCards.some(favoriteCard => {
-                if (favoriteCard._id === card._id) {
-                  isFavoriteCard = true;
-                }
-              })
-
-              return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
-              />
-            })
-          )
-            : (
-              favoriteCards.map((card) => {
-                let isFavoriteCard = false;
-                favoriteCards.some(favoriteCard => {
-                  if (favoriteCard._id === card._id) {
-                    isFavoriteCard = true;
-                  }
-                });
-
-                return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
-                />
-              })
-            )
-        }
+      Type Display Card:
+      <div className="form-check">
+        <input className="form-check-input" onChange={() => setCardGalleryStyle((prev) => !prev)} type="checkbox" value="" id="flexCheckDefault" />
+        <label className="form-check-label" htmlFor="flexCheckDefault">
+          Slider <i className="bi bi-sliders"></i>
+        </label>
       </div>
+
+      {
+        cardGalleryStyle ?
+          <div className="d-flex justify-content-center flex-wrap">
+            {renderCards}
+          </div>
+          :
+          <Carousel breakPoints={breakPoints}>
+            {renderCards}
+          </Carousel>
+      }
     </>
   );
 };
