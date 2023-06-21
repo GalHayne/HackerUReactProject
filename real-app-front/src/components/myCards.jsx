@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
 import PageHeader from "./common/pageHeader";
 import { useMyCards } from "../hooks/useMyCards";
 import Card from "./card";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
 import usersService from "../services/usersService";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const MyCards = () => {
 
@@ -18,6 +17,7 @@ const MyCards = () => {
 
   const cards = useMyCards();
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     getFavoriteCards();
@@ -60,17 +60,16 @@ const MyCards = () => {
     <>
       <PageHeader
         title={!onlyFavorite ? "My Cards" : 'Favorite Cards'}
-        description={!onlyFavorite ? "your cards are in the list below" : "your favorite cards are in the list below"}
+        description={cards.length ? !onlyFavorite ? "your cards are in the list below" : "your favorite cards are in the list below" : 'Click on Add new card to add new card'}
       />
 
-      <div className="row">
-        <Link to="/create-card">Create a New Card</Link>
-      </div>
-      <div className="d-flex justify-content-end mb-3" >
-        {!onlyFavorite ? <button disabled={favoriteCards.length === 0} type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>Favorite cards </button>
+      <div className="d-flex justify-content-between mb-3" >
+        <button type="button" className="btn btn-primary" onClick={() => navigate('/create-card')} title="Add new card">Add new card</button>
+        {!onlyFavorite ? <button disabled={favoriteCards.length === 0} type="button" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" onClick={() => setOnlyFavorite((prev) => !prev)}>Favorite cards </button>
           :
-          <button type="button" className="btn btn-primary w-25" onClick={() => setOnlyFavorite((prev) => !prev)}>All cards </button>
+          <button type="button" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" onClick={() => setOnlyFavorite((prev) => !prev)}>All cards </button>
         }
+
       </div>
 
 
@@ -96,7 +95,7 @@ const MyCards = () => {
                   if (favoriteCard._id === card._id) {
                     isFavoriteCard = true;
                   }
-                })
+                });
 
                 return <Card key={card._id} card={card} isFavoriteCard={isFavoriteCard} MoveTofavorite={MoveTofavorite} removeFromfavorite={removeFromfavorite}
                 />

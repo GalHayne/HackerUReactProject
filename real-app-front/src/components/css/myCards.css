@@ -1,0 +1,17 @@
+:root{
+  --dark-backGroundColor: #212529;
+  --gray-backGroundColor: #494d51;
+  --dark-colorText: #e8e8e8;
+  --li-hover-color: #a7a7a7;
+  --drop-down-text-color: #e8e8e8;
+  --blue-for-lightMode: #0d6efd
+
+}
+
+.card-desgin{
+    color: var(--dark-colorText);
+    background: rgb(86,86,93);
+    background: linear-gradient(131deg, rgba(86,86,93,1) 0%, rgba(48,48,50,1) 50%);
+    padding: 15px;
+    border-radius: 5px;
+}

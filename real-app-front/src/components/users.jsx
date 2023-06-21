@@ -36,7 +36,7 @@ const Users = () => {
     return (
       <tbody key={user._id}>
         <tr className="text-center">
-          <th className="">{userId === user._id ? <div title="connected now" className="connectNow"></div> : <div></div>}</th>
+          <th>{userId === user._id ? <div title="connected now" className="connectNow"></div> : <div></div>}</th>
           <th scope="row">{user._id}</th>
           <td>{user.name}</td>
           <td>{user.email}</td>
@@ -57,7 +57,7 @@ const Users = () => {
         note="Note that when you delete a user, all their cards will also be deleted for the deleted user"
       />
 
-      <table className="table">
+      <table className="table table-dark table-striped">
         <thead>
           <tr className="text-center">
             <th>Connect Now</th>

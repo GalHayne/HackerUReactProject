@@ -3,6 +3,8 @@
 @import './components/css/navbar.css';
 @import './components/css/users.css';
 @import './components/css/footer.css';
+@import './components/css/myCards.css';
+
 
 :root{
   --dark-backGroundColor: #212529;

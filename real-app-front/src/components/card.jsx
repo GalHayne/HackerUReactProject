@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth.context";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Card = ({
   card: {
@@ -17,6 +17,8 @@ const Card = ({
 }) => {
   const { user } = useAuth();
 
+  const navigate = useNavigate();
+
   const handleMoveTofavorite = async (card_id) => {
     MoveTofavorite(card_id);
   };
@@ -26,10 +28,10 @@ const Card = ({
   };
 
   return (
-    <div className="card m-2" style={{width: "18rem" }}>
+    <div className="card-desgin m-2" style={{ minWidth: "12rem", width: "15rem" }}>
       {!isFavoriteCard ? (
         <div
-          className="bg-transparent position-absolute end-0 m-2"
+          className="bg-transparent text-warning position-relative end-0"
           title="add to favorite card"
           onClick={() => handleMoveTofavorite(_id)}
         >
@@ -37,13 +39,14 @@ const Card = ({
         </div>
       ) : (
         <div
-          className="bg-transparent position-absolute text-warning end-0 m-2"
+          className="bg-transparent text-warning position-relative end-0"
           title="remove from favorite cards"
           onClick={() => handleRemoveFromfavorite(_id)}
         >
           <i className="bi bi-star-fill"></i>
         </div>
-      )}
+      )
+      }
       <div className="d-flex flex-row justify-content-around align-items-center">
         <img
           src={bizImage}
@@ -57,24 +60,16 @@ const Card = ({
         <p className="card-text">Adress : {bizAddress}</p>
         <p className="card-text">Phone : {bizPhone}</p>
         {user.biz ? (
-          <>
-            <Link to={`/my-cards/edit/${_id}`} className="card-link">
-              edit
-            </Link>
-            <Link to={`/my-cards/delete/${_id}`} className="card-link">
-              delete
-            </Link>
-          </>
+          <div className="d-flex justify-content-between">
+            <button className="btn btn-primary" onClick={() => navigate(`/my-cards/edit/${_id}`)}>Edit</button>
+            <button className="btn btn-danger" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
+          </div>
         ) : (
           <>
             {user_id === user._id ? (
-              <div>
-                <Link to={`/my-cards/edit/${_id}`} className="card-link">
-                  edit
-                </Link>
-                <Link to={`/my-cards/delete/${_id}`} className="card-link">
-                  delete
-                </Link>
+              <div className="d-flex justify-content-between">
+                <button className="btn btn-primary" onClick={() => navigate(`/my-cards/edit/${_id}`)}>Edit</button>
+                <button className="btn btn-danget" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
               </div>
             ) : (
               <div></div>
@@ -82,7 +77,7 @@ const Card = ({
           </>
         )}
       </div>
-    </div>
+    </div >
   );
 };
 

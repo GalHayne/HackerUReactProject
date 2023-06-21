@@ -5,7 +5,7 @@ const About = () => {
     <PageHeader
       title={
         <>
-          About Real<i className="bi bi-geo-fill"></i>App
+          Hayne's <i class="bi bi-card-text"></i> Cards
         </>
       }
       description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo voluptas itaque minus? Voluptatibus odit quos porro ea assumenda quasi reiciendis corrupti, reprehenderit accusantium sed esse ratione, sapiente labore, odio debitis."

@@ -27,7 +27,7 @@ const Navbar = () => {
     <nav className={classNameHeader} aria-label="Fourth navbar example">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Real<i className="bi bi-geo-fill"></i>App
+          Hayne's <i class="bi bi-card-text"></i> Cards
         </Link>
         <button
           className="navbar-toggler"
@@ -66,7 +66,7 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto mb-2 mb-md-0">
             {user ? (
               <>
-               <li className="nav-item">
+                <li className="nav-item">
                   <NavLink title="log out" className="nav-link" to="/sign-out">
                     Sign Out
                   </NavLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
                       <i className="bi bi-person"></i>
                     </div>
                   </NavLink>
-                </li>   
+                </li>
               </>
             ) : (
               <>
@@ -99,50 +99,50 @@ const Navbar = () => {
               </>
             )}
             <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarScrollingDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {modeIcon}
-                  </a>
-                  <ul
-                    className="dropdown-menu p-3"
-                    aria-labelledby="navbarScrollingDropdown"
-                  >
-                    <li
-                      className={
-                        isLihgtSelected
-                          ? "lightModeLi p-2 modeSelected"
-                          : "lightModeLi p-2"
-                      }
-                      onClick={() => {
-                        toogleTheme("light");
-                        setIsLihgtSelected(true);
-                        setIsDarkSelected(false);
-                      }}
-                    >
-                      <i className="bi bi-brightness-high"></i>Light
-                    </li>
-                    <li
-                      className={
-                        isDarkSelected
-                          ? "my-2 darkModeLi p-2 modeSelected"
-                          : "my-2 darkModeLi p-2"
-                      }
-                      onClick={() => {
-                        toogleTheme("dark");
-                        setIsLihgtSelected(false);
-                        setIsDarkSelected(true);
-                      }}
-                    >
-                      <i className="bi bi-moon"></i>Drak
-                    </li>
-                  </ul>
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarScrollingDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {modeIcon}
+              </a>
+              <ul
+                className="dropdown-menu p-3"
+                aria-labelledby="navbarScrollingDropdown"
+              >
+                <li
+                  className={
+                    isLihgtSelected
+                      ? "lightModeLi p-2 modeSelected"
+                      : "lightModeLi p-2"
+                  }
+                  onClick={() => {
+                    toogleTheme("light");
+                    setIsLihgtSelected(true);
+                    setIsDarkSelected(false);
+                  }}
+                >
+                  <i className="bi bi-brightness-high"></i>Light
                 </li>
+                <li
+                  className={
+                    isDarkSelected
+                      ? "my-2 darkModeLi p-2 modeSelected"
+                      : "my-2 darkModeLi p-2"
+                  }
+                  onClick={() => {
+                    toogleTheme("dark");
+                    setIsLihgtSelected(false);
+                    setIsDarkSelected(true);
+                  }}
+                >
+                  <i className="bi bi-moon"></i>Drak
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
