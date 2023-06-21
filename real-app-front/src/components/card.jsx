@@ -31,7 +31,7 @@ const Card = ({
   };
 
   return (
-    <div className={`card-desgin m-3 ${theme}`} style={{ minWidth: "12rem", width: "15rem" }}>
+    <div className={`card-desgin m-3 ${theme}`} style={{ minWidth: "12rem", width: "20rem" }}>
       {!isFavoriteCard ? (
         <div
           className="bg-transparent position-relative end-0"

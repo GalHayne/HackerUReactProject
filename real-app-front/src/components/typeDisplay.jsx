@@ -1,4 +1,4 @@
-const TypeDisplay = ({setCardGalleryStyle}) => {
+const TypeDisplay = ({setCardGalleryStyle,galleryStyle}) => {
 
     const handleGalleryStyleChange = () => {
         setCardGalleryStyle()
@@ -6,13 +6,13 @@ const TypeDisplay = ({setCardGalleryStyle}) => {
 
   return (
     <div>
-      Type Display Card:
+      Slider Display Card:
       <div className="form-check">
         <input
           className="form-check-input"
           onChange={() => handleGalleryStyleChange()}
           type="checkbox"
-          value=""
+          checked={!galleryStyle}
           id="flexCheckDefault"
         />
         <label className="form-check-label" htmlFor="flexCheckDefault">

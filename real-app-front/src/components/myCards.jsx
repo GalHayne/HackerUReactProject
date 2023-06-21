@@ -16,13 +16,15 @@ const MyCards = () => {
 
   const [favoriteCards, setFavoriteCards] = useState([]);
 
-  const [cardGalleryStyle, setCardGalleryStyle] = useState(true);
-
   const { user } = useAuth();
 
   const cards = useMyCards();
 
   const { theme } = useDarkContext();
+  const { galleryStyle, toogleStyle } = useDarkContext();
+
+  console.log(galleryStyle);
+
 
   const navigate = useNavigate();
 
@@ -60,7 +62,7 @@ const MyCards = () => {
   }
 
   const handleGalleryStyleChange = () => {
-    setCardGalleryStyle(prev => !prev)
+    toogleStyle(prev => !prev)
   }
 
   const breakPoints = [
@@ -108,7 +110,8 @@ const MyCards = () => {
     <>
       <PageHeader
         title={!onlyFavorite ? "My Cards" : 'Favorite Cards'}
-        description={cards.length ? !onlyFavorite ? "your cards are in the list below" : "your favorite cards are in the list below" : 'Click on Add new card to add new card'}
+        description={cards.length ? !onlyFavorite ? "You can see all the business cards that users have uploaded to the site. You can see the professional's contact details and directions. You can mark the favorites cards and only the favorites cards can be displayed. In addition, you can add a new business card by clicking on Add new card." : "your favorite cards are in the list below" : 'Click on Add new card to add new card'}
+        note={'Please note that every new business card that is uploaded to the site is carefully checked by the site manager, if there is a defective card, the manager deletes it.'}
       />
 
       <div className="d-flex justify-content-between mb-3" >
@@ -119,10 +122,10 @@ const MyCards = () => {
         }
       </div>
 
-      <TypeDisplay setCardGalleryStyle={handleGalleryStyleChange}/>
+      <TypeDisplay setCardGalleryStyle={handleGalleryStyleChange} galleryStyle={galleryStyle}/>
 
       {
-        cardGalleryStyle ?
+        galleryStyle ?
           <div className="d-flex justify-content-center flex-wrap">
             {renderCards}
           </div>

@@ -6,6 +6,8 @@ function Provider({ children }) {
     
   const [theme, setTheme] = useState("light");
 
+  const [galleryStyle, setGalleryStyle] = useState(true);
+
   const toogleTheme = (state) => {
     setTheme((prev) => {
       if (state === prev) return state;
@@ -13,9 +15,13 @@ function Provider({ children }) {
     });
   };
 
+  const toogleStyle = () => setGalleryStyle(state => !state);
+
   const valueToShare = {
     toogleTheme,
     theme,
+    toogleStyle,
+    galleryStyle,
   };
 
   return (

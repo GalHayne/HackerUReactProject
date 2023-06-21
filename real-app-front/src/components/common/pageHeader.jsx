@@ -15,10 +15,9 @@ const PageHeader = ({ title, description, note=null }) => {
         </div>
       )}
 
-      {note &&<div>
+      {note &&<span>
         <p>{note}</p>
-
-      </div>}
+      </span>}
     </>
   );
 };

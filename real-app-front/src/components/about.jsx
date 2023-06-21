@@ -2,14 +2,13 @@ import PageHeader from "./common/pageHeader";
 
 const About = () => {
   return (
-    <PageHeader
-      title={
-        <>
-          Hayne's <i className="bi bi-card-text"></i> Cards
-        </>
-      }
-      description="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo voluptas itaque minus? Voluptatibus odit quos porro ea assumenda quasi reiciendis corrupti, reprehenderit accusantium sed esse ratione, sapiente labore, odio debitis."
-    />
+    <div>
+      <PageHeader
+        title={<>About</>}
+        description="A quick explanation of the site:"
+      />
+      <p>First Sign Up on the website then connect to the website click on My Cards and from here you can add professionals with whom you have contacted. In addition, you will see all the business owners on the site</p>
+    </div>
   );
 };
 

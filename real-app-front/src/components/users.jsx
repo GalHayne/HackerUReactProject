@@ -57,8 +57,8 @@ const Users = () => {
     <>
       <PageHeader
         title="Users"
-        description="All users registered in the system are in the table below. You can turn a regular user into an administrator and only regular users can be deleted"
-        note="Note that when you delete a user, all their cards will also be deleted for the deleted user"
+        description="In the table below you can see all the users registered to the site, you can see which users have administrator privileges.
+        Additionally, you can give a regular user admin privileges by clicking Make Admin on the user you want to give admin privileges"
       />
 
       <table className={`table table-${tableMode} table-striped`}>
