@@ -6,8 +6,6 @@ const removeTheBlock = (user) => {
 
     const deltaHours = (diff_hours(dateNow, user.timeBlock));
 
-    console.log(deltaHours);
-
     if (deltaHours > HOURS_TO_REMOVE_BLOCK) {
         return true;
     }

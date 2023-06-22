@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import cardsService from "../services/cardsService";
+import { toast } from "react-toastify";
 
 export const useMyCards = () => {
   const [cards, setCards] = useState([]);
 
   const getCards = async () => {
-    try{
+    try {
       const { data } = await cardsService.getAll();
       setCards(data);
-    } catch(err){
-      console.log(err);
+    } catch (err) {
+      toast(err);
     }
   };
 
