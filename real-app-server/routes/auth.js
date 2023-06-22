@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
 
   if (checkIfUserBlock(user)) {
     
-    return res.status(401).send('Sorry, the user is locked out, please try again later');
+    return res.status(401).send('Sorry, the user is blocked, please contact the manager');
     
   }
 
