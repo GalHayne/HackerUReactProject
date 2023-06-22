@@ -1,3 +1,5 @@
+const TIME_TO_REMOVE_BLOCK = 1;
+
 const removeTheBlock = (user) => {
 
     const dateNow = new Date();
@@ -6,7 +8,7 @@ const removeTheBlock = (user) => {
 
     console.log(deltaHours);
 
-    if (deltaHours > 0.27) {
+    if (deltaHours > TIME_TO_REMOE_BLOCK) {
         return true;
     }
 
