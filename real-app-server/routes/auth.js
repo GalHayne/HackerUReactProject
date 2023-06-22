@@ -8,22 +8,26 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error){
+    return res.status(400).send(error.details[0].message);
+  }
+    
 
   let user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return res.status(400).send("Invalid email or password.");
+    return res.status(400).send("The user is not registered on the site.");
   }
 
   if (checkIfUserBlock(user)) {
-    res.status(400).send('Sorry, the user is locked out, please try again later');
-    return;
+    
+    return res.status(401).send('Sorry, the user is locked out, please try again later');
+    
   }
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
     incLoginAttempts(user);
-    return res.status(400).send("Invalid email or password.");
+    return res.status(402).send("Invalid email or password.");
   }
 
   res.json({ token: user.generateAuthToken() });

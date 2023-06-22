@@ -6,8 +6,10 @@ import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/input";
 import PageHeader from "./common/pageHeader";
 import { useAuth } from "../context/auth.context";
-import { toast } from "react-toastify";
+
 import useDarkContext from "../hooks/useDarkModa-context";
+import showTheResponse from "../utils/showTheResponse";
+import { toast } from "react-toastify";
 
 const SignIn = ({ redirect = "/" }) => {
   const [error, setError] = useState("");
@@ -36,20 +38,16 @@ const SignIn = ({ redirect = "/" }) => {
     async onSubmit(values) {
       try {
         const res = await login(values);
-        if (res) {
-          navigate(redirect);
-          toast.success(`You have successfully connected to the system`);
-        } else {
-          toast.error(`Problem connecting to the server`);
-          setError(
-            "After 3 incorrect login attempts the user will be blocked for 24 hours"
-          );
+        showTheResponse(res)
+        if (res.response.data !== 200){
+          setError(res.response.data);
+          return;
+        } 
+      } catch (connect) {
+        toast.success(`You have successfully connected to the system`);
+        navigate(redirect);
         }
-      } catch (err) {
-        if (err) {
-          setError(err);
-        }
-      }
+      
     },
   });
 

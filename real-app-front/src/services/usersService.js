@@ -14,11 +14,15 @@ export function createUser(user) {
 }
 
 export async function loginUser(credentials) {
-  const response = await httpService.post("/auth", credentials);
-  localStorage.setItem(TOKEN_KEY, response.data.token);
-  setTokenHeader();
+  try{
+    const response = await httpService.post("/auth", credentials);
+    localStorage.setItem(TOKEN_KEY, response.data.token);
+    setTokenHeader();
+    return response;
+  }catch(err){
+    return err;
+  }
 
-  return response;
 }
 
 export function logout() {
