@@ -1,9 +1,9 @@
-.bi.bi-android2{
-    color: var(--li-hover-color);
+.bi.bi-android2 {
+  color: var(--li-hover-color);
 }
 
-.bi.bi-android2:hover{
-    color: var(--li-hover-color2);
+.bi.bi-android2:hover {
+  color: var(--li-hover-color2);
 }
 
 table {
@@ -11,3 +11,13 @@ table {
   border-radius: 1em;
   overflow: hidden;
 }
+
+/* .card-modal {
+  background-color: aqua;
+  text-align: center;
+  position: fixed;
+  width: '100rem';
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+} */

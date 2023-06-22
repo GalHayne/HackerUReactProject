@@ -19,13 +19,14 @@ const CardModal = ({ onClose, card: {
 
     return (
 
-        <div className=" p-3 rounded" style={{
-            backgroundColor: '#554f4f',
+        <div className="card-modal p-3 rounded" style={{
+            backgroundColor: '#3f4144',
             position: "fixed",
             width: "50rem",
             textAlign: "center",
             top: "50%",
             left: "50%",
+            color: 'white',
             transform: "translate(-50%, -50%)",
         }} >
 
