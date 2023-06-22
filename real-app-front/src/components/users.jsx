@@ -54,8 +54,8 @@ const Users = () => {
           <td>{user.name}</td>
           <td>{user.email}</td>
           <td>{JSON.stringify(user.biz)}</td>
-          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i class="bi bi-people-fill"></i></button></td> : <td></td>}
-          {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i class="bi bi-shield-fill-x"></i></button></td> : <td></td>}
+          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i className="bi bi-people-fill"></i></button></td> : <td></td>}
+          {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i className="bi bi-shield-fill-x"></i></button></td> : <td></td>}
         </tr>
       </tbody>
 

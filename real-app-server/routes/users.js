@@ -57,7 +57,7 @@ router.put("/removeBlock/:id", auth, async (req, res) => {
     return res.status(404).send("The user with the given ID was not found.");
 
   user.block = false;
-  user.blockTime = [];
+  user.timeBlock = [];
 
   user.save();
 
