@@ -5,7 +5,7 @@ const TypeDisplay = ({setCardGalleryStyle,galleryStyle}) => {
     }
 
   return (
-    <div>
+    <div  title="show the cards in slider">
       Slider Display Card:
       <div className="form-check">
         <input

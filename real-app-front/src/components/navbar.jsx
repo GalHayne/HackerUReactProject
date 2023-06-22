@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <nav className={classNameHeader} aria-label="Fourth navbar example">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" title="Main page" to="/">
           Hayne's <i className="bi bi-card-text"></i> Cards
         </Link>
         <button
@@ -66,7 +66,7 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto mb-2 mb-md-0">
             {user ? (
               <>
-                <li className="nav-item">
+                <li title="sign out from the web" className="nav-item">
                   <NavLink title="log out" className="nav-link" to="/sign-out">
                     Sign Out
                   </NavLink>
@@ -81,24 +81,24 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <li className="nav-item">
+                <li className="nav-item" title="sign in to web">
                   <NavLink className="nav-link" to="/sign-in">
                     Sign In
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" title="sign up to web">
                   <NavLink className="nav-link" to="/sign-up">
                     Sign Up
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" title="sign up busniess to web">
                   <NavLink className="nav-link" to="/sign-up-biz">
                     Sign Up Business
                   </NavLink>
                 </li>
               </>
             )}
-            <li className="nav-item dropdown">
+            <li className="nav-item dropdown" title="change theme">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"

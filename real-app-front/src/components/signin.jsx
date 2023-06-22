@@ -88,6 +88,7 @@ const SignIn = ({ redirect = "/" }) => {
           <div className="my-2">
             <button
               type="submit"
+              title="sign in"
               disabled={!form.isValid}
               className={`btn btn-primary ${theme}`}
             >

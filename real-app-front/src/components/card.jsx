@@ -38,6 +38,7 @@ const Card = ({ card,
   return (
     <div
       className={`card-desgin m-3 ${theme}`}
+      title={bizName}
       style={{ minWidth: "12rem", width: "20rem", height: "20rem" }}
     >
       {!isFavoriteCard ? (
@@ -104,12 +105,14 @@ const Card = ({ card,
         <div className="d-flex justify-content-between P-2">
           <button
             className={`btn btn-primary ${theme}`}
+            title="Edit card"
             onClick={() => navigate(`/my-cards/edit/${_id}`)}
           >
             Edit
           </button>
           <button
             className="btn btn-secondary"
+            title="Delete card"
             onClick={() => navigate(`/my-cards/delete/${_id}`)}
           >
             Delete
@@ -121,12 +124,14 @@ const Card = ({ card,
             <div className="d-flex justify-content-between P-2">
               <button
                 className={`btn btn-primary ${theme}`}
+                title="Edit card"
                 onClick={() => navigate(`/my-cards/edit/${_id}`)}
               >
                 Edit
               </button>
               <button
                 className="btn btn-secondary"
+                title="Delete card"
                 onClick={() => navigate(`/my-cards/delete/${_id}`)}
               >
                 Delete

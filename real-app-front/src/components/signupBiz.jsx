@@ -91,6 +91,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
           <div className="my-2">
             <button
               type="submit"
+              title="sign up business"
               disabled={!form.isValid}
               className={`btn btn-primary ${theme}`}
             >

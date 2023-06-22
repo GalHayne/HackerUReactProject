@@ -76,7 +76,7 @@ const UserDeatils = () => {
     })
   }
 
-  const handleCancle = () => {
+  const handlecancel = () => {
     handleToggleShowEdit()
   }
 
@@ -97,7 +97,7 @@ const UserDeatils = () => {
       {!showEdit && <div className="m-3"><p><span>User Name: </span>{userDetails.name}</p>
         <p> <span>Email: </span>{userDetails.email}</p></div>
       }
-      {!showEdit && <button className={`rounded w-25 p-2 btn btn-primary ${theme}`} style={{ minWidth: "100px" }} onClick={handleToggleShowEdit}>Edit profile</button>}
+      {!showEdit && <button className={`rounded w-25 p-2 btn btn-primary ${theme}`} style={{ minWidth: "100px" }} title="edit profile" onClick={handleToggleShowEdit}>Edit profile</button>}
       {showEdit && <form onSubmit={form.handleSubmit} noValidate>
         {error && <div className="alert alert-danger">{error}</div>}
 
@@ -125,15 +125,17 @@ const UserDeatils = () => {
             value={userDetails}
             type="submit"
             disabled={!form.isValid}
+            title="update"
             className={`btn btn-primary  ${theme} m-2`}
           >
             Update
           </button>
           <button
             className="btn btn-secondary m-2"
-            onClick={handleCancle}
+            title="cancel"
+            onClick={handlecancel}
           >
-            Cancle
+            cancel
           </button>
         </div>
       </form>}
