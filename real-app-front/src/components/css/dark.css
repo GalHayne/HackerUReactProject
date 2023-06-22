@@ -1,10 +1,8 @@
-
-
-#dark{
-    background-color: var(--dark-backGroundColor);
-    color: var(--dark-colorText)
+#dark {
+  background-color: var(--dark-backGroundColor);
+  color: var(--dark-colorText);
 }
 
-#footer-dark{
-    background-color: #212529;
+#footer-dark {
+  background-color: #212529;
 }

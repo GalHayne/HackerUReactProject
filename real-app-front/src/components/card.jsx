@@ -31,57 +31,106 @@ const Card = ({
   };
 
   return (
-    <div className={`card-desgin m-3 ${theme}`} style={{ minWidth: "12rem", width: "20rem" }}>
+    <div
+      className={`card-desgin m-3 ${theme}`}
+      style={{ minWidth: "12rem", width: "20rem" }}
+    >
       {!isFavoriteCard ? (
-        <div
-          className="bg-transparent position-relative end-0"
-          title="add to favorite card"
-          onClick={() => handleMoveTofavorite(_id)}
-        >
-          <i className="bi bi-star"></i>
+        <div className="d-flex justify-content-between">
+          <i
+            onClick={() => handleMoveTofavorite(_id)}
+            style={{ cursor: "pointer" }}
+            className="bi bi-star"
+            title="add to favorite card"
+          ></i>
+          <i
+            style={{ cursor: "pointer" }}
+            class="bi bi-fullscreen"
+            title="open card in full screen"
+          ></i>
         </div>
       ) : (
-        <div
-          className="bg-transparent position-relative end-0"
-          title="remove from favorite cards"
-          onClick={() => handleRemoveFromfavorite(_id)}
-        >
-          <i className="bi bi-star-fill"></i>
+        <div className="d-flex justify-content-between">
+          <i
+            onClick={() => handleRemoveFromfavorite(_id)}
+            style={{ cursor: "pointer" }}
+            className="bi bi-star-fill"
+            title="remove from favorite cards"
+          ></i>
+          <i
+            style={{ cursor: "pointer" }}
+            class="bi bi-fullscreen"
+            title="open card in full screen"
+          ></i>
         </div>
-      )
-      }
+      )}
       <div className="d-flex justify-content-between align-items-center">
         <img
           src={bizImage}
           className=" card-img-top my-1 p-1 w-50 rounded-circle"
           alt={bizName}
         />
-        <h5 className="card-title">{bizName.length > 12 ? bizName.substring(0, 12) + '...' : bizName}</h5>
+        <h5 className="card-title">
+          {bizName.length > 12 ? bizName.substring(0, 12) + "..." : bizName}
+        </h5>
       </div>
       <div className="card-body">
-        <p className="card-text"><span>Description</span>  : {bizDescription.length > 35 ? bizDescription.substring(0, 35) + '...' : bizDescription}</p>
-        <p className="card-text"><span>Adress</span> :{bizAddress.length > 35 ? bizAddress.substring(0, 35) + '...' : bizAddress}</p>
-        <p className="card-text"><span>Phone</span> : {bizPhone.length > 35 ? bizPhone.substring(0, 35) + '...' : bizPhone}</p>
+        <p className="card-text">
+          <span>Description</span> :{" "}
+          {bizDescription.length > 35
+            ? bizDescription.substring(0, 35) + "..."
+            : bizDescription}
+        </p>
+        <p className="card-text">
+          <span>Adress</span> :
+          {bizAddress.length > 35
+            ? bizAddress.substring(0, 35) + "..."
+            : bizAddress}
+        </p>
+        <p className="card-text">
+          <span>Phone</span> :{" "}
+          {bizPhone.length > 35 ? bizPhone.substring(0, 35) + "..." : bizPhone}
+        </p>
       </div>
       <hr />
       {user.biz ? (
         <div className="d-flex justify-content-between P-2">
-          <button className={`btn btn-primary ${theme}`} onClick={() => navigate(`/my-cards/edit/${_id}`)}>Edit</button>
-          <button className="btn btn-secondary" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
+          <button
+            className={`btn btn-primary ${theme}`}
+            onClick={() => navigate(`/my-cards/edit/${_id}`)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigate(`/my-cards/delete/${_id}`)}
+          >
+            Delete
+          </button>
         </div>
       ) : (
         <>
           {user_id === user._id ? (
             <div className="d-flex justify-content-between P-2">
-              <button className={`btn btn-primary ${theme}`} onClick={() => navigate(`/my-cards/edit/${_id}`)}>Edit</button>
-              <button className="btn btn-secondary" onClick={() => navigate(`/my-cards/delete/${_id}`)}>Delete</button>
+              <button
+                className={`btn btn-primary ${theme}`}
+                onClick={() => navigate(`/my-cards/edit/${_id}`)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => navigate(`/my-cards/delete/${_id}`)}
+              >
+                Delete
+              </button>
             </div>
           ) : (
             <div></div>
           )}
         </>
       )}
-    </div >
+    </div>
   );
 };
 

@@ -1,12 +1,12 @@
-@import './components/css/dark.css';
-@import './components/css/light.css';
-@import './components/css/navbar.css';
-@import './components/css/users.css';
-@import './components/css/footer.css';
-@import './components/css/myCards.css';
-@import './components/css/userTable.css';
+@import "./components/css/dark.css";
+@import "./components/css/light.css";
+@import "./components/css/navbar.css";
+@import "./components/css/users.css";
+@import "./components/css/footer.css";
+@import "./components/css/myCards.css";
+@import "./components/css/userTable.css";
 
-:root{
+:root {
   --light-backGroundColor: #f8f9fa;
   --dark-backGroundColor: #212529;
   --gray-backGroundColor: #494d51;
@@ -17,11 +17,12 @@
   --card-bgColor-dark: #3f4144;
   --drop-down-text-color: #e8e8e8;
   --blue-for-lightMode: #0d6efd;
-  --icons-color:#868585 ;
-  --icons-color-hover:#050505 ;
+  --green-for-darkMode: #198754;
+  --icons-color: #868585;
+  --icons-color-hover: #050505;
 }
 
-.center-div{
+.center-div {
   margin-right: auto;
   margin-left: auto;
   width: 38%;
@@ -30,19 +31,19 @@
   border-radius: 10px;
 }
 
-.center-div.dark{
+.center-div.dark {
   background-color: var(--card-bgColor-dark);
 }
 
-.center-div.light{
+.center-div.light {
   background-color: var(--card-bgColor-light);
 }
 
-.btn.btn-primary.dark{
+.btn.btn-primary.dark {
   background-color: #198754;
   border: none;
 }
 
-.btn.btn-primary.dark:hover{
+.btn.btn-primary.dark:hover {
   background-color: #0e5735;
 }

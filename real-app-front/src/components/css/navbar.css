@@ -1,24 +1,31 @@
-.lightModeLi:hover{
-    background-color:  var(--li-hover-color);
-    border-radius: 10px;
-    color:  var(--drop-down-text-color);
-    padding: 3px;
-  }
-  
-  .darkModeLi:hover{
-    background-color:  var(--li-hover-color);
-    border-radius: 10px;
-    color:  var(--drop-down-text-color);
-    padding: 3px;
-  }
-  
-  .modeSelected{
-    background-color:  var(--blue-for-lightMode);
-    border-radius: 10px;
-    padding: 3px;
-    color: var(--drop-down-text-color);
-  }
+.lightModeLi:hover {
+  background-color: var(--li-hover-color);
+  border-radius: 10px;
+  color: var(--drop-down-text-color);
+  padding: 3px;
+}
 
-  .active{
-    border-bottom: solid;
-  }
+.darkModeLi:hover {
+  background-color: var(--li-hover-color);
+  border-radius: 10px;
+  color: var(--drop-down-text-color);
+  padding: 3px;
+}
+
+.modeSelected {
+  border-radius: 10px;
+  padding: 3px;
+  color: var(--drop-down-text-color);
+}
+
+.btn-dark {
+  background-color: var(--green-for-darkMode);
+}
+
+.btn-light {
+  background-color: var(--blue-for-lightMode);
+}
+
+.active {
+  border-bottom: solid;
+}

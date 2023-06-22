@@ -116,7 +116,7 @@ const Navbar = () => {
                 <li
                   className={
                     isLihgtSelected
-                      ? "lightModeLi p-2 modeSelected"
+                      ? "lightModeLi p-2 modeSelected btn-light"
                       : "lightModeLi p-2"
                   }
                   onClick={() => {
@@ -130,7 +130,7 @@ const Navbar = () => {
                 <li
                   className={
                     isDarkSelected
-                      ? "my-2 darkModeLi p-2 modeSelected"
+                      ? "my-2 darkModeLi p-2 modeSelected btn-dark"
                       : "my-2 darkModeLi p-2"
                   }
                   onClick={() => {
