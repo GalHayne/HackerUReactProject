@@ -4,7 +4,7 @@ const DarkContext = createContext();
 
 function Provider({ children }) {
     
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   const [galleryStyle, setGalleryStyle] = useState(true);
 

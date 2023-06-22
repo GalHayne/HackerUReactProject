@@ -40,27 +40,28 @@ const Users = () => {
       toast.success(`The ${response.data.name} has been unblocked`)
       getUsers();
     })
-      .catch(err => toast.error(err))
+    .catch(err => toast.error(err))
   }
+
+  let tableMode = (theme === 'dark') ? 'light' : 'dark'
 
   const renderUsers = users?.map((user) => {
     return (
       <tbody key={user._id}>
         <tr className="text-center">
-          <th>{userId === user._id ? <div title="connected now" className="connectNow"></div> : <div></div>}</th>
+          <th>{userId === user._id ? <div title="connected now" className={`connectNow ${theme}`}></div> : <div></div>}</th>
           <th scope="row">{user._id}</th>
           <td>{user.name}</td>
           <td>{user.email}</td>
           <td>{JSON.stringify(user.biz)}</td>
-          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i className="bi bi-android2"></i></button></td> : <td></td>}
-          {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i className="bi bi-android2"></i></button></td> : <td></td>}
+          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i class="bi bi-people-fill"></i></button></td> : <td></td>}
+          {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i class="bi bi-shield-fill-x"></i></button></td> : <td></td>}
         </tr>
       </tbody>
 
     )
   })
 
-  let tableMode = (theme === 'dark') ? 'light' : 'dark'
 
   return (
     <>

@@ -5,10 +5,6 @@ const { User, validate, validateCards } = require("../models/user");
 const { Card } = require("../models/card");
 const auth = require("../middleware/auth");
 const router = express.Router();
-const {
-  deleteAllUserThatFavorCrd,
-} = require("../util/deleteAllUserThatFavorCrd");
-const { deleteCard } = require("../util/deleteCard");
 
 const getCards = async (cardsArray) => {
   const cards = await Card.find({ bizNumber: { $in: cardsArray } });
@@ -55,15 +51,13 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 router.put("/removeBlock/:id", auth, async (req, res) => {
-  console.log('you are here!!');
   let user = await User.findOne({ _id: req.params.id });
 
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
 
   user.block = false;
-  user.incorrectLoginAttempts = 0;
-  user.timeBlock = null;
+  user.blockTime = [];
 
   user.save();
 
@@ -170,7 +164,7 @@ router.post("/", async (req, res) => {
   if (user) return res.status(400).send("User already registered.");
 
   user = new User(
-    _.pick(req.body, ["name", "email", "password", "biz", "cards", "block", "timeBlock", "incorrectLoginAttempts"])
+    _.pick(req.body, ["name", "email", "password", "biz", "cards", "block", "timeBlock",])
   );
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);

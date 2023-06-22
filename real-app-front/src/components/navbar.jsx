@@ -8,8 +8,13 @@ const Navbar = () => {
 
   const { toogleTheme, theme } = useDarkContext();
 
-  const [isLihgtSelected, setIsLihgtSelected] = useState(true);
-  const [isDarkSelected, setIsDarkSelected] = useState(false);
+  const [isLihgtSelected, setIsLihgtSelected] = useState(false);
+
+  const switchMode = (mode) =>{
+    mode === 'light' ? toogleTheme("light") : toogleTheme("dark");
+      
+    setIsLihgtSelected(mode === 'light');               
+  }
 
   const modeIcon =
     theme === "light" ? (
@@ -18,10 +23,7 @@ const Navbar = () => {
       <i className="bi bi-moon"></i>
     );
 
-  const classNameHeader =
-    theme === "dark"
-      ? "navbar navbar-expand-sm navbar-dark bg-dark"
-      : "navbar navbar-expand-sm navbar-light bg-light";
+    const classNameHeader = `navbar navbar-expand-sm navbar-${theme} bg-${theme}`
 
   return (
     <nav className={classNameHeader} aria-label="Fourth navbar example">
@@ -116,27 +118,23 @@ const Navbar = () => {
                 <li
                   className={
                     isLihgtSelected
-                      ? "lightModeLi p-2 modeSelected btn-light"
+                      ? `my-2 lightModeLi p-2 modeSelected btn-${theme}`
                       : "lightModeLi p-2"
                   }
                   onClick={() => {
-                    toogleTheme("light");
-                    setIsLihgtSelected(true);
-                    setIsDarkSelected(false);
+                    switchMode('light')
                   }}
                 >
                   <i className="bi bi-brightness-high"></i>Light
                 </li>
                 <li
                   className={
-                    isDarkSelected
-                      ? "my-2 darkModeLi p-2 modeSelected btn-dark"
-                      : "my-2 darkModeLi p-2"
+                    !isLihgtSelected
+                      ? `my-2 lightModeLi p-2 modeSelected btn-${theme}`
+                      : "darkModeLi p-2"
                   }
                   onClick={() => {
-                    toogleTheme("dark");
-                    setIsLihgtSelected(false);
-                    setIsDarkSelected(true);
+                    switchMode('dark');
                   }}
                 >
                   <i className="bi bi-moon"></i>Drak
