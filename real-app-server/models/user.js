@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  incorrectLoginAttempts: {
+    type: Number,
+    default: 0,
+  },
   createdAt: { type: Date, default: Date.now },
   cards: Array,
   favoriteCard: Array,
@@ -58,6 +62,7 @@ function validateUser(user) {
     biz: Joi.boolean().required(),
     block: Joi.boolean().required(),
     timeBlock: Joi.date(),
+    incorrectLoginAttempts: Joi.number(),
   });
 
   return schema.validate(user);

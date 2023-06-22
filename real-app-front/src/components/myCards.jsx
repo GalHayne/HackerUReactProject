@@ -23,9 +23,6 @@ const MyCards = () => {
   const { theme } = useDarkContext();
   const { galleryStyle, toogleStyle } = useDarkContext();
 
-  console.log(galleryStyle);
-
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -122,7 +119,7 @@ const MyCards = () => {
         }
       </div>
 
-      <TypeDisplay setCardGalleryStyle={handleGalleryStyleChange} galleryStyle={galleryStyle}/>
+      {<TypeDisplay setCardGalleryStyle={handleGalleryStyleChange} galleryStyle={galleryStyle} />}
 
       {
         galleryStyle ?
@@ -131,9 +128,9 @@ const MyCards = () => {
           </div>
           :
           <div className="text-center mt-5">
-          {cards.length !== 0 ? <Carousel breakPoints={breakPoints}>
-            {renderCards}
-          </Carousel> : <p>no cards...</p>} 
+            {cards.length !== 0 ? <Carousel breakPoints={breakPoints}>
+              {renderCards}
+            </Carousel> : <p>no cards...</p>}
           </div>
       }
     </>

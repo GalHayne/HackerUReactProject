@@ -40,7 +40,6 @@ const SignIn = ({ redirect = "/" }) => {
           navigate(redirect);
           toast.success(`You have successfully connected to the system`);
         } else {
-
           toast.error(`Problem connecting to the server`);
         }
       } catch (err) {

@@ -84,7 +84,6 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
 });
 
 router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
-  console.log(req.params.user_id);
   let user = await User.findOne({ _id: req.params.user_id });
   let card = await Card.findOne({ _id: req.params.card_id });
 
@@ -155,7 +154,7 @@ router.post("/", async (req, res) => {
   if (user) return res.status(400).send("User already registered.");
 
   user = new User(
-    _.pick(req.body, ["name", "email", "password", "biz", "cards", "block", "timeBlock"])
+    _.pick(req.body, ["name", "email", "password", "biz", "cards", "block", "timeBlock", "incorrectLoginAttempts"])
   );
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);

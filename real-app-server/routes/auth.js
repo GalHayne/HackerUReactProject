@@ -2,6 +2,7 @@ const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const { User } = require("../models/user");
 const express = require("express");
+const { checkIfUserBlock } = require("../util/checkIfUserBlock");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -9,11 +10,27 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   let user = await User.findOne({ email: req.body.email });
-  console.log(user);
-  if (!user) return res.status(400).send("Invalid email or password.");
+  if (!user) {
+    return res.status(400).send("Invalid email or password.");
+  }
+
+  if (checkIfUserBlock(user)) {
+    console.log('user is block');
+    res.status(400);
+    res.send('User Is Block');
+    return;
+  }
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send("Invalid email or password.");
+  if (!validPassword) {
+    user.incorrectLoginAttempts = user.incorrectLoginAttempts + 1;
+    if (user.incorrectLoginAttempts >= 3) {
+      user.block = true;
+      user.timeBlock = new Date();
+    }
+    user.save();
+    return res.status(400).send("Invalid email or password.");
+  }
 
   res.json({ token: user.generateAuthToken() });
 });
