@@ -5,7 +5,6 @@ import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
 import useDarkContext from "../hooks/useDarkModa-context";
 
-
 const Users = () => {
 
   const { user } = useAuth();
@@ -35,6 +34,15 @@ const Users = () => {
       .catch(err => toast.error(err))
   }
 
+  const handleRemoveBlock = async (_id) => {
+    const res = usersService.removeBlock(_id)
+    res.then(response => {
+      toast.success(`The ${response.data.name} has been unblocked`)
+      getUsers();
+    })
+      .catch(err => toast.error(err))
+  }
+
   const renderUsers = users?.map((user) => {
     return (
       <tbody key={user._id}>
@@ -45,6 +53,7 @@ const Users = () => {
           <td>{user.email}</td>
           <td>{JSON.stringify(user.biz)}</td>
           {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i className="bi bi-android2"></i></button></td> : <td></td>}
+          {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i className="bi bi-android2"></i></button></td> : <td></td>}
         </tr>
       </tbody>
 
@@ -70,6 +79,7 @@ const Users = () => {
             <th scope="col">Email</th>
             <th scope="col">Is Admin</th>
             <th scope="col">Make Admin</th>
+            <th scope="col">Remove Block</th>
           </tr>
         </thead>
         {renderUsers}

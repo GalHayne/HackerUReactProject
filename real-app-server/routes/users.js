@@ -54,6 +54,22 @@ router.put("/:id", auth, async (req, res) => {
   res.send(user);
 });
 
+router.put("/removeBlock/:id", auth, async (req, res) => {
+  console.log('you are here!!');
+  let user = await User.findOne({ _id: req.params.id });
+
+  if (!user)
+    return res.status(404).send("The user with the given ID was not found.");
+
+  user.block = false;
+  user.incorrectLoginAttempts = 0;
+  user.timeBlock = null;
+
+  user.save();
+
+  res.send(user);
+});
+
 router.put("/updateDetails/:id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.id });
 

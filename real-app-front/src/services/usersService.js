@@ -63,6 +63,10 @@ export function toggleUserPermissions(user_id) {
   return httpService.put(`users/${user_id}`);
 }
 
+export function removeBlock(user_id) {
+  return httpService.put(`users/removeBlock/${user_id}`);
+}
+
 export function getMe(user_id) {
   return httpService.get(`/users/${user_id}`);
 }
@@ -78,6 +82,7 @@ const usersService = {
   addCardFromUserToFavorite,
   removeCardFromFavoriteToUser,
   toggleUserPermissions,
+  removeBlock,
   getMe,
 };
 
