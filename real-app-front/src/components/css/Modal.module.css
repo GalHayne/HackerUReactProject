@@ -1,0 +1,41 @@
+/* @import "../../../styles/index.scss"; */
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #554f4f;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+
+  &[data-open="true"] {
+    animation: scale-up 0.3s forwards;
+  }
+}
+
+.card-modal.dark {
+  background-color: aqua;
+}
+
+.card-modal.light {
+  background-color: aqua;
+}

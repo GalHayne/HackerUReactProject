@@ -5,6 +5,7 @@
 @import "./components/css/footer.css";
 @import "./components/css/myCards.css";
 @import "./components/css/userTable.css";
+@import "./components/css/Modal.module.css";
 
 :root {
   --light-backGroundColor: #f8f9fa;

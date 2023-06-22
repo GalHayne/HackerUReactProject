@@ -1,8 +1,11 @@
 import { useAuth } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import useDarkContext from "../hooks/useDarkModa-context";
+import useModal from "../hooks/use-modal";
+import Modal from "./common/Modal";
+import CardModal from "./cardModal";
 
-const Card = ({
+const Card = ({ card,
   card: {
     _id,
     bizName,
@@ -17,6 +20,8 @@ const Card = ({
   removeFromfavorite,
 }) => {
   const { user } = useAuth();
+
+  const [modalStatus, openModal, closeModal] = useModal();
 
   const { theme } = useDarkContext();
 
@@ -33,7 +38,7 @@ const Card = ({
   return (
     <div
       className={`card-desgin m-3 ${theme}`}
-      style={{ minWidth: "12rem", width: "20rem" }}
+      style={{ minWidth: "12rem", width: "20rem", height: "20rem" }}
     >
       {!isFavoriteCard ? (
         <div className="d-flex justify-content-between">
@@ -44,8 +49,9 @@ const Card = ({
             title="add to favorite card"
           ></i>
           <i
+            onClick={() => openModal()}
             style={{ cursor: "pointer" }}
-            class="bi bi-fullscreen"
+            className="bi bi-fullscreen"
             title="open card in full screen"
           ></i>
         </div>
@@ -58,8 +64,9 @@ const Card = ({
             title="remove from favorite cards"
           ></i>
           <i
+            onClick={() => openModal()}
             style={{ cursor: "pointer" }}
-            class="bi bi-fullscreen"
+            className="bi bi-fullscreen"
             title="open card in full screen"
           ></i>
         </div>
@@ -77,19 +84,19 @@ const Card = ({
       <div className="card-body">
         <p className="card-text">
           <span>Description</span> :{" "}
-          {bizDescription.length > 35
-            ? bizDescription.substring(0, 35) + "..."
+          {bizDescription.length > 32
+            ? bizDescription.substring(0, 32) + "..."
             : bizDescription}
         </p>
         <p className="card-text">
-          <span>Adress</span> :
-          {bizAddress.length > 35
-            ? bizAddress.substring(0, 35) + "..."
+          <span>Address</span> :
+          {bizAddress.length > 32
+            ? bizAddress.substring(0, 32) + "..."
             : bizAddress}
         </p>
         <p className="card-text">
           <span>Phone</span> :{" "}
-          {bizPhone.length > 35 ? bizPhone.substring(0, 35) + "..." : bizPhone}
+          {bizPhone.length > 32 ? bizPhone.substring(0, 32) + "..." : bizPhone}
         </p>
       </div>
       <hr />
@@ -130,6 +137,9 @@ const Card = ({
           )}
         </>
       )}
+      <Modal modalStatus={modalStatus} onClose={closeModal}>
+        <CardModal onClose={closeModal} user={user} card={card} />
+      </Modal>
     </div>
   );
 };

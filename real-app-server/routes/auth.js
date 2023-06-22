@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
   }
 
   if (checkIfUserBlock(user)) {
-    res.status(400);
+    res.status(400).send('Sorry, the user is locked out, please try again later');
     return;
   }
 
