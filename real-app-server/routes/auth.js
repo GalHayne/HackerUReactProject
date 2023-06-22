@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const { User } = require("../models/user");
 const express = require("express");
 const { checkIfUserBlock } = require("../util/checkIfUserBlock");
+const { incLoginAttempts } = require("../util/incLoginAttempts");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -15,20 +16,13 @@ router.post("/", async (req, res) => {
   }
 
   if (checkIfUserBlock(user)) {
-    console.log('user is block');
     res.status(400);
-    res.send('User Is Block');
     return;
   }
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
-    user.incorrectLoginAttempts = user.incorrectLoginAttempts + 1;
-    if (user.incorrectLoginAttempts >= 3) {
-      user.block = true;
-      user.timeBlock = new Date();
-    }
-    user.save();
+    incLoginAttempts(user);
     return res.status(400).send("Invalid email or password.");
   }
 

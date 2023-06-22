@@ -41,6 +41,9 @@ const SignIn = ({ redirect = "/" }) => {
           toast.success(`You have successfully connected to the system`);
         } else {
           toast.error(`Problem connecting to the server`);
+          setError(
+            "After 3 incorrect login attempts the user will be blocked for 24 hours"
+          );
         }
       } catch (err) {
         if (err) {
@@ -66,7 +69,6 @@ const SignIn = ({ redirect = "/" }) => {
       <div className={`center-div ${theme} shadow p-3`}>
         <form onSubmit={form.handleSubmit} noValidate>
           {error && <div className="alert alert-danger">{error}</div>}
-
 
           <Input
             {...form.getFieldProps("email")}

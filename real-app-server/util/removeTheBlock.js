@@ -1,4 +1,4 @@
-const HOURS_TO_REMOVE_BLOCK = 1;
+const HOURS_TO_REMOVE_BLOCK = 24;
 
 const removeTheBlock = (user) => {
 
