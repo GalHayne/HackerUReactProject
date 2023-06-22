@@ -1,6 +1,6 @@
 
 
-const checkIfResetTheAttempts = async () => {
+const checkIfResetTheAttempts = () => {
 
     return false;
 
