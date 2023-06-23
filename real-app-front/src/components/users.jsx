@@ -43,6 +43,14 @@ const Users = () => {
     .catch(err => toast.error(err))
   }
 
+  const handleDeleteUser = async (_id) => {
+    const res = usersService.deleteUser(_id)
+    res.then(response => {
+      console.log(response);
+    })
+    .catch(err => toast.error(err))
+  }
+
   let tableMode = (theme === 'dark') ? 'light' : 'dark'
 
   const renderUsers = users?.map((user) => {
@@ -56,6 +64,7 @@ const Users = () => {
           <td>{JSON.stringify(user.biz)}</td>
           {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i className="bi bi-people-fill"></i></button></td> : <td></td>}
           {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i className="bi bi-shield-fill-x"></i></button></td> : <td></td>}
+          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleDeleteUser(user._id)} title="delete the user"><i class="bi bi-person-dash-fill"></i></button></td> : <td></td>}
         </tr>
       </tbody>
 
@@ -81,6 +90,7 @@ const Users = () => {
             <th scope="col">Is Admin</th>
             <th scope="col">Make Admin</th>
             <th scope="col">Remove Block</th>
+            <th scope="col">Delete User</th>
           </tr>
         </thead>
         {renderUsers}

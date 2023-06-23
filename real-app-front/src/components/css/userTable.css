@@ -1,10 +1,12 @@
 .bi-people-fill,
-.bi-shield-fill-x {
+.bi-shield-fill-x,
+.bi-person-dash-fill {
   color: var(--li-hover-color);
 }
 
 .bi-people-fill:hover,
-.bi-shield-fill-x:hover {
+.bi-shield-fill-x:hover,
+.bi-person-dash-fill:hover {
   color: var(--li-hover-color2);
 }
 

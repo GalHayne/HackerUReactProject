@@ -51,6 +51,9 @@ export function getFavoriteCards(user) {
   return httpService.get(`users/FavoriteCard/${user?._id}`);
 }
 
+export function deleteUser(user_id) {
+  return httpService.put(`users/deleteUser/${user_id}`);
+}
 export function addCardFromUserToFavorite(card_id, user_id) {
   return httpService.put(`users/addFavoriteCard/${card_id}/${user_id}`);
 }
@@ -78,6 +81,7 @@ const usersService = {
   getJWT,
   getUser,
   getAllUsers,
+  deleteUser,
   getFavoriteCards,
   addCardFromUserToFavorite,
   removeCardFromFavoriteToUser,
