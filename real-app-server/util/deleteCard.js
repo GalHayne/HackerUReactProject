@@ -2,7 +2,7 @@ const { Card } = require("../models/card");
 const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd")
 
 
-const deleteCard = async (card_id) => {
+const deleteCard = async (card_id, res) => {
 
    const card = await Card.findOne({
       _id: card_id,
@@ -17,22 +17,15 @@ const deleteCard = async (card_id) => {
          });
 
          if (!deleteCard) {
-            return false;
-            // return res.status(404).send("The card with the given ID was not found.");
+            return res.status(404).send("The card with the given ID was not found.");
          }
-         return deleteCard;
-         // res.send(deleteCard);
-         // res.status(201);
+         res.send(deleteCard);
+         res.status(201);
       })
    } else {
-      return false;
-      // return res.status(404).send("The card with the given ID was not found.");
+
+      return res.status(404).send("The card with the given ID was not found.");
    }
-
-
-
-
-
 
 }
 

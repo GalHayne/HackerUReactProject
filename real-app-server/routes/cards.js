@@ -4,64 +4,36 @@ const { Card, validateCard, generateBizNumber } = require("../models/card");
 const { User } = require("../models/user");
 const auth = require("../middleware/auth");
 const router = express.Router();
-const {
-  deleteAllUserThatFavorCrd,
-} = require("../util/deleteAllUserThatFavorCrd");
+const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd");
 const { deleteCard } = require("../util/deleteCard");
 
 router.get("/", async (req, res) => {
+
   const cards = await Card.find();
   res.send(cards);
   res.status(200);
 });
 
 router.delete("/:card_id", auth, async (req, res) => {
-  const results = deleteCard(req.params.card_id);
-  if (!results) {
-    return res.status(404).send("The card with the given ID was not found.");
-  } else {
-    res.send(results);
-    res.status(201);
-  }
+
+  deleteCard(req.params.card_id, res);
+
 });
-
-// const card = await Card.findOne({
-//   _id: req.params.card_id,
-// });
-
-// if (card) {
-//   const results = deleteAllUserThatFavorCrd(card)
-//   results.then(async () => {
-
-//     const deleteCard = await Card.findOneAndRemove({
-//       _id: req.params.card_id,
-//     });
-
-//     if (!deleteCard) {
-//       return res.status(404).send("The card with the given ID was not found.");
-//     }
-//     res.send(deleteCard);
-//     res.status(201);
-//   })
-// } else {
-
-//   return res.status(404).send("The card with the given ID was not found.");
-// }
 
 router.put("/:id", auth, async (req, res) => {
   const { error } = validateCard(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let card = await Card.findOneAndUpdate({ _id: req.params.id }, req.body);
+  let card = await Card.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body
+  );
 
   for (let i = 0; i < card.userFavorite.length; ++i) {
     const currentUserId = card.userFavorite[i];
     const user = await User.findOne({ _id: currentUserId });
     for (let j = 0; j < user.favoriteCard.length; ++j) {
-      if (
-        JSON.stringify(req.params.id) ===
-        JSON.stringify(user.favoriteCard[j]._id)
-      ) {
+      if (JSON.stringify(req.params.id) === JSON.stringify(user.favoriteCard[j]._id)) {
         const cardUpdate = await Card.findOne({ _id: req.params.id });
         if (cardUpdate) {
           user.favoriteCard.splice(j, 1, cardUpdate);
