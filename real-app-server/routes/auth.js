@@ -18,15 +18,24 @@ router.post("/", async (req, res) => {
   }
 
   if (checkIfUserBlock(user)) {
-    
     return res.status(401).send('Sorry, the user is blocked, please contact the manager');
-    
   }
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
+
     incLoginAttempts(user);
-    return res.status(402).send("Invalid email or password.");
+
+    const length = user.timeBlock.length;
+
+    const msg =
+      length !== 3
+        ? `The user will be blocked after ${3 - length} incorrect attempts`
+        : `Sorry, the user is blocked, please contact the manager`;
+
+    return res
+      .status(402)
+      .send(msg);
   }
 
   res.json({ token: user.generateAuthToken() });

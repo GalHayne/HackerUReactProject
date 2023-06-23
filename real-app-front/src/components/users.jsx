@@ -28,7 +28,7 @@ const Users = () => {
   const handleToggleUser = async (_id) => {
     const res = usersService.toggleUserPermissions(_id)
     res.then(response => {
-      toast.success(`The user ${response.data.name} became a admin`)
+      toast.success(`The user: ${response.data.email} became a admin`)
       getUsers();
     })
       .catch(err => toast.error(err))
@@ -37,7 +37,7 @@ const Users = () => {
   const handleRemoveBlock = async (_id) => {
     const res = usersService.removeBlock(_id)
     res.then(response => {
-      toast.success(`The ${response.data.name} has been unblocked`)
+      toast.success(`The user: ${response.data.email} has been unblocked`)
       getUsers();
     })
     .catch(err => toast.error(err))

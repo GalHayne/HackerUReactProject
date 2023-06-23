@@ -4,7 +4,6 @@ const { deleteAllUserThatFavorCrd } = require("../util/deleteAllUserThatFavorCrd
 
 const deleteCard = async (card) => {
 
-
    if (card) {
       deleteAllUserThatFavorCrd(card)
    }

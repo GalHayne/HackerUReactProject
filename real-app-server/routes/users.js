@@ -4,6 +4,7 @@ const _ = require("lodash");
 const { User, validate, validateCards } = require("../models/user");
 const { Card } = require("../models/card");
 const auth = require("../middleware/auth");
+const { deleteCard } = require("../util/deleteCard");
 const router = express.Router();
 
 const getCards = async (cardsArray) => {
@@ -97,32 +98,10 @@ router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.user_id });
   let card = await Card.findOne({ _id: req.params.card_id });
 
-  if (user && card) {
-    let index;
-
-    for (let i = 0; i < user.favoriteCard.length; ++i) {
-      if (
-        JSON.stringify(card._id) === JSON.stringify(user.favoriteCard[i]._id)
-      ) {
-        index = i;
-      }
-    }
-
-    user.favoriteCard.splice(index, 1);
-    user.save();
-
-    for (let i = 0; i < card.userFavorite.length; ++i) {
-      if (JSON.stringify(user._id) === JSON.stringify(card.userFavorite[i])) {
-        index = i;
-      }
-    }
-
-    card.userFavorite.splice(index, 1);
-    card.save();
-
-    res.send(user);
-    res.status(201);
-  } else {
+  try{
+    res = await deleteCard(card);
+    console.log(res).send('card deleted');
+  }catch(err){
     res.status(400);
   }
 });
