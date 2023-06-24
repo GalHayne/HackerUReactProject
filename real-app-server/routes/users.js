@@ -66,12 +66,18 @@ router.put("/removeBlock/:id", auth, async (req, res) => {
   res.send(user);
 });
 
-router.put("/deleteUser/:id", auth, async (req, res) => {
+router.delete("/deleteUser/:id", auth, async (req, res) => {
   let cards = await Card.find({ user_id: req.params.id });
 
-  for (let i = 0; i < cards.length; ++i) {
-    await deleteCard(cards[i]._id, res);
+  console.log(cards);
+
+  if (cards.length === 0) {
+    const user = await User.findOneAndRemove({ _id: req.params.id })
+    res.status(201).send(user);
+  } else {
+    res.status(404).send(cards)
   }
+
 
 });
 

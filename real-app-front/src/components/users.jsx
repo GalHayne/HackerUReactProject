@@ -28,7 +28,7 @@ const Users = () => {
   const handleToggleUser = async (_id) => {
     const res = usersService.toggleUserPermissions(_id)
     res.then(response => {
-      toast.success(`The user: ${response.data.email} became a admin`)
+      toast.success(`The user: ${response.data.email} became a admin`);
       getUsers();
     })
       .catch(err => toast.error(err))
@@ -37,18 +37,20 @@ const Users = () => {
   const handleRemoveBlock = async (_id) => {
     const res = usersService.removeBlock(_id)
     res.then(response => {
-      toast.success(`The user: ${response.data.email} has been unblocked`)
+      toast.success(`The user: ${response.data.email} has been unblocked`);
       getUsers();
     })
-    .catch(err => toast.error(err))
+      .catch(err => toast.error(err))
   }
 
   const handleDeleteUser = async (_id) => {
-    const res = usersService.deleteUser(_id)
-    res.then(response => {
-      console.log(response);
-    })
-    .catch(err => toast.error(err))
+    try {
+      const res = await usersService.deleteUser(_id);
+      toast.success(`The user: ${res.data.name} has been deleted`);
+      getUsers();
+    } catch (err) {
+      console.log("The user have that him created please delete the cards before:", err.response.data);
+    }
   }
 
   let tableMode = (theme === 'dark') ? 'light' : 'dark'
@@ -64,7 +66,7 @@ const Users = () => {
           <td>{JSON.stringify(user.biz)}</td>
           {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i className="bi bi-people-fill"></i></button></td> : <td></td>}
           {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i className="bi bi-shield-fill-x"></i></button></td> : <td></td>}
-          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleDeleteUser(user._id)} title="delete the user"><i class="bi bi-person-dash-fill"></i></button></td> : <td></td>}
+          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleDeleteUser(user._id)} title="delete the user"><i className="bi bi-person-dash-fill"></i></button></td> : <td></td>}
         </tr>
       </tbody>
 

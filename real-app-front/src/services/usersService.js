@@ -14,12 +14,12 @@ export function createUser(user) {
 }
 
 export async function loginUser(credentials) {
-  try{
+  try {
     const response = await httpService.post("/auth", credentials);
     localStorage.setItem(TOKEN_KEY, response.data.token);
     setTokenHeader();
     return response;
-  }catch(err){
+  } catch (err) {
     return err;
   }
 
@@ -52,7 +52,7 @@ export function getFavoriteCards(user) {
 }
 
 export function deleteUser(user_id) {
-  return httpService.put(`users/deleteUser/${user_id}`);
+  return httpService.delete(`users/deleteUser/${user_id}`);
 }
 export function addCardFromUserToFavorite(card_id, user_id) {
   return httpService.put(`users/addFavoriteCard/${card_id}/${user_id}`);
