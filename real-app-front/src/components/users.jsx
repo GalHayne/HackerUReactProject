@@ -52,8 +52,10 @@ const Users = () => {
     } catch (err) {
       if (err.response.status === 404) {
         console.log("The user have that him created please delete the cards before:", err.response.data);
+        toast.error('The user have that him created please delete the cards before')
       } else {
         console.log("The user cannot be deleted because hte user have favorite card. remove the favorite card from the user", err.response.data);
+        toast.error('The user cannot be deleted because hte user have favorite card. remove the favorite card from the user')
       }
     }
   }
