@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import useDarkContext from "../hooks/useDarkModa-context";
 
 const Users = () => {
-
   const { user } = useAuth();
 
   const { theme } = useDarkContext();
@@ -21,65 +20,124 @@ const Users = () => {
   };
 
   useEffect(() => {
-
-    getUsers()
+    getUsers();
   }, []);
 
   const handleToggleUser = async (_id) => {
-    const res = usersService.toggleUserPermissions(_id)
-    res.then(response => {
-      toast.success(`The user: ${response.data.email} became a admin`);
-      getUsers();
-    })
-      .catch(err => toast.error(err))
-  }
+    const res = usersService.toggleUserPermissions(_id);
+    res
+      .then((response) => {
+        toast.success(`The user: ${response.data.email} became a admin`);
+        getUsers();
+      })
+      .catch((err) => toast.error(err));
+  };
 
   const handleRemoveBlock = async (_id) => {
-    const res = usersService.removeBlock(_id)
-    res.then(response => {
-      toast.success(`The user: ${response.data.email} has been unblocked`);
-      getUsers();
-    })
-      .catch(err => toast.error(err))
-  }
+    const res = usersService.removeBlock(_id);
+    res
+      .then((response) => {
+        toast.success(`The user: ${response.data.email} has been unblocked`);
+        getUsers();
+      })
+      .catch((err) => toast.error(err));
+  };
 
   const handleDeleteUser = async (_id) => {
     try {
       const res = await usersService.deleteUser(_id);
-      console.log(res);
-      toast.success(`The user: ${res.data.name} has been deleted`);
-      getUsers();
+      console.log(res.status);
+      if (res.status === 200) {
+        console.log("need call again to delete");
+        handleDeleteUser(_id);
+      } else {
+        toast.success(`The user: ${res.data.name} has been deleted`);
+        getUsers();
+      }
     } catch (err) {
       if (err.response.status === 404) {
-        console.log("The user have that him created please delete the cards before:", err.response.data);
-        toast.error('The user have that him created please delete the cards before')
+        console.log(
+          "The user have that him created please delete the cards before:",
+          err.response.data
+        );
+        toast.error(
+          "The user have that him created please delete the cards before"
+        );
       } else {
-        console.log("The user cannot be deleted because hte user have favorite card. remove the favorite card from the user", err.response.data);
-        toast.error('The user cannot be deleted because hte user have favorite card. remove the favorite card from the user')
+        console.log(
+          "The user cannot be deleted because hte user have favorite card. remove the favorite card from the user",
+          err.response.data
+        );
+        toast.error(
+          "The user cannot be deleted because hte user have favorite card. remove the favorite card from the user"
+        );
       }
     }
-  }
+  };
 
-  let tableMode = (theme === 'dark') ? 'light' : 'dark'
+  let tableMode = theme === "dark" ? "light" : "dark";
 
   const renderUsers = users?.map((user) => {
     return (
       <tbody key={user._id}>
         <tr className="text-center">
-          <th>{userId === user._id ? <div title="connected now" className={`connectNow ${theme}`}></div> : <div></div>}</th>
+          <th>
+            {userId === user._id ? (
+              <div
+                title="connected now"
+                className={`connectNow ${theme}`}
+              ></div>
+            ) : (
+              <div></div>
+            )}
+          </th>
           <th scope="row">{user._id}</th>
           <td>{user.name}</td>
           <td>{user.email}</td>
           <td>{JSON.stringify(user.biz)}</td>
-          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleToggleUser(user._id)} title="make this user admin"><i className="bi bi-people-fill"></i></button></td> : <td></td>}
-          {user.block ? <td><button className="btn btn-none rounded" onClick={() => handleRemoveBlock(user._id)} title="delete the block from user"><i className="bi bi-shield-fill-x"></i></button></td> : <td></td>}
-          {!user.biz ? <td><button className="btn btn-none rounded" onClick={() => handleDeleteUser(user._id)} title="delete the user"><i className="bi bi-person-dash-fill"></i></button></td> : <td></td>}
+          {!user.biz ? (
+            <td>
+              <button
+                className="btn btn-none rounded"
+                onClick={() => handleToggleUser(user._id)}
+                title="make this user admin"
+              >
+                <i className="bi bi-people-fill"></i>
+              </button>
+            </td>
+          ) : (
+            <td></td>
+          )}
+          {user.block ? (
+            <td>
+              <button
+                className="btn btn-none rounded"
+                onClick={() => handleRemoveBlock(user._id)}
+                title="delete the block from user"
+              >
+                <i className="bi bi-shield-fill-x"></i>
+              </button>
+            </td>
+          ) : (
+            <td></td>
+          )}
+          {!user.biz ? (
+            <td>
+              <button
+                className="btn btn-none rounded"
+                onClick={() => handleDeleteUser(user._id)}
+                title="delete the user"
+              >
+                <i className="bi bi-person-dash-fill"></i>
+              </button>
+            </td>
+          ) : (
+            <td></td>
+          )}
         </tr>
       </tbody>
-
-    )
-  })
-
+    );
+  });
 
   return (
     <>

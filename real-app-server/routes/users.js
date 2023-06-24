@@ -35,7 +35,7 @@ router.get("/:id", auth, async (req, res) => {
     res.status(200);
     res.send(user);
   } else {
-    res.status(404).send('The user does not exist');
+    res.status(404).send("The user does not exist");
   }
 });
 
@@ -70,19 +70,30 @@ router.delete("/deleteUser/:id", auth, async (req, res) => {
   let cards = await Card.find({ user_id: req.params.id });
 
   if (cards.length === 0) {
-    const user = await User.findOne({ _id: req.params.id })
+    const user = await User.findOne({ _id: req.params.id });
     if (user.favoriteCard.length === 0) {
-      const userDelete = await User.findOneAndRemove({ _id: req.params.id })
+      const userDelete = await User.findOneAndRemove({ _id: req.params.id });
       res.status(201).send(userDelete);
     } else {
-      res.status(403).send(user.favoriteCard)
+      const mapCardsId = user.favoriteCard.map(card => {
+        return card._id
+      })
+      for (let i = 0; i < mapCardsId.length; ++i) {
+        let card = await Card.findOne({ _id: mapCardsId[i] })
+        for (let j = 0; j < card.userFavorite.length; ++j) {
+          if (JSON.stringify(card.userFavorite[j]._id) === JSON.stringify(user._id)) {
+            card.userFavorite.splice(j, 1);
+            card.save();
+          }
+        }
+      }
+      user.favoriteCard = [];
+      user.save();
+      res.status(200).send('need cal again to delete')
     }
-
   } else {
-    res.status(404).send(cards)
+    res.status(404).send(cards);
   }
-
-
 });
 
 router.put("/updateDetails/:id", auth, async (req, res) => {
@@ -115,8 +126,6 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
 });
 
 router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
-
-
   if (removeFavoriteCardFromUser(req.params.user_id, req.params.card_id)) {
     const user = await User.findOne({ _id: req.params.user_id });
     res.send(user);
@@ -155,7 +164,7 @@ router.get("/me", auth, async (req, res) => {
     const user = await User.findById(req.user._id).select("-password");
     res.send(user);
   } catch (err) {
-    res.status(404).send('The user does not exist')
+    res.status(404).send("The user does not exist");
   }
 });
 
@@ -167,7 +176,15 @@ router.post("/", async (req, res) => {
   if (user) return res.status(400).send("User already registered.");
 
   user = new User(
-    _.pick(req.body, ["name", "email", "password", "biz", "cards", "block", "timeBlock",])
+    _.pick(req.body, [
+      "name",
+      "email",
+      "password",
+      "biz",
+      "cards",
+      "block",
+      "timeBlock",
+    ])
   );
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
