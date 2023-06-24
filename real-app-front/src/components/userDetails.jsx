@@ -59,14 +59,29 @@ const UserDeatils = () => {
 
 
   const getMe = async () => {
-    const res = usersService.getMe(user._id)
-    res.then(response => setUserDetails(response.data[0]))
-      .catch(err => toast(`cant get user details`))
+    try {
+      const res = usersService.getMe(user?._id)
+      res.then(response => setUserDetails(response.data[0]))
+        .catch(res => {
+          if (res.response.status === 404) {
+            toast.error('The user does not exist please sign up')
+            navigate('/sign-out');
+          }
+        })
+    }
+    catch (err) {
+      toast.error('The user does not exist please sign up')
+      navigate('/sign-out');
+    }
   }
 
   useEffect(() => {
     if (user) {
       getMe();
+    } else {
+      navigate('/sign-out');
+      navigate('/sign-in');
+      toast.error('The user does not exist')
     }
   }, [])
 
@@ -93,9 +108,9 @@ const UserDeatils = () => {
           </>
         }
       />
-      <img className="rounded-circle" style={{width: "150px"}} src={userImg} alt="Logo" />
-      {!showEdit && <div className="m-3"><p><span>User Name: </span>{userDetails.name}</p>
-        <p> <span>Email: </span>{userDetails.email}</p></div>
+      <img className="rounded-circle" style={{ width: "150px" }} src={userImg} alt="Logo" />
+      {!showEdit && <div className="m-3"><p><span>User Name: </span>{userDetails?.name}</p>
+        <p> <span>Email: </span>{userDetails?.email}</p></div>
       }
       {!showEdit && <button className={`rounded w-25 p-2 btn btn-primary ${theme}`} style={{ minWidth: "100px" }} title="edit profile" onClick={handleToggleShowEdit}>Edit profile</button>}
       {showEdit && <form onSubmit={form.handleSubmit} noValidate>
@@ -107,7 +122,7 @@ const UserDeatils = () => {
             type="email"
             label="Email"
             required
-            placeholder={userDetails.email}
+            placeholder={userDetails?.email}
             error={form.touched.email && form.errors.email}
           />
           <Input
@@ -115,7 +130,7 @@ const UserDeatils = () => {
             type="text"
             label="Name"
             required
-            placeholder={userDetails.name}
+            placeholder={userDetails?.name}
             error={form.touched.name && form.errors.name}
           />
         </div>

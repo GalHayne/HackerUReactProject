@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import Joi from "joi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/input";
@@ -9,6 +9,7 @@ import cardsService from "../services/cardsService";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/auth.context";
 import useDarkContext from "../hooks/useDarkModa-context";
+import usersService from "../services/usersService";
 
 const CardsCreate = () => {
   const [error, setError] = useState("");
@@ -60,6 +61,25 @@ const CardsCreate = () => {
       }
     },
   });
+
+  useEffect(() => {
+
+    try {
+      const res = usersService.getMe(user?._id)
+      res.then(res => toast.success('You have connected successfully, insert a new card'))
+        .catch(res => {
+          if (res.response.status === 404) {
+            toast.error('The user does not exist please sign up')
+            navigate('/sign-out');
+          }
+        })
+    }
+    catch (err) {
+      toast.error('The user does not exist please sign up')
+      navigate('/sign-out');
+    }
+
+  }, [])
 
   if (!user) {
     return <Navigate to="/" />;

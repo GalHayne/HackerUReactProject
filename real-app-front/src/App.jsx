@@ -22,14 +22,13 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import UserDeatils from "./components/userDetails";
 import useDarkContext from "./hooks/useDarkModa-context";
 
-
 function App() {
 
-  const {theme} = useDarkContext();
-  
+  const { theme } = useDarkContext();
+
   return (
     <div className="app d-flex flex-column min-vh-100" id={theme}>
-      <ToastContainer position="bottom-right"/>
+      <ToastContainer position="bottom-right" />
       <header>
         <Navbar />
       </header>
@@ -73,7 +72,8 @@ function App() {
             }
           />
           <Route path="create-card" element={<CardsCreate />} />
-          
+          <Route path='*' element={<Home />} />
+
         </Routes>
       </main>
       <Footer />

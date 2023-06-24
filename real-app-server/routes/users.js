@@ -5,6 +5,7 @@ const { User, validate, validateCards } = require("../models/user");
 const { Card } = require("../models/card");
 const auth = require("../middleware/auth");
 const { removeFavoriteCardFromUser } = require("../util/removeFavoriteCard");
+const { deleteCard } = require("../util/deleteCard");
 const router = express.Router();
 
 const getCards = async (cardsArray) => {
@@ -30,11 +31,11 @@ router.get("/", auth, async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   const user = await User.find({ _id: req.params.id });
 
-  if (user) {
+  if (user && user?.length !== 0) {
     res.status(200);
     res.send(user);
   } else {
-    res.status(404);
+    res.status(404).send('The user does not exist');
   }
 });
 
@@ -63,6 +64,15 @@ router.put("/removeBlock/:id", auth, async (req, res) => {
   user.save();
 
   res.send(user);
+});
+
+router.put("/deleteUser/:id", auth, async (req, res) => {
+  let cards = await Card.find({ user_id: req.params.id });
+
+  for (let i = 0; i < cards.length; ++i) {
+    await deleteCard(cards[i]._id, res);
+  }
+
 });
 
 router.put("/updateDetails/:id", auth, async (req, res) => {
@@ -96,7 +106,7 @@ router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
 
 router.put("/removeFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
 
-  
+
   if (removeFavoriteCardFromUser(req.params.user_id, req.params.card_id)) {
     const user = await User.findOne({ _id: req.params.user_id });
     res.send(user);
@@ -131,8 +141,12 @@ router.patch("/cards", auth, async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password");
-  res.send(user);
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.send(user);
+  } catch (err) {
+    res.status(404).send('The user does not exist')
+  }
 });
 
 router.post("/", async (req, res) => {

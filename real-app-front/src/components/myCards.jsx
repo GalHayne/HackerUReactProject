@@ -21,7 +21,7 @@ const MyCards = () => {
   const cards = useMyCards();
 
   const { theme } = useDarkContext();
-  
+
   const { galleryStyle, toogleStyle } = useDarkContext();
 
   const navigate = useNavigate();
@@ -71,12 +71,12 @@ const MyCards = () => {
     { width: 1800, itemsToShow: 5 },
   ]
 
-  const renderCards = !cards.length ? (<p>no cards...</p>)
+  const renderCards = !cards?.length ? (<p>no cards...</p>)
     : onlyFavorite === false ? (
       cards.map((card) => {
         let isFavoriteCard = false;
-        favoriteCards.some(favoriteCard => {
-          if (favoriteCard._id === card._id) {
+        favoriteCards?.some(favoriteCard => {
+          if (favoriteCard?._id === card?._id) {
             isFavoriteCard = true;
           }
         })
@@ -114,7 +114,7 @@ const MyCards = () => {
 
       <div className="d-flex justify-content-between mb-3" >
         <button type="button" className={`btn btn-primary ${theme}`} onClick={() => navigate('/create-card')} title="Add new card">Add new card</button>
-        {!onlyFavorite ? <button disabled={favoriteCards.length === 0} type="button" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" title="show favorite cards" onClick={() => setOnlyFavorite((prev) => !prev)}>Favorite cards </button>
+        {!onlyFavorite ? <button disabled={favoriteCards?.length === 0} type="button" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" title="show favorite cards" onClick={() => setOnlyFavorite((prev) => !prev)}>Favorite cards </button>
           :
           <button type="button" title="show all cards" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" onClick={() => setOnlyFavorite((prev) => !prev)}>All cards </button>
         }
@@ -129,7 +129,7 @@ const MyCards = () => {
           </div>
           :
           <div className="text-center mt-5">
-            {cards.length !== 0 ? <Carousel breakPoints={breakPoints}>
+            {cards?.length !== 0 ? <Carousel breakPoints={breakPoints}>
               {renderCards}
             </Carousel> : <p>no cards...</p>}
           </div>
