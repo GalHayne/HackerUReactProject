@@ -69,11 +69,15 @@ router.put("/removeBlock/:id", auth, async (req, res) => {
 router.delete("/deleteUser/:id", auth, async (req, res) => {
   let cards = await Card.find({ user_id: req.params.id });
 
-  console.log(cards);
-
   if (cards.length === 0) {
-    const user = await User.findOneAndRemove({ _id: req.params.id })
-    res.status(201).send(user);
+    const user = await User.findOne({ _id: req.params.id })
+    if (user.favoriteCard.length === 0) {
+      const userDelete = await User.findOneAndRemove({ _id: req.params.id })
+      res.status(201).send(userDelete);
+    } else {
+      res.status(403).send(user.favoriteCard)
+    }
+
   } else {
     res.status(404).send(cards)
   }

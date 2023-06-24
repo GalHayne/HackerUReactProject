@@ -46,10 +46,15 @@ const Users = () => {
   const handleDeleteUser = async (_id) => {
     try {
       const res = await usersService.deleteUser(_id);
+      console.log(res);
       toast.success(`The user: ${res.data.name} has been deleted`);
       getUsers();
     } catch (err) {
-      console.log("The user have that him created please delete the cards before:", err.response.data);
+      if (err.response.status === 404) {
+        console.log("The user have that him created please delete the cards before:", err.response.data);
+      } else {
+        console.log("The user cannot be deleted because hte user have favorite card. remove the favorite card from the user", err.response.data);
+      }
     }
   }
 
