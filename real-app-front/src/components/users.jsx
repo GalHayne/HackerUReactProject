@@ -166,7 +166,7 @@ const Users = () => {
         {renderUsers}
       </table>
       <Modal modalStatus={modalStatus} onClose={closeModal}>
-        <DeleteCardsModal onClose={closeModal} cards={cardsToDelete} msg={'The user have cards that him created please delete the cards before'} />
+        <DeleteCardsModal onClose={closeModal} cards={cardsToDelete} msg={'Delete this cards before:'} />
       </Modal>
     </>
   );
