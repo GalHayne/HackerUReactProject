@@ -4,15 +4,22 @@ import usersService from "../services/usersService";
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
 import useDarkContext from "../hooks/useDarkModa-context";
+import useModal from "../hooks/use-modal";
+import Modal from "./common/Modal";
+import DeleteCardsModal from "./DeleteCardsModal";
 
 const Users = () => {
   const { user } = useAuth();
 
   const { theme } = useDarkContext();
 
+  const [modalStatus, openModal, closeModal] = useModal();
+
   const userId = user._id;
 
   const [users, setUsers] = useState();
+
+  const [cardsToDelete, setCardsToDelete] = useState([]);
 
   const getUsers = async () => {
     const { data } = await usersService.getAllUsers();
@@ -54,10 +61,8 @@ const Users = () => {
       }
     } catch (err) {
       if (err.response.status === 404) {
-        console.log(
-          "The user have that him created please delete the cards before:",
-          err.response.data
-        );
+        setCardsToDelete(err.response.data);
+        openModal();
         toast.error(
           "The user have that him created please delete the cards before"
         );
@@ -160,6 +165,9 @@ const Users = () => {
         </thead>
         {renderUsers}
       </table>
+      <Modal modalStatus={modalStatus} onClose={closeModal}>
+        <DeleteCardsModal onClose={closeModal} cards={cardsToDelete} msg={'The user have cards that him created please delete the cards before'} />
+      </Modal>
     </>
   );
 };
