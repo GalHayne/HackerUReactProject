@@ -46,9 +46,7 @@ const Users = () => {
   const handleDeleteUser = async (_id) => {
     try {
       const res = await usersService.deleteUser(_id);
-      console.log(res.status);
       if (res.status === 200) {
-        console.log("need call again to delete");
         handleDeleteUser(_id);
       } else {
         toast.success(`The user: ${res.data.name} has been deleted`);
