@@ -7,8 +7,8 @@ import useDarkContext from "../hooks/useDarkModa-context";
 import useModal from "../hooks/use-modal";
 import Modal from "./common/Modal";
 import DeleteCardsModal from "./DeleteCardsModal";
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 
 const Users = () => {
   const { user } = useAuth();
@@ -159,15 +159,12 @@ const Users = () => {
       </Tbody>
     );
   });
-
   return (
     <>
       <PageHeader
         title="Users"
-        description="In the table below you can see all the users registered to the site, you can see which users have administrator privileges.
-        Additionally, you can give a regular user admin privileges by clicking Make Admin on the user you want to give admin privileges"
+        description="In the table below you can see all the users registered to the site and you can see their permissions. In addition, you can turn a normal user into a business user, a business user into a normal user, unblock a blocked user and delete a user."
       />
-
       <Table className={`my-5 table table-${tableMode} table-striped`}>
         <Thead>
           <Tr className="text-center">
@@ -193,5 +190,4 @@ const Users = () => {
     </>
   );
 };
-
 export default Users;

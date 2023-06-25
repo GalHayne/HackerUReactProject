@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth.context";
 import { toast } from "react-toastify";
 import usersService from "../services/usersService";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useDarkContext from "../hooks/useDarkModa-context";
 import Carousel from 'react-elastic-carousel';
 import TypeDisplay from "./typeDisplay";
