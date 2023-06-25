@@ -65,12 +65,14 @@ const CardModal = ({ onClose, card: {
             {user.biz ? (
                 <div className="d-flex justify-content-around P-2">
                     <button
+                        title="edit card"
                         className={`btn btn-primary ${theme}`}
                         onClick={() => navigate(`/my-cards/edit/${_id}`)}
                     >
                         Edit
                     </button>
                     <button
+                    title="delete card"
                         className="btn btn-secondary"
                         onClick={() => navigate(`/my-cards/delete/${_id}`)}
                     >

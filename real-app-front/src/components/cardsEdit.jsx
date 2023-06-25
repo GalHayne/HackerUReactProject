@@ -123,13 +123,22 @@ const CardsEdit = () => {
           Note The fields marked with an * are mandatory
         </p>
 
-        <div className="my-2">
+        <div className="my-2 d-flex justify-content-between">
           <button
+          title="update card"
             type="submit"
             disabled={!form.isValid}
             className={`btn btn-primary ${theme}`}
           >
-            Edit Card
+            Update Card
+          </button>
+          <button
+          title="cancel"
+            onClick={() => navigate('/my-cards')}
+            disabled={!form.isValid}
+            className={`btn btn-secondary`}
+          >
+            Cancel 
           </button>
         </div>
       </form>

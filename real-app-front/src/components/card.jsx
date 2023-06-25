@@ -38,7 +38,6 @@ const Card = ({ card,
   return (
     <div
       className={`card-desgin m-3 ${theme}`}
-      title={bizName}
       style={{ minWidth: "12rem", width: "20rem", height: "20rem" }}
     >
       {!isFavoriteCard ? (
@@ -72,7 +71,7 @@ const Card = ({ card,
           ></i>
         </div>
       )}
-      <div className="d-flex justify-content-between align-items-center">
+      <div className="d-flex justify-content-around align-items-center">
         <img
           src={bizImage}
           className=" card-img-top my-1 p-1 w-50 rounded-circle"
