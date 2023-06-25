@@ -57,7 +57,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
             )}
-            {user?.biz && (
+            {user?.admin && (
               <li className="nav-item">
                 <NavLink title="users manager" className="nav-link" to="/users">
                   CRM

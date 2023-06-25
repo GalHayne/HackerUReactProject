@@ -1,4 +1,4 @@
-const PageHeader = ({ title, description, note=null }) => {
+const PageHeader = ({ title, description, note = null }) => {
   return (
     <>
       <div className="row mt-4">
@@ -10,12 +10,12 @@ const PageHeader = ({ title, description, note=null }) => {
       {description && (
         <div className="row mt-2">
           <div className="col-12">
-            <p>{description}</p>
+            <div>{description}</div>
           </div>
         </div>
       )}
 
-      {note &&<span>
+      {note && <span>
         <p>{note}</p>
       </span>}
     </>

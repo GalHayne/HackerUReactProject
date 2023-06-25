@@ -49,14 +49,14 @@ function App() {
           <Route path="sign-out" element={<SignOut redirect="/" />} />
           <Route path="user-details" element={<UserDeatils redirect="/" />} />
           <Route path="my-cards" element={
-            <ProtectedRoute onlyBiz>
+            <ProtectedRoute>
               <MyCards />
             </ProtectedRoute>
           } />
           <Route
             path="users"
             element={
-              <ProtectedRoute onlyBiz>
+              <ProtectedRoute isAdmin>
                 <Users />
               </ProtectedRoute>
             }
@@ -64,7 +64,7 @@ function App() {
           <Route
             path="my-cards/delete/:id"
             element={
-              <ProtectedRoute onlyBiz>
+              <ProtectedRoute isAdmin isBiz>
                 <CardsDelete />
               </ProtectedRoute>
             }
@@ -72,7 +72,7 @@ function App() {
           <Route
             path="my-cards/edit/:id"
             element={
-              <ProtectedRoute onlyBiz>
+              <ProtectedRoute isAdmin isBiz>
                 <CardsEdit />
               </ProtectedRoute>
             }
@@ -80,7 +80,7 @@ function App() {
           <Route
             path="create-card"
             element={
-              <ProtectedRoute onlyBiz>
+              <ProtectedRoute isAdmin isBiz>
                 <CardsCreate />
               </ProtectedRoute>
             }

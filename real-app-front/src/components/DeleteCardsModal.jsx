@@ -58,7 +58,8 @@ const DeleteCardsModal = ({ onClose, msg, userIdSelect }) => {
                 backgroundColor: "#3f4144", position: "fixed", overflowY: "auto", width: "50rem", height: "50rem", textAlign: "center", top: "50%", left: "50%", color: "white", transform: "translate(-50%, -50%)",
             }}
         >
-            <h1>{msg}</h1>
+            <h3 className="text-danger">{msg}</h3>
+            <p>*To delete the user you will need to delete these cards first</p>
 
             <div className="mt-5">
                 {renderCards}

@@ -39,15 +39,15 @@ const SignIn = ({ redirect = "/" }) => {
       try {
         const res = await login(values);
         showTheResponse(res)
-        if (res.response.data !== 200){
+        if (res.response.data !== 200) {
           setError(res.response.data);
           return;
-        } 
+        }
       } catch (connect) {
         toast.success(`You have successfully connected to the system`);
         navigate(redirect);
-        }
-      
+      }
+
     },
   });
 
@@ -60,12 +60,12 @@ const SignIn = ({ redirect = "/" }) => {
       <div className="text-center">
         <PageHeader
           title="Sign In with Real App"
-          description="Sign in to your accound"
+          description="Sign in to your account"
         />
       </div>
 
       <div className={`center-div ${theme} shadow p-3`}>
-        <form onSubmit={form.handleSubmit} noValidate>
+        <form className="p-3" onSubmit={form.handleSubmit} noValidate>
           {error && <div className="alert alert-danger">{error}</div>}
 
           <Input

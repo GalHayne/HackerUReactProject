@@ -58,7 +58,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
       <div className="text-center">
         <PageHeader
           title="Sign Up as Business with Real App"
-          description="Open a new business account, it is free for you!"
+          description="Open a new business account and get ability to advertise your business and your employees or friends!"
         />
       </div>
 

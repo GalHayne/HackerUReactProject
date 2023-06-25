@@ -56,12 +56,12 @@ const SignUp = ({ redirect = "/" }) => {
       <div className="text-center">
         <PageHeader
           title="Sign Up with Real App"
-          description="Open a new account, it is free you yammani!"
+          description="Open a new account, it is free for you!"
         />
       </div>
 
       <div className={`center-div ${theme} shadow p-3`}>
-        <form onSubmit={form.handleSubmit} noValidate>
+        <form className="p-3" onSubmit={form.handleSubmit} noValidate>
           {error && <div className="alert alert-danger">{error}</div>}
 
           <Input
