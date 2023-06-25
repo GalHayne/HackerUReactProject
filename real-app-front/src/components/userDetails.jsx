@@ -109,8 +109,8 @@ const UserDeatils = () => {
         }
       />
       <img className="rounded-circle" style={{ width: "150px" }} src={userImg} alt="Logo" />
-      {!showEdit && <div className="m-3"><p><span>User Name: </span>{userDetails?.name}</p>
-        <p> <span>Email: </span>{userDetails?.email}</p></div>
+      {!showEdit && <div className="m-3"><p><span className="bold">User Name: </span>{userDetails?.name}</p>
+        <p> <span className="bold">Email: </span>{userDetails?.email}</p></div>
       }
       {!showEdit && <button className={`rounded w-25 p-2 btn btn-primary ${theme}`} style={{ minWidth: "100px" }} title="edit profile" onClick={handleToggleShowEdit}>Edit profile</button>}
       {showEdit && <form onSubmit={form.handleSubmit} noValidate>

@@ -38,25 +38,27 @@ const CardModal = ({ onClose, card: {
                     alt={bizName}
                 />
                 <h5 className="card-title">
-                    {bizName}
+                    {bizName.length > 60
+                        ? bizName.substring(0, 60) + "..."
+                        : bizName}
                 </h5>
             </div>
             <div className="card-body">
                 <p className="card-text">
-                    <span>Description</span>
-                    {bizDescription.length > 150
-                        ? bizDescription.substring(0, 150) + "..."
+                    <span className="bold">Description: </span>
+                    {bizDescription.length > 100
+                        ? bizDescription.substring(0, 100) + "..."
                         : bizDescription}
                 </p>
                 <p className="card-text">
-                    <span>Address</span> :
-                    {bizAddress.length > 150
-                        ? bizAddress.substring(0, 150) + "..."
+                    <span className="bold">Address: </span>
+                    {bizAddress.length > 100
+                        ? bizAddress.substring(0, 100) + "..."
                         : bizAddress}
                 </p>
                 <p className="card-text">
-                    <span>Phone</span>
-                    {bizPhone.length > 150 ? bizPhone.substring(0, 150) + "..." : bizPhone}
+                    <span className="bold">Phone: </span>
+                    {bizPhone.length > 100 ? bizPhone.substring(0, 100) + "..." : bizPhone}
                 </p>
             </div>
             <hr />

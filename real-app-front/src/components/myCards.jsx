@@ -116,7 +116,7 @@ const MyCards = () => {
         }
       </div>
       <div className="d-flex justify-content-center">
-        <span>{cards.length} cards</span>
+        <span className="bold">{cards.length} cards</span>
       </div>
 
       {<TypeDisplay setCardGalleryStyle={handleGalleryStyleChange} galleryStyle={galleryStyle} />}

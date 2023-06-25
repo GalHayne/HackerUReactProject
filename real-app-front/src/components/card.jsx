@@ -84,19 +84,19 @@ const Card = ({ card,
       </div>
       <div className="card-body">
         <p className="card-text">
-          <span>Description</span> :{" "}
+          <span className="bold">Description: </span> :{" "}
           {bizDescription.length > 32
             ? bizDescription.substring(0, 32) + "..."
             : bizDescription}
         </p>
         <p className="card-text">
-          <span>Address</span> :
+          <span className="bold">Address: </span> :
           {bizAddress.length > 32
             ? bizAddress.substring(0, 32) + "..."
             : bizAddress}
         </p>
         <p className="card-text">
-          <span>Phone</span> :{" "}
+          <span className="bold">Phone: </span> :{" "}
           {bizPhone.length > 32 ? bizPhone.substring(0, 32) + "..." : bizPhone}
         </p>
       </div>
