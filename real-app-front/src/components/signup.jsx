@@ -71,19 +71,20 @@ const SignUp = ({ redirect = "/" }) => {
             required
             error={form.touched.email && form.errors.email}
           />
+            <Input
+              {...form.getFieldProps("name")}
+              type="text"
+              label="Name"
+              required
+              error={form.touched.name && form.errors.name}
+            />
           <Input
             {...form.getFieldProps("password")}
             type="password"
             label="Password"
             required
+            eye
             error={form.touched.password && form.errors.password}
-          />
-          <Input
-            {...form.getFieldProps("name")}
-            type="text"
-            label="Name"
-            required
-            error={form.touched.name && form.errors.name}
           />
 
           <div className="my-2">

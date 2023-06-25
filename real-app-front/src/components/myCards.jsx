@@ -71,7 +71,7 @@ const MyCards = () => {
     { width: 1800, itemsToShow: 5 },
   ]
 
-  const renderCards = !cards?.length ? (<p>no cards...</p>)
+  const renderCards = !cards?.length ? ("")
     : onlyFavorite === false ? (
       cards.map((card) => {
         let isFavoriteCard = false;
@@ -115,6 +115,9 @@ const MyCards = () => {
           <button type="button" title="show all cards" style={{ minWidth: "5rem", width: "10rem" }} className="btn btn-secondary" onClick={() => setOnlyFavorite((prev) => !prev)}>All cards </button>
         }
       </div>
+      <div className="d-flex justify-content-center">
+        <span>{cards.length} cards</span>
+      </div>
 
       {<TypeDisplay setCardGalleryStyle={handleGalleryStyleChange} galleryStyle={galleryStyle} />}
 
@@ -127,7 +130,7 @@ const MyCards = () => {
           <div className="text-center mt-5">
             {cards?.length !== 0 ? <Carousel breakPoints={breakPoints}>
               {renderCards}
-            </Carousel> : <p>no cards...</p>}
+            </Carousel> : ""}
           </div>
       }
     </>

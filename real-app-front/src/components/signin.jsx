@@ -80,6 +80,7 @@ const SignIn = ({ redirect = "/" }) => {
             type="password"
             label="Password"
             required
+            eye
             error={form.touched.password && form.errors.password}
           />
 
