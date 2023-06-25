@@ -21,6 +21,7 @@ import Users from "./components/users";
 import ProtectedRoute from "./components/common/protectedRoute";
 import UserDeatils from "./components/userDetails";
 import useDarkContext from "./hooks/useDarkModa-context";
+import SignupAdmin from "./components/signupAdmin";
 
 function App() {
 
@@ -36,6 +37,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
+          <Route
+            path="sign-up-admin"
+            element={<SignupAdmin redirect="/sign-in" />}
+          />
           <Route
             path="sign-up-biz"
             element={<SignUpBiz redirect="/sign-in" />}

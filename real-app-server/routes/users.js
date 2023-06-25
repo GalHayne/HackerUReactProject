@@ -193,6 +193,7 @@ router.post("/", async (req, res) => {
       "cards",
       "block",
       "timeBlock",
+      "admin",
     ])
   );
   const salt = await bcrypt.genSalt(10);
