@@ -96,6 +96,10 @@ const SignupAdmin = ({ redirect = "/sign-in" }) => {
             error={form.touched.password && form.errors.password}
           />
 
+          <p className="text-danger">
+            Note The fields marked with an * are mandatory
+          </p>
+
           <div className="my-2">
             <button
               type="submit"

@@ -36,9 +36,16 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
     }),
     async onSubmit(values) {
       try {
-        const res = await createUser({ ...values, biz: true, block: false, admin: false });
+        const res = await createUser({
+          ...values,
+          biz: true,
+          block: false,
+          admin: false,
+        });
         if (res) {
-          toast.success(`${res.data.name} you have successfully registered to the site, you are transferred to the login page`)
+          toast.success(
+            `${res.data.name} you have successfully registered to the site, you are transferred to the login page`
+          );
         }
         navigate(redirect);
       } catch ({ response }) {
@@ -73,13 +80,13 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
             required
             error={form.touched.email && form.errors.email}
           />
-            <Input
-              {...form.getFieldProps("name")}
-              type="text"
-              label="Name"
-              required
-              error={form.touched.name && form.errors.name}
-              />
+          <Input
+            {...form.getFieldProps("name")}
+            type="text"
+            label="Name"
+            required
+            error={form.touched.name && form.errors.name}
+          />
           <Input
             {...form.getFieldProps("password")}
             eye
@@ -88,6 +95,10 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
             required
             error={form.touched.password && form.errors.password}
           />
+
+          <p className="text-danger">
+            Note The fields marked with an * are mandatory
+          </p>
 
           <div className="my-2">
             <button

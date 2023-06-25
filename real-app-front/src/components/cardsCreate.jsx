@@ -123,6 +123,7 @@ const CardsCreate = () => {
           error={form.touched.bizImage && form.errors.bizImage}
         />
 
+          <p className="text-danger">Note The fields marked with an * are mandatory</p>
         <div className="my-2">
           <button
             type="submit"
@@ -132,6 +133,8 @@ const CardsCreate = () => {
             Create Card
           </button>
         </div>
+
+
       </form>
     </div>
   );
