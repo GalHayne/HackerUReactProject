@@ -57,7 +57,7 @@ const Users = () => {
       if (res.status === 200) {
         handleDeleteUser(_id);
       } else {
-        toast.success(`The user: ${res.data.name} has been deleted`);
+        toast.success(`The user: ${res.data.email} has been deleted`);
         getUsers();
       }
     } catch (err) {
@@ -98,20 +98,12 @@ const Users = () => {
           <th scope="row">{user?._id}</th>
           <td>{user?.name}</td>
           <td>{user?.email}</td>
-          <td>{JSON.stringify(user?.biz)}</td>
-          {!user?.admin ? (
-            <td>
-              <button
-                className="btn btn-none rounded"
-                onClick={() => handleToggleUser(user?._id)}
-                title="make this user admin"
-              >
-                <i className="bi bi-people-fill"></i>
-              </button>
-            </td>
-          ) : (
-            <td></td>
-          )}
+          <td>
+            make business
+          </td>
+          <td>
+            make normal
+          </td>
           {user.block ? (
             <td>
               <button
@@ -158,8 +150,8 @@ const Users = () => {
             <th scope="col">User ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Is Admin</th>
-            <th scope="col">Make Admin</th>
+            <th scope="col">Make Business User</th>
+            <th scope="col">Make Noraml User</th>
             <th scope="col">Remove Block</th>
             <th scope="col">Delete User</th>
           </tr>
