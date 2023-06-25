@@ -36,7 +36,7 @@ const SignUp = ({ redirect = "/" }) => {
     }),
     async onSubmit(values) {
       try {
-        const res = await createUser({ ...values, biz: false, block: false });
+        const res = await createUser({ ...values, biz: false, block: false, admin: false });
         toast.success(`${res.data.name} you have successfully registered to the site, you are transferred to the login page`)
         navigate(redirect);
       } catch ({ response }) {
@@ -56,12 +56,12 @@ const SignUp = ({ redirect = "/" }) => {
       <div className="text-center">
         <PageHeader
           title="Sign Up with Real App"
-          description="Open a new account, it is free you yammani!"
+          description="Open a new account, it is free for you!"
         />
       </div>
 
       <div className={`center-div ${theme} shadow p-3`}>
-        <form onSubmit={form.handleSubmit} noValidate>
+        <form className="p-3" onSubmit={form.handleSubmit} noValidate>
           {error && <div className="alert alert-danger">{error}</div>}
 
           <Input

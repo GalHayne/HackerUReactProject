@@ -81,10 +81,6 @@ const CardsCreate = () => {
 
   }, [])
 
-  if (!user) {
-    return <Navigate to="/" />;
-  }
-
 
   return (
     <div className={`center-div ${theme} shadow p-3`}>

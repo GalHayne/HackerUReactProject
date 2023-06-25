@@ -21,9 +21,9 @@ import Users from "./components/users";
 import ProtectedRoute from "./components/common/protectedRoute";
 import UserDeatils from "./components/userDetails";
 import useDarkContext from "./hooks/useDarkModa-context";
+import SignupAdmin from "./components/signupAdmin";
 
 function App() {
-
   const { theme } = useDarkContext();
 
   return (
@@ -37,6 +37,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route
+            path="sign-up-admin"
+            element={<SignupAdmin redirect="/sign-in" />}
+          />
+          <Route
             path="sign-up-biz"
             element={<SignUpBiz redirect="/sign-in" />}
           />
@@ -44,16 +48,15 @@ function App() {
           <Route path="sign-in" element={<SignIn redirect="/" />} />
           <Route path="sign-out" element={<SignOut redirect="/" />} />
           <Route path="user-details" element={<UserDeatils redirect="/" />} />
-          <Route
-            path="my-cards"
-            element={
+          <Route path="my-cards" element={
+            <ProtectedRoute>
               <MyCards />
-            }
-          />
+            </ProtectedRoute>
+          } />
           <Route
             path="users"
             element={
-              <ProtectedRoute onlyBiz>
+              <ProtectedRoute isAdmin>
                 <Users />
               </ProtectedRoute>
             }
@@ -61,23 +64,32 @@ function App() {
           <Route
             path="my-cards/delete/:id"
             element={
-              <CardsDelete />
+              <ProtectedRoute isAdmin isBiz>
+                <CardsDelete />
+              </ProtectedRoute>
             }
           />
           <Route
             path="my-cards/edit/:id"
-            element=
-            {
-              <CardsEdit />
+            element={
+              <ProtectedRoute isAdmin isBiz>
+                <CardsEdit />
+              </ProtectedRoute>
             }
           />
-          <Route path="create-card" element={<CardsCreate />} />
-          <Route path='*' element={<Home />} />
-
+          <Route
+            path="create-card"
+            element={
+              <ProtectedRoute isAdmin isBiz>
+                <CardsCreate />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Home />} />
         </Routes>
       </main>
       <Footer />
-    </div >
+    </div>
   );
 }
 

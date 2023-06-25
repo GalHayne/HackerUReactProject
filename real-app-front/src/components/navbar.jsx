@@ -10,10 +10,10 @@ const Navbar = () => {
 
   const [isLihgtSelected, setIsLihgtSelected] = useState(false);
 
-  const switchMode = (mode) =>{
+  const switchMode = (mode) => {
     mode === 'light' ? toogleTheme("light") : toogleTheme("dark");
-      
-    setIsLihgtSelected(mode === 'light');               
+
+    setIsLihgtSelected(mode === 'light');
   }
 
   const modeIcon =
@@ -23,7 +23,7 @@ const Navbar = () => {
       <i className="bi bi-moon"></i>
     );
 
-    const classNameHeader = `navbar navbar-expand-sm navbar-${theme} bg-${theme}`
+  const classNameHeader = `navbar navbar-expand-sm navbar-${theme} bg-${theme}`
 
   return (
     <nav className={classNameHeader} aria-label="Fourth navbar example">
@@ -57,7 +57,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
             )}
-            {user?.biz && (
+            {user?.admin && (
               <li className="nav-item">
                 <NavLink title="users manager" className="nav-link" to="/users">
                   CRM
@@ -96,6 +96,11 @@ const Navbar = () => {
                 <li className="nav-item" title="sign up busniess to web">
                   <NavLink className="nav-link" to="/sign-up-biz">
                     Sign Up Business
+                  </NavLink>
+                </li>
+                <li className="nav-item" title="sign up busniess to web">
+                  <NavLink className="nav-link" to="/sign-up-admin">
+                    Sign Up Admin
                   </NavLink>
                 </li>
               </>

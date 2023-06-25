@@ -19,8 +19,6 @@ const Users = () => {
 
   const [users, setUsers] = useState();
 
-  const [cardsToDelete, setCardsToDelete] = useState([]);
-
   const [userIdSelect, setUserIdSelect] = useState();
 
   const getUsers = async () => {
@@ -64,7 +62,7 @@ const Users = () => {
       }
     } catch (err) {
       if (err.response.status === 404) {
-        setCardsToDelete(err.response.data);
+
         openModal();
         toast.error(
           "The user have that him created please delete the cards before"
@@ -97,15 +95,15 @@ const Users = () => {
               <div></div>
             )}
           </th>
-          <th scope="row">{user._id}</th>
-          <td>{user.name}</td>
-          <td>{user.email}</td>
-          <td>{JSON.stringify(user.biz)}</td>
-          {!user.biz ? (
+          <th scope="row">{user?._id}</th>
+          <td>{user?.name}</td>
+          <td>{user?.email}</td>
+          <td>{JSON.stringify(user?.biz)}</td>
+          {!user?.admin ? (
             <td>
               <button
                 className="btn btn-none rounded"
-                onClick={() => handleToggleUser(user._id)}
+                onClick={() => handleToggleUser(user?._id)}
                 title="make this user admin"
               >
                 <i className="bi bi-people-fill"></i>
@@ -118,7 +116,7 @@ const Users = () => {
             <td>
               <button
                 className="btn btn-none rounded"
-                onClick={() => handleRemoveBlock(user._id)}
+                onClick={() => handleRemoveBlock(user?._id)}
                 title="delete the block from user"
               >
                 <i className="bi bi-shield-fill-x"></i>
@@ -127,11 +125,11 @@ const Users = () => {
           ) : (
             <td></td>
           )}
-          {!user.biz ? (
+          {!user?.admin ? (
             <td>
               <button
                 className="btn btn-none rounded"
-                onClick={() => handleDeleteUser(user._id)}
+                onClick={() => handleDeleteUser(user?._id)}
                 title="delete the user"
               >
                 <i className="bi bi-person-dash-fill"></i>
@@ -169,7 +167,7 @@ const Users = () => {
         {renderUsers}
       </table>
       <Modal modalStatus={modalStatus} onClose={closeModal}>
-        <DeleteCardsModal onClose={closeModal} msg={'Delete this cards before:'} userIdSelect={userIdSelect} />
+        <DeleteCardsModal onClose={closeModal} msg={'Note that this user has cards that he created:'} userIdSelect={userIdSelect} />
       </Modal>
     </>
   );
