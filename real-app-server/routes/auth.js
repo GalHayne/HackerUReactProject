@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
-  if (error){
+  if (error) {
     return res.status(400).send(error.details[0].message);
   }
 
@@ -18,24 +18,24 @@ router.post("/", async (req, res) => {
   }
 
   if (checkIfUserBlock(user)) {
-    return res.status(401).send('Sorry, the user is blocked, please contact the manager');
+    return res
+      .status(401)
+      .send("Sorry, the user is blocked, please contact the manager");
   }
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
-
-    incLoginAttempts(user);
+    if (!user.admin) incLoginAttempts(user);
 
     const length = user.timeBlock.length;
 
-    const msg =
-      length !== 3
-        ? `The user will be blocked after ${3 - length} incorrect attempts`
-        : `Sorry, the user is blocked, please contact the manager`;
+    const msg = user.admin
+      ? "The password is incorrect"
+      : length !== 3
+      ? `The user will be blocked after ${3 - length} incorrect attempts`
+      : `Sorry, the user is blocked, please contact the manager`;
 
-    return res
-      .status(402)
-      .send(msg);
+    return res.status(402).send(msg);
   }
 
   res.json({ token: user.generateAuthToken() });
