@@ -1,13 +1,53 @@
-import Card from "./card";
+import { useEffect, useState } from "react";
+import usersService from "../services/usersService";
+import useDarkContext from "../hooks/useDarkModa-context";
+import cardsService from "../services/cardsService";
+import { toast } from "react-toastify";
 
-const DeleteCardsModal = ({ onClose, cards, msg }) => {
+const DeleteCardsModal = ({ onClose, msg, userIdSelect }) => {
 
-    const renderCards = cards.map((card) => {
+    const { theme } = useDarkContext();
+
+    const [cards, setCards] = useState();
+
+    useEffect(() => {
+        try {
+            getCards();
+        } catch (err) {
+            console.log(err);
+        }
+    }, [])
+
+    const handleDeleteCard = async (card_id) => {
+        const res = await cardsService.deleteCard(card_id);
+        getCards();
+    }
+
+
+    const getCards = async () => {
+        const res = await usersService.getUserCards(userIdSelect);
+        if (res.data.length !== 0) {
+            setCards(res.data)
+        } else {
+            toast.success('The user has no more cards. This user can be deleted')
+            onClose();
+        }
+
+    }
+
+    const renderCards = cards?.map((card) => {
         return (
-            <div key={card._id} className="border rounded m-3 p-2 w-50 mx-auto">
-                <h3>Card Name: {card.bizName}</h3>
-                <h5>Phone: {card.bizPhone}</h5>
-            </div>
+            <div key={card?._id} className="cardOnModal border rounded m-3 p-2 w-50 mx-auto">
+                <h3>Card Name: {card?.bizName}</h3>
+                <h5>Phone: {card?.bizPhone}</h5>
+                <button
+                    className={`btn btn-primary ${theme}`}
+                    title="Delete card"
+                    onClick={() => handleDeleteCard(card._id)}
+                >
+                    Delete
+                </button>
+            </div >
         )
     })
 

@@ -39,6 +39,15 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
+router.get("/userCards/:user_id", auth, async (req, res) => {
+  const cards = await Card.find({ user_id: req.params.user_id });
+
+  if (!cards)
+    return res.status(404).send("The user with the given ID was not found.");
+
+  return res.status(200).send(cards);
+});
+
 router.put("/:id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.id });
 

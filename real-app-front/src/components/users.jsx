@@ -21,6 +21,8 @@ const Users = () => {
 
   const [cardsToDelete, setCardsToDelete] = useState([]);
 
+  const [userIdSelect, setUserIdSelect] = useState();
+
   const getUsers = async () => {
     const { data } = await usersService.getAllUsers();
     setUsers(data);
@@ -51,6 +53,7 @@ const Users = () => {
   };
 
   const handleDeleteUser = async (_id) => {
+    setUserIdSelect(_id)
     try {
       const res = await usersService.deleteUser(_id);
       if (res.status === 200) {
@@ -166,7 +169,7 @@ const Users = () => {
         {renderUsers}
       </table>
       <Modal modalStatus={modalStatus} onClose={closeModal}>
-        <DeleteCardsModal onClose={closeModal} cards={cardsToDelete} msg={'Delete this cards before:'} />
+        <DeleteCardsModal onClose={closeModal} msg={'Delete this cards before:'} userIdSelect={userIdSelect} />
       </Modal>
     </>
   );

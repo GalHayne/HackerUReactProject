@@ -74,6 +74,10 @@ export function getMe(user_id) {
   return httpService.get(`/users/${user_id}`);
 }
 
+export function getUserCards(user_id) {
+  return httpService.get(`users/userCards/${user_id}`);
+}
+
 const usersService = {
   createUser,
   loginUser,
@@ -88,6 +92,7 @@ const usersService = {
   toggleUserPermissions,
   removeBlock,
   getMe,
+  getUserCards,
 };
 
 export default usersService;

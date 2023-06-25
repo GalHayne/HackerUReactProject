@@ -1,24 +1,28 @@
-.card-desgin{
+.card-desgin {
   font-size: 12px;
   padding: 2%;
   border-radius: 5px;
 }
 
-.card-desgin.light{
+.card-desgin.light {
   color: var(--dark-backGroundColor);
   background-color: var(--card-bgColor-light);
-    
-  }
-  
-.card-desgin.dark{
+}
+
+.card-desgin.dark {
   color: var(--dark-colorText);
   background-color: var(--card-bgColor-dark);
 }
 
-.card-text  {
+.card-text {
   margin: 1px;
 }
 
-span{
+span {
   font-weight: bold;
+}
+
+.cardOnModal {
+  background-color: var(--li-hover-color);
+  color: var(--icons-color-hover);
 }
