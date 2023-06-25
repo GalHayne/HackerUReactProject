@@ -3,9 +3,6 @@ const { Card } = require("../models/card");
 
 const removeFavoriteCardFromUser = async (user_id, card_id) => {
 
-
-  console.log('try remove favorite card');
-
   let user = await User.findOne({ _id: user_id });
   let card = await Card.findOne({ _id: card_id });
 

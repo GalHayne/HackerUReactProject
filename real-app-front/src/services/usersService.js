@@ -78,6 +78,10 @@ export function getUserCards(user_id) {
   return httpService.get(`users/userCards/${user_id}`);
 }
 
+export function toggleUser(user_id) {
+  return httpService.put(`users/toggleUser/${user_id}`);
+}
+
 const usersService = {
   createUser,
   loginUser,
@@ -93,6 +97,7 @@ const usersService = {
   removeBlock,
   getMe,
   getUserCards,
+  toggleUser,
 };
 
 export default usersService;

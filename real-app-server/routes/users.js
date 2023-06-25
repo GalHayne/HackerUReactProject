@@ -5,7 +5,6 @@ const { User, validate, validateCards } = require("../models/user");
 const { Card } = require("../models/card");
 const auth = require("../middleware/auth");
 const { removeFavoriteCardFromUser } = require("../util/removeFavoriteCard");
-const { deleteCard } = require("../util/deleteCard");
 const router = express.Router();
 
 const getCards = async (cardsArray) => {
@@ -49,6 +48,19 @@ router.get("/userCards/:user_id", auth, async (req, res) => {
 });
 
 router.put("/:id", auth, async (req, res) => {
+  let user = await User.findOne({ _id: req.params.id });
+
+  if (!user)
+    return res.status(404).send("The user with the given ID was not found.");
+
+  user.biz = !user.biz;
+
+  user.save();
+
+  res.send(user);
+});
+
+router.put("/toggleUser/:id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.id });
 
   if (!user)

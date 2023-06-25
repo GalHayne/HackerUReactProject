@@ -1,13 +1,17 @@
 .bi-people-fill,
+.bi-person-fill,
 .bi-shield-fill-x,
 .bi-person-dash-fill {
   color: var(--li-hover-color);
+  cursor: pointer;
 }
 
 .bi-people-fill:hover,
+.bi-person-fill:hover,
 .bi-shield-fill-x:hover,
 .bi-person-dash-fill:hover {
   color: var(--li-hover-color2);
+  cursor: pointer;
 }
 
 table {

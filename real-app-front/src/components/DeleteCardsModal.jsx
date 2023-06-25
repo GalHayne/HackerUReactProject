@@ -14,7 +14,7 @@ const DeleteCardsModal = ({ onClose, msg, userIdSelect }) => {
         try {
             getCards();
         } catch (err) {
-            console.log(err);
+            toast.error(err)
         }
     }, [])
 
@@ -55,7 +55,7 @@ const DeleteCardsModal = ({ onClose, msg, userIdSelect }) => {
         <div
             className="card-modal p-3 rounded"
             style={{
-                backgroundColor: "#3f4144", position: "fixed", overflowY: "auto", width: "50rem", height: "50rem", textAlign: "center", top: "50%", left: "50%", color: "white", transform: "translate(-50%, -50%)",
+                backgroundColor: "#3f4144", position: "fixed", overflowY: "auto", width: "50rem", height: "400px", textAlign: "center", top: "50%", left: "50%", color: "white", transform: "translate(-50%, -50%)",
             }}
         >
             <h3 className="text-danger">{msg}</h3>

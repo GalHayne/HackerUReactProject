@@ -31,13 +31,13 @@ const Users = () => {
   }, []);
 
   const handleToggleUser = async (_id) => {
-    const res = usersService.toggleUserPermissions(_id);
-    res
-      .then((response) => {
-        toast.success(`The user: ${response.data.email} became a admin`);
-        getUsers();
-      })
-      .catch((err) => toast.error(err));
+    try {
+      await usersService.toggleUser(_id);
+      toast.success(`User permissions have changed`);
+      getUsers();
+    } catch (err) {
+      toast.err(err);
+    }
   };
 
   const handleRemoveBlock = async (_id) => {
@@ -51,7 +51,7 @@ const Users = () => {
   };
 
   const handleDeleteUser = async (_id) => {
-    setUserIdSelect(_id)
+    setUserIdSelect(_id);
     try {
       const res = await usersService.deleteUser(_id);
       if (res.status === 200) {
@@ -62,7 +62,6 @@ const Users = () => {
       }
     } catch (err) {
       if (err.response.status === 404) {
-
         openModal();
         toast.error(
           "The user have that him created please delete the cards before"
@@ -82,6 +81,14 @@ const Users = () => {
   let tableMode = theme === "dark" ? "light" : "dark";
 
   const renderUsers = users?.map((user) => {
+    let makeNoraml;
+
+    if (!user.admin && user.biz) {
+      makeNoraml = true;
+    } else if (!user.admin && !user.biz) {
+      makeNoraml = false;
+    }
+
     return (
       <tbody key={user._id}>
         <tr className="text-center">
@@ -95,21 +102,37 @@ const Users = () => {
               <div></div>
             )}
           </th>
-          <th scope="row">{user?._id}</th>
           <td>{user?.name}</td>
           <td>{user?.email}</td>
+          <td>{JSON.stringify(user?.admin)}</td>
           <td>
-            make business
+            {makeNoraml && !user.admin ? (
+              <i
+                title="make normal user"
+                className="bi bi-person-fill"
+                onClick={() => handleToggleUser(user._id)}
+              ></i>
+            ) : (
+              ""
+            )}
           </td>
           <td>
-            make normal
+            {!makeNoraml && !user.admin ? (
+              <i
+                title="make business user"
+                className="bi bi-people-fill"
+                onClick={() => handleToggleUser(user._id)}
+              ></i>
+            ) : (
+              ""
+            )}
           </td>
           {user.block ? (
             <td>
               <button
                 className="btn btn-none rounded"
                 onClick={() => handleRemoveBlock(user?._id)}
-                title="delete the block from user"
+                title="remove the block from user"
               >
                 <i className="bi bi-shield-fill-x"></i>
               </button>
@@ -143,15 +166,15 @@ const Users = () => {
         Additionally, you can give a regular user admin privileges by clicking Make Admin on the user you want to give admin privileges"
       />
 
-      <table className={`table table-${tableMode} table-striped`}>
+      <table className={`my-5 table table-${tableMode} table-striped`}>
         <thead>
           <tr className="text-center">
             <th>Connect Now</th>
-            <th scope="col">User ID</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Make Business User</th>
+            <th scope="col">Is Admin</th>
             <th scope="col">Make Noraml User</th>
+            <th scope="col">Make Business User</th>
             <th scope="col">Remove Block</th>
             <th scope="col">Delete User</th>
           </tr>
@@ -159,7 +182,11 @@ const Users = () => {
         {renderUsers}
       </table>
       <Modal modalStatus={modalStatus} onClose={closeModal}>
-        <DeleteCardsModal onClose={closeModal} msg={'Note that this user has cards that he created:'} userIdSelect={userIdSelect} />
+        <DeleteCardsModal
+          onClose={closeModal}
+          msg={"Note that this user has cards that he created:"}
+          userIdSelect={userIdSelect}
+        />
       </Modal>
     </>
   );

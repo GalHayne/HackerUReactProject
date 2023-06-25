@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <div>
       <PageHeader
-        title={<>Home</>}
+        title={<> Hayne's <i className="bi bi-card-text"></i> Cards</>}
         description={description}
       />
       <div className="text-center">
