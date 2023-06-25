@@ -24,7 +24,6 @@ import useDarkContext from "./hooks/useDarkModa-context";
 import SignupAdmin from "./components/signupAdmin";
 
 function App() {
-
   const { theme } = useDarkContext();
 
   return (
@@ -49,12 +48,11 @@ function App() {
           <Route path="sign-in" element={<SignIn redirect="/" />} />
           <Route path="sign-out" element={<SignOut redirect="/" />} />
           <Route path="user-details" element={<UserDeatils redirect="/" />} />
-          <Route
-            path="my-cards"
-            element={
+          <Route path="my-cards" element={
+            <ProtectedRoute onlyBiz>
               <MyCards />
-            }
-          />
+            </ProtectedRoute>
+          } />
           <Route
             path="users"
             element={
@@ -66,23 +64,32 @@ function App() {
           <Route
             path="my-cards/delete/:id"
             element={
-              <CardsDelete />
+              <ProtectedRoute onlyBiz>
+                <CardsDelete />
+              </ProtectedRoute>
             }
           />
           <Route
             path="my-cards/edit/:id"
-            element=
-            {
-              <CardsEdit />
+            element={
+              <ProtectedRoute onlyBiz>
+                <CardsEdit />
+              </ProtectedRoute>
             }
           />
-          <Route path="create-card" element={<CardsCreate />} />
-          <Route path='*' element={<Home />} />
-
+          <Route
+            path="create-card"
+            element={
+              <ProtectedRoute onlyBiz>
+                <CardsCreate />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Home />} />
         </Routes>
       </main>
       <Footer />
-    </div >
+    </div>
   );
 }
 
