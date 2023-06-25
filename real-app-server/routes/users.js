@@ -120,14 +120,19 @@ router.delete("/deleteUser/:id", auth, async (req, res) => {
 router.put("/updateDetails/:id", auth, async (req, res) => {
   let user = await User.findOne({ _id: req.params.id });
 
+  let users = await User.find({ email: req.body.email });
+
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
+    
+    if (users.length > 0)
+    return res.status(404).send("The email already exists in the system , choose another one");
 
   user.email = req.body.email;
   user.name = req.body.name;
 
   user.save();
-  res.send(user);
+  res.send('success update details');
 });
 
 router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
