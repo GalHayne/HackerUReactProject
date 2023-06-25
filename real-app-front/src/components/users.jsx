@@ -7,6 +7,8 @@ import useDarkContext from "../hooks/useDarkModa-context";
 import useModal from "../hooks/use-modal";
 import Modal from "./common/Modal";
 import DeleteCardsModal from "./DeleteCardsModal";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 const Users = () => {
   const { user } = useAuth();
@@ -90,9 +92,9 @@ const Users = () => {
     }
 
     return (
-      <tbody key={user._id}>
-        <tr className="text-center">
-          <th>
+      <Tbody key={user._id}>
+        <Tr className="text-center">
+          <Th>
             {userId === user._id ? (
               <div
                 title="connected now"
@@ -101,11 +103,11 @@ const Users = () => {
             ) : (
               <div></div>
             )}
-          </th>
-          <td>{user?.name}</td>
-          <td>{user?.email}</td>
-          <td>{JSON.stringify(user?.admin)}</td>
-          <td>
+          </Th>
+          <Td>{user?.name}</Td>
+          <Td>{user?.email}</Td>
+          <Td>{JSON.stringify(user?.admin)}</Td>
+          <Td>
             {makeNoraml && !user.admin ? (
               <i
                 title="make normal user"
@@ -115,8 +117,8 @@ const Users = () => {
             ) : (
               ""
             )}
-          </td>
-          <td>
+          </Td>
+          <Td>
             {!makeNoraml && !user.admin ? (
               <i
                 title="make business user"
@@ -126,9 +128,9 @@ const Users = () => {
             ) : (
               ""
             )}
-          </td>
+          </Td>
           {user.block ? (
-            <td>
+            <Td>
               <button
                 className="btn btn-none rounded"
                 onClick={() => handleRemoveBlock(user?._id)}
@@ -136,12 +138,12 @@ const Users = () => {
               >
                 <i className="bi bi-shield-fill-x"></i>
               </button>
-            </td>
+            </Td>
           ) : (
-            <td></td>
+            <Td></Td>
           )}
           {!user?.admin ? (
-            <td>
+            <Td>
               <button
                 className="btn btn-none rounded"
                 onClick={() => handleDeleteUser(user?._id)}
@@ -149,12 +151,12 @@ const Users = () => {
               >
                 <i className="bi bi-person-dash-fill"></i>
               </button>
-            </td>
+            </Td>
           ) : (
-            <td></td>
+            <Td></Td>
           )}
-        </tr>
-      </tbody>
+        </Tr>
+      </Tbody>
     );
   });
 
@@ -166,21 +168,21 @@ const Users = () => {
         Additionally, you can give a regular user admin privileges by clicking Make Admin on the user you want to give admin privileges"
       />
 
-      <table className={`my-5 table table-${tableMode} table-striped`}>
-        <thead>
-          <tr className="text-center">
-            <th>Connect Now</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Is Admin</th>
-            <th scope="col">Make Noraml User</th>
-            <th scope="col">Make Business User</th>
-            <th scope="col">Remove Block</th>
-            <th scope="col">Delete User</th>
-          </tr>
-        </thead>
+      <Table className={`my-5 table table-${tableMode} table-striped`}>
+        <Thead>
+          <Tr className="text-center">
+            <Th>Connect Now</Th>
+            <Th scope="col">Name</Th>
+            <Th scope="col">Email</Th>
+            <Th scope="col">Is Admin</Th>
+            <Th scope="col">Make Noraml User</Th>
+            <Th scope="col">Make Business User</Th>
+            <Th scope="col">Remove Block</Th>
+            <Th scope="col">Delete User</Th>
+          </Tr>
+        </Thead>
         {renderUsers}
-      </table>
+      </Table>
       <Modal modalStatus={modalStatus} onClose={closeModal}>
         <DeleteCardsModal
           onClose={closeModal}
