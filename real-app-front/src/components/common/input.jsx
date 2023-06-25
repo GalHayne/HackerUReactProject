@@ -33,9 +33,9 @@ const Input = ({ label, name, error, type = 'password', width = "w-100", eye , p
       .join(" ")}
       />
       {showPassword === 'password' ? <div>
-        <a href="#"><i className="bi bi-eye-fill m-1 w-100" onClick={handleShowPasswordChange}></i></a>
+        <i className="bi bi-eye-fill m-1 w-100" onClick={handleShowPasswordChange}></i>
       </div> : (showPassword === 'text' && eye === true)  ? <div>
-        <a href="#"><i className="bi bi-eye-slash-fill m-1 w-100" onClick={handleShowPasswordChange}></i></a>
+        <i className="bi bi-eye-slash-fill m-1 w-100" onClick={handleShowPasswordChange}></i>
       </div> : ''}
       </div>
       <span className="invalid-feedback">{error}</span>
