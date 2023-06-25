@@ -53,7 +53,10 @@ const CardsCreate = () => {
           body.bizImage = bizImage;
         }
         const res = cardsService.createCard(body);
-        res.then((data) => { toast.success(`${data.data.bizName}'s card was created successfully`); navigate("/my-cards"); })
+        res.then((data) => {
+          toast.success(`${data.data.bizName}'s card was created successfully`);
+          navigate("/my-cards");
+        });
       } catch ({ response }) {
         if (response && response.status === 400) {
           setError(response.data);
@@ -63,24 +66,23 @@ const CardsCreate = () => {
   });
 
   useEffect(() => {
-
     try {
-      const res = usersService.getMe(user?._id)
-      res.then(res => toast.success('You have connected successfully, insert a new card'))
-        .catch(res => {
+      const res = usersService.getMe(user?._id);
+      res
+        .then((res) =>
+          toast.success("You have connected successfully, insert a new card")
+        )
+        .catch((res) => {
           if (res.response.status === 404) {
-            toast.error('The user does not exist please sign up')
-            navigate('/sign-out');
+            toast.error("The user does not exist please sign up");
+            navigate("/sign-out");
           }
-        })
+        });
+    } catch (err) {
+      toast.error("The user does not exist please sign up");
+      navigate("/sign-out");
     }
-    catch (err) {
-      toast.error('The user does not exist please sign up')
-      navigate('/sign-out');
-    }
-
-  }, [])
-
+  }, []);
 
   return (
     <div className={`center-div ${theme} shadow p-3`}>
@@ -123,7 +125,9 @@ const CardsCreate = () => {
           error={form.touched.bizImage && form.errors.bizImage}
         />
 
-          <p className="text-danger">Note The fields marked with an * are mandatory</p>
+        <p className="text-danger">
+          Note The fields marked with an * are mandatory
+        </p>
         <div className="my-2">
           <button
             type="submit"
@@ -133,8 +137,6 @@ const CardsCreate = () => {
             Create Card
           </button>
         </div>
-
-
       </form>
     </div>
   );

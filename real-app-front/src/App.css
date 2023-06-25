@@ -10,7 +10,7 @@
   --light-backGroundColor: #f8f9fa;
   --dark-backGroundColor: #212529;
   --gray-backGroundColor: #494d51;
-  --dark-colorText: #b1afaf;
+  --dark-colorText: #f4f2f2;
   --dark-eyeHoverColor: #e8e8e8;
   --li-hover-color: #a7a7a7;
   --li-hover-color2: #696767;
@@ -51,7 +51,8 @@
 
 .bi-eye-fill,
 .bi-eye-slash-fill{
-  color: var(--dark-colorText);
+  color: var(--card-bgColor-dark);
+  cursor: pointer;
 }
 
 .bi-eye-fill:hover,
