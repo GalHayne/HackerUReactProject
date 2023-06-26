@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Joi from "joi";
 import { useEffect, useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/input";
 import PageHeader from "./common/pageHeader";
@@ -69,9 +69,7 @@ const CardsCreate = () => {
     try {
       const res = usersService.getMe(user?._id);
       res
-        .then((res) =>
-          {}
-        )
+        .then((res) => {})
         .catch((res) => {
           if (res.response.status === 404) {
             toast.error("The user does not exist please sign up");
@@ -128,13 +126,20 @@ const CardsCreate = () => {
         <p className="text-danger">
           Note The fields marked with an * are mandatory
         </p>
-        <div className="my-2">
+        <div className="my-2 d-flex justify-content-between">
           <button
             type="submit"
             disabled={!form.isValid}
             className={`btn btn-primary ${theme}`}
           >
             Create Card
+          </button>
+          <button
+            title="cancel"
+            onClick={() => navigate("/my-cards")}
+            className={`btn btn-secondary`}
+          >
+            Cancel
           </button>
         </div>
       </form>
