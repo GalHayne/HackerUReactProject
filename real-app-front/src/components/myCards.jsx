@@ -99,6 +99,10 @@ const MyCards = () => {
         })
       )
 
+      if(galleryStyle === false && onlyFavorite && favoriteCards.length === 0){
+        toogleStyle()
+      }
+
 
   return (
     <>

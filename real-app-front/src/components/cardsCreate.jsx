@@ -70,7 +70,7 @@ const CardsCreate = () => {
       const res = usersService.getMe(user?._id);
       res
         .then((res) =>
-          toast.success("You have connected successfully, insert a new card")
+          {}
         )
         .catch((res) => {
           if (res.response.status === 404) {
