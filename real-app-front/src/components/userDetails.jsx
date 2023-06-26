@@ -14,7 +14,9 @@ const UserDeatils = () => {
   const [updateUser, setUpdateUser] = useState({
     name: userDetails.name,
     email: userDetails.email,
+    password: ' ',
   });
+
 
   const navigate = useNavigate();
 
@@ -105,7 +107,7 @@ const UserDeatils = () => {
   }
 
   return (
-    <div className="d-flex flex-column">
+    <div className="d-flex flex-column justify-content-center align-items-center w-25">
       <PageHeader title={<>User Details</>} />
       <img
         className="rounded-circle m-3"
@@ -128,7 +130,7 @@ const UserDeatils = () => {
       )}
       {!showEdit && (
         <button
-          className={`rounded w-25 btn btn-primary ${theme}`}
+          className={`rounded w-100 btn btn-primary ${theme}`}
           style={{ minWidth: "100px" }}
           title="edit profile"
           onClick={handleToggleShowEdit}
@@ -138,37 +140,44 @@ const UserDeatils = () => {
       )}
       {showEdit && (
         <form onSubmit={e => handleSumbit(e)}>
-          <div className="w-25">
-            <input
-              required
-              onChange={(e) => {
-                handleChangeName(e);
-              }}
-              minLength="2"
-              maxLength="255"
-              className="rounded m-3 form-group p-2 needs-validation"
-              type="text"
-              value={updateUser.name}
-            />
-            <input
-              required
-              onChange={(e) => {
-                handleChangeEmail(e);
-              }}
-              minLength="2"
-              maxLength="255"
-              name="email"
-              className="rounded m-3 form-group p-2 needs-validation"
-              type="text"
-              value={updateUser.email}
-            />
+          <div className="w-100">
+            <div className="d-flex flex-column">
+              <label>Name:</label>
+              <input
+                required
+                onChange={(e) => {
+                  handleChangeName(e);
+                }}
+                minLength="2"
+                maxLength="255"
+                className="rounded m-3 form-group p-2 needs-validation"
+                type="text"
+                value={updateUser.name}
+              />
+            </div>
+            <div className="d-flex flex-column">
+              <label>Email:</label>
+              <input
+                required
+                onChange={(e) => {
+                  handleChangeEmail(e);
+                }}
+                minLength="2"
+                maxLength="255"
+                name="email"
+                className="rounded m-3 form-group p-2 needs-validation"
+                type="text"
+                value={updateUser.email}
+              />
+            </div>
           </div>
 
-          <div className="d-flex w-25">
+          <div className="d-flex w-100">
             <button
               disabled={
                 updateUser.name === userDetails.name &&
-                updateUser.email === userDetails.email
+                updateUser.email === userDetails.email &&
+                updateUser.password === userDetails.password
               }
               className={`btn btn-primary ${theme} m-3`}
             >
