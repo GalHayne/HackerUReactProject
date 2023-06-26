@@ -43,7 +43,7 @@ const CardModal = ({ onClose, card: {
                         : bizName}
                 </h5>
             </div>
-            <div className="card-body">
+            <div className="card-body d-flex flex-column align-items-start">
                 <p className="card-text">
                     <span className="bold">Description: </span>
                     {bizDescription.length > 100
@@ -63,7 +63,7 @@ const CardModal = ({ onClose, card: {
             </div>
             <hr />
             {user.biz ? (
-                <div className="d-flex justify-content-around P-2">
+                <div className="d-flex justify-content-between P-2">
                     <button
                         title="edit card"
                         className={`btn btn-primary ${theme}`}
@@ -72,7 +72,7 @@ const CardModal = ({ onClose, card: {
                         Edit
                     </button>
                     <button
-                    title="delete card"
+                        title="delete card"
                         className="btn btn-secondary"
                         onClick={() => navigate(`/my-cards/delete/${_id}`)}
                     >
