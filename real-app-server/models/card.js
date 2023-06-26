@@ -40,6 +40,7 @@ const cardSchema = new mongoose.Schema({
     maxlength: 99999999999,
     unique: true,
   },
+  createdAt: { type: Date, default: Date.now },
   userFavorite: {
     type: Array,
     required: true,
