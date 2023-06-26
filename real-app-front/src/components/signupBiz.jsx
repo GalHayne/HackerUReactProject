@@ -17,6 +17,9 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
   const navigate = useNavigate();
   const { user, createUser } = useAuth();
 
+  const regularExpression =
+    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,255}$/;
+
   const form = useFormik({
     validateOnMount: true,
     initialValues: {
@@ -35,22 +38,24 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
       password: Joi.string().min(6).max(1024).required().label("Password"),
     }),
     async onSubmit(values) {
-      try {
-        const res = await createUser({
-          ...values,
-          biz: true,
-          block: false,
-          admin: false,
-        });
-        if (res) {
-          toast.success(
-            `${res.data.name} you have successfully registered to the site, you are transferred to the login page`
-          );
-        }
-        navigate(redirect);
-      } catch ({ response }) {
-        if (response && response.status === 400) {
-          setError(response.data);
+      if (regularExpression.test(values.password)) {
+        try {
+          const res = await createUser({
+            ...values,
+            biz: true,
+            block: false,
+            admin: false,
+          });
+          if (res) {
+            toast.success(
+              `${res.data.name} you have successfully registered to the site, you are transferred to the login page`
+            );
+          }
+          navigate(redirect);
+        } catch ({ response }) {
+          if (response && response.status === 400) {
+            setError(response.data);
+          }
         }
       }
     },
