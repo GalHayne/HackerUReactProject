@@ -96,9 +96,9 @@ const CardModal = ({
             width="150"
             height="150"
             style={{border:"0", borderRadius: '15px', padding: '5px'}}
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
         <div>
