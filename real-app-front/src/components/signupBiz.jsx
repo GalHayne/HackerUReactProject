@@ -57,6 +57,11 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
             setError(response.data);
           }
         }
+      } else {
+        setError("The password does not match the policy");
+        toast.error(
+          "The password length must be minimum 6 char ,  at least a number, and at least a special character."
+        );
       }
     },
   });
