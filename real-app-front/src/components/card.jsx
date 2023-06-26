@@ -100,7 +100,7 @@ const Card = ({ card,
         </p>
       </div>
       <hr />
-      {user?._id === _id  ? (
+      {user?._id === _id || user.admin  ? (
         <div className="d-flex justify-content-between P-2">
           <button
             className={`btn btn-primary ${theme}`}

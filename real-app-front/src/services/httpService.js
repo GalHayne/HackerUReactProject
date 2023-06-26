@@ -12,9 +12,6 @@ axios.interceptors.response.use(null, (error) => {
   if (error.code === "ERR_NETWORK") {
     toast.error("Network Error");
   }
-  // } else if (error.response && error.response.status >= 403) {
-  //   toast.error("An unexpected error occurred");
-  // }
 
   return Promise.reject(error);
 });

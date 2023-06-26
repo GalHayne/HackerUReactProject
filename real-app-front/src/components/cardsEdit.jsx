@@ -135,7 +135,6 @@ const CardsEdit = () => {
           <button
           title="cancel"
             onClick={() => navigate('/my-cards')}
-            disabled={!form.isValid}
             className={`btn btn-secondary`}
           >
             Cancel 
