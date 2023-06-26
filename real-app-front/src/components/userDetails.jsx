@@ -145,7 +145,7 @@ const UserDeatils = () => {
                 handleChangeName(e);
               }}
               minLength="2"
-              maxLength="12"
+              maxLength="255"
               className="rounded m-3 form-group p-2 needs-validation"
               type="text"
               value={updateUser.name}
@@ -156,7 +156,7 @@ const UserDeatils = () => {
                 handleChangeEmail(e);
               }}
               minLength="2"
-              maxLength="25"
+              maxLength="255"
               name="email"
               className="rounded m-3 form-group p-2 needs-validation"
               type="text"
