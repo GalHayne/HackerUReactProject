@@ -17,6 +17,9 @@ const SignupAdmin = ({ redirect = "/sign-in" }) => {
   const navigate = useNavigate();
   const { user, createUser } = useAuth();
 
+  const regularExpression =
+    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,255}$/;
+
   const form = useFormik({
     validateOnMount: true,
     initialValues: {
@@ -35,23 +38,30 @@ const SignupAdmin = ({ redirect = "/sign-in" }) => {
       password: Joi.string().min(6).max(1024).required().label("Password"),
     }),
     async onSubmit(values) {
-      try {
-        const res = await createUser({
-          ...values,
-          biz: true,
-          block: false,
-          admin: true,
-        });
-        if (res) {
-          toast.success(
-            `${res.data.name} you have successfully registered to the site, you are transferred to the login page`
-          );
+      if (regularExpression.test(values.password)) {
+        try {
+          const res = await createUser({
+            ...values,
+            biz: true,
+            block: false,
+            admin: true,
+          });
+          if (res) {
+            toast.success(
+              `${res.data.name} you have successfully registered to the site, you are transferred to the login page`
+            );
+          }
+          navigate(redirect);
+        } catch ({ response }) {
+          if (response && response.status === 400) {
+            setError(response.data);
+          }
         }
-        navigate(redirect);
-      } catch ({ response }) {
-        if (response && response.status === 400) {
-          setError(response.data);
-        }
+      } else {
+        setError("The password does not match the policy");
+        toast.error(
+          "The password length must be minimum 8 char ,  at least a number, and at least a special character."
+        );
       }
     },
   });

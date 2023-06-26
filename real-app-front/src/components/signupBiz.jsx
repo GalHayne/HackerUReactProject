@@ -18,7 +18,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
   const { user, createUser } = useAuth();
 
   const regularExpression =
-    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,255}$/;
+    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,255}$/;
 
   const form = useFormik({
     validateOnMount: true,
@@ -35,7 +35,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
         .required()
         .email({ tlds: { allow: false } })
         .label("Email"),
-      password: Joi.string().min(6).max(1024).required().label("Password"),
+      password: Joi.string().min(8).max(1024).required().label("Password"),
     }),
     async onSubmit(values) {
       if (regularExpression.test(values.password)) {
@@ -60,7 +60,7 @@ const SignUpBiz = ({ redirect = "/sign-in" }) => {
       } else {
         setError("The password does not match the policy");
         toast.error(
-          "The password length must be minimum 6 char ,  at least a number, and at least a special character."
+          "The password length must be minimum 8 char ,  at least a number, and at least a special character."
         );
       }
     },
