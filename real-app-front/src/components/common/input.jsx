@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Input = ({ label, name, error, type = 'password', width = "w-100", eye , password ,placeholder= "",...rest }) => {
+const Input = ({ label, name, error, type = 'password', width = "w-100", maxLength=60 ,eye , password ,placeholder= "",...rest }) => {
 
   const [showPassword,setShowPassword] = useState(type)
 
@@ -28,6 +28,8 @@ const Input = ({ label, name, error, type = 'password', width = "w-100", eye , p
       id={name}
       type={showPassword}
       name={name}
+      minLength={2}
+      maxLength={maxLength}
       className={["form-control", error && "is-invalid", width]
       .filter(Boolean)
       .join(" ")}

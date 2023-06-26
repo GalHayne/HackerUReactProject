@@ -38,7 +38,7 @@ const Card = ({ card,
   return (
     <div
       className={`card-desgin m-3 ${theme}`}
-      style={{ minWidth: "12rem", width: "20rem", height: "20rem" }}
+      style={{ minWidth: "12rem", width: "20rem", height: "20rem" , padding:"1%" }}
     >
       {!isFavoriteCard ? (
         <div className="d-flex justify-content-between">

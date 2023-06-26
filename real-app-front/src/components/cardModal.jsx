@@ -65,7 +65,7 @@ const CardModal = ({
 
         <h5 className="card-title">
           Name:
-          {bizName.length > 60 ? bizName.substring(0, 60) + "..." : bizName}
+          {bizName.length > " " +  60 ? bizName.substring(0, 60) + "..." : " " + bizName}
         </h5>
       </div>
       <hr></hr>
@@ -147,24 +147,6 @@ const CardModal = ({
         </>
       )}
     </div>
-
-    //     <div className="container" style={modalStyle}>
-    //       <div class="row">
-    //     <div class="col-sm-4">col-sm-4</div>
-    //     <div class="col-sm-4">col-sm-4</div>
-    //     <div class="col-sm-4">col-sm-4</div>
-    //   </div>
-    //   <div class="row">
-    //     <div class="col-sm">col-sm</div>
-    //     <div class="col-sm">col-sm</div>
-    //     <div class="col-sm">col-sm</div>
-    //   </div>
-    //   <div class="row">
-    //     <div class="col-sm">col-sm</div>
-    //     <div class="col-sm">col-sm</div>
-    //     <div class="col-sm">col-sm</div>
-    //   </div>
-    //     </div>
   );
 };
 
