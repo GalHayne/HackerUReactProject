@@ -122,10 +122,13 @@ router.put("/updateDetails/:id", auth, async (req, res) => {
 
   let users = await User.find({ email: req.body.email });
 
+  console.log(users.length > 0);
+  console.log(JSON.stringify(req.params.id) !== JSON.stringify(user._id));
+
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
-    
-    if (users.length > 0)
+
+  if (users.length > 0 && JSON.stringify(req.params.id) !== JSON.stringify(users[0]._id))
     return res.status(404).send("The email already exists in the system , choose another one");
 
   user.email = req.body.email;
