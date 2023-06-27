@@ -1,37 +1,59 @@
 import { useState } from "react";
 import useDarkContext from "../../hooks/useDarkModa-context";
 
-const Input = ({ label, name, error, type = 'password', width = "w-100", maxLength = 60, eye, password, placeholder = "", ...rest }) => {
-
-  const [showPassword, setShowPassword] = useState(type)
+const Input = ({
+  label,
+  name,
+  error,
+  type = "password",
+  width = "w-100",
+  maxLength = 60,
+  eye,
+  password,
+  placeholder = "",
+  ...rest
+}) => {
+  const [showPassword, setShowPassword] = useState(type);
 
   const { theme } = useDarkContext();
 
   const handleShowPasswordChange = () => {
-    setShowPassword(prev => {
-      if (prev === 'text') {
-        return 'password'
+    setShowPassword((prev) => {
+      if (prev === "text") {
+        return "password";
       } else {
-        return 'text'
+        return "text";
       }
-    })
-  }
+    });
+  };
 
   return (
     <div className="form-group my-1">
-
       <label htmlFor={name}>
         <div className="flex d-flex">
           {rest.required && <span className="text-danger ms-1">*</span>}
           {label}
-          {showPassword === 'password' ? <div>
-            <i className={`bi bi-eye-fill ${theme} m-1 w-100`} onClick={handleShowPasswordChange}></i>
-          </div> : (showPassword === 'text' && eye === true) ? <div>
-            <i className={`bi bi-eye-slash-fill ${theme} m-1 w-100`} onClick={handleShowPasswordChange}></i>
-          </div> : ''}
+          {showPassword === "password" ? (
+            <div>
+              <i
+                className={`bi bi-eye-fill ${theme} m-1 w-100`}
+                onClick={handleShowPasswordChange}
+              ></i>
+            </div>
+          ) : showPassword === "text" && eye === true ? (
+            <div>
+              <i
+                className={`bi bi-eye-slash-fill ${theme} m-1 w-100`}
+                onClick={handleShowPasswordChange}
+              ></i>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </label>
       <input
+        style={{ minWidth: "200px" }}
         placeholder={placeholder}
         {...rest}
         id={name}
@@ -46,7 +68,6 @@ const Input = ({ label, name, error, type = 'password', width = "w-100", maxLeng
 
       <span className="invalid-feedback">{error}</span>
     </div>
-
   );
 };
 

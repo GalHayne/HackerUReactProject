@@ -96,13 +96,16 @@ router.delete("/deleteUser/:id", auth, async (req, res) => {
       const userDelete = await User.findOneAndRemove({ _id: req.params.id });
       res.status(201).send(userDelete);
     } else {
-      const mapCardsId = user.favoriteCard.map(card => {
-        return card._id
-      })
+      const mapCardsId = user.favoriteCard.map((card) => {
+        return card._id;
+      });
       for (let i = 0; i < mapCardsId.length; ++i) {
-        let card = await Card.findOne({ _id: mapCardsId[i] })
+        let card = await Card.findOne({ _id: mapCardsId[i] });
         for (let j = 0; j < card.userFavorite.length; ++j) {
-          if (JSON.stringify(card.userFavorite[j]._id) === JSON.stringify(user._id)) {
+          if (
+            JSON.stringify(card.userFavorite[j]._id) ===
+            JSON.stringify(user._id)
+          ) {
             card.userFavorite.splice(j, 1);
             card.save();
           }
@@ -110,7 +113,7 @@ router.delete("/deleteUser/:id", auth, async (req, res) => {
       }
       user.favoriteCard = [];
       user.save();
-      res.status(200).send('need cal again to delete')
+      res.status(200).send("need cal again to delete");
     }
   } else {
     res.status(404).send(cards);
@@ -125,16 +128,36 @@ router.put("/updateDetails/:id", auth, async (req, res) => {
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
 
-  if (users.length > 0 && JSON.stringify(req.params.id) !== JSON.stringify(users[0]._id))
-    return res.status(404).send("The email already exists in the system , choose another one");
+  if (
+    users.length > 0 &&
+    JSON.stringify(req.params.id) !== JSON.stringify(users[0]._id)
+  )
+    return res
+      .status(404)
+      .send("The email already exists in the system , choose another one");
 
   user.email = req.body.email;
   user.name = req.body.name;
+  await user.save();
+
+  res.send("success update details");
+});
+
+router.put("/updatePassword/:id", auth, async (req, res) => {
+  let user = await User.findOne({ _id: req.params.id });
+
+  if (!user)
+    return res.status(404).send("The user with the given ID was not found.");
+    
+    if (req.body.password.length === 0){
+    return res.status(404).send("The password cannot be 0 in length.");
+  }
+
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(req.body.password, salt);
   await user.save();
 
-  res.send('success update details');
+  res.send("success update password");
 });
 
 router.put("/addFavoriteCard/:card_id/:user_id", auth, async (req, res) => {
