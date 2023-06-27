@@ -15,7 +15,7 @@ const UserDeatils = () => {
   const [updateUser, setUpdateUser] = useState({
     name: userDetails.name,
     email: userDetails.email,
-    password: userDetails.password,
+    password: "test",
   });
 
 
@@ -201,7 +201,6 @@ const UserDeatils = () => {
                 name="password"
                 className="rounded m-3 form-group p-2 needs-validation"
                 type="password"
-                value={updateUser.password}
               />
             </div>
           </div>
