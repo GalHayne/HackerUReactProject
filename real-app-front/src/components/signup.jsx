@@ -53,9 +53,9 @@ const SignUp = ({ redirect = "/" }) => {
         } catch ({ response }) {
           if (response && response.status === 400) {
             setError(response.data);
-          } 
+          }
         }
-      }else{
+      } else {
         setError("The password does not match the policy");
         toast.error(
           "The password length must be minimum 8 char ,  at least a number, and at least a special character."
@@ -103,10 +103,6 @@ const SignUp = ({ redirect = "/" }) => {
             eye
             error={form.touched.password && form.errors.password}
           />
-
-          <p className="text-danger">
-            Note The fields marked with an * are mandatory
-          </p>
 
           <div className="my-2">
             <button

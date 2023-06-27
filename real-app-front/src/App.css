@@ -49,13 +49,24 @@
   background-color: #0e5735;
 }
 
-.bi-eye-fill,
-.bi-eye-slash-fill{
+.bi-eye-fill.dark,
+.bi-eye-slash-fill.dark {
+  color: var(--card-bgColor-light);
+  cursor: pointer;
+}
+
+.bi-eye-fill.dark:hover,
+.bi-eye-slash-fill.dark:hover {
+  color: var(--li-hover-color);
+}
+
+.bi-eye-fill.light,
+.bi-eye-slash-fill.light {
   color: var(--card-bgColor-dark);
   cursor: pointer;
 }
 
-.bi-eye-fill:hover,
-.bi-eye-slash-fill:hover{
+.bi-eye-fill.light:hover,
+.bi-eye-slash-fill.light:hover {
   color: var(--dark-backGroundColor);
 }
