@@ -122,9 +122,6 @@ router.put("/updateDetails/:id", auth, async (req, res) => {
 
   let users = await User.find({ email: req.body.email });
 
-  console.log(users.length > 0);
-  console.log(JSON.stringify(req.params.id) !== JSON.stringify(user._id));
-
   if (!user)
     return res.status(404).send("The user with the given ID was not found.");
 
@@ -133,8 +130,10 @@ router.put("/updateDetails/:id", auth, async (req, res) => {
 
   user.email = req.body.email;
   user.name = req.body.name;
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(req.body.password, salt);
+  await user.save();
 
-  user.save();
   res.send('success update details');
 });
 

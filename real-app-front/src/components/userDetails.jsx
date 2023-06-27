@@ -7,6 +7,7 @@ import PageHeader from "./common/pageHeader";
 import usersService from "../services/usersService";
 import useDarkContext from "../hooks/useDarkModa-context";
 import axios from "axios";
+import Input from "./common/input";
 
 const UserDeatils = () => {
   const [userDetails, setUserDetails] = useState("");
@@ -14,7 +15,7 @@ const UserDeatils = () => {
   const [updateUser, setUpdateUser] = useState({
     name: userDetails.name,
     email: userDetails.email,
-    password: ' ',
+    password: userDetails.password,
   });
 
 
@@ -58,6 +59,9 @@ const UserDeatils = () => {
     return /\S+@\S+\.\S+/.test(email);
   }
 
+  const regularExpression =
+    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,255}$/;
+
   const handleToggleShowEdit = () => {
     setShowEdit((prevState) => {
       return !prevState;
@@ -77,28 +81,42 @@ const UserDeatils = () => {
     setUpdateUser((prev) => ({ ...prev, email: e.target.value }));
   };
 
+  const handleChangePassword = (e) => {
+    setUpdateUser((prev) => ({ ...prev, password: e.target.value }));
+  };
+
   const handleSumbit = async (e) => {
 
     e.preventDefault();
 
-    if (isValidEmail(updateUser.email)) {
-      try {
-        const res = await axios.put(
-          `http://localhost:3900/api/users/updateDetails/${user._id}`,
-          {
-            name: updateUser.name,
-            email: updateUser.email,
-          }
-        );
-        toast.success(res.data);
-        setShowEdit(false);
-        getMe()
-        setShowEdit(false);
-      } catch (err) {
-        toast.error(err.response.data);
+
+    if (regularExpression.test(updateUser.password)) {
+
+
+      if (isValidEmail(updateUser.email)) {
+        try {
+          const res = await axios.put(
+            `http://localhost:3900/api/users/updateDetails/${user._id}`,
+            {
+              name: updateUser.name,
+              email: updateUser.email,
+              password: updateUser.password,
+            }
+          );
+          toast.success(res.data);
+          setShowEdit(false);
+          getMe()
+          setShowEdit(false);
+        } catch (err) {
+          toast.error(err.response.data);
+        }
+      } else {
+        toast.error("The email must be valid");
       }
     } else {
-      toast.error("The email must be valid");
+      toast.error(
+        "The password length must be minimum 8 char ,  at least a number, and at least a special character."
+      );
     }
   };
 
@@ -142,32 +160,48 @@ const UserDeatils = () => {
         <form onSubmit={e => handleSumbit(e)}>
           <div className="w-100">
             <div className="d-flex flex-column">
-              <label>Name:</label>
-              <input
+              <Input
                 required
                 onChange={(e) => {
                   handleChangeName(e);
                 }}
+                label={"Name"}
                 minLength="2"
-                maxLength="255"
+                maxLength="120"
                 className="rounded m-3 form-group p-2 needs-validation"
                 type="text"
                 value={updateUser.name}
               />
             </div>
             <div className="d-flex flex-column">
-              <label>Email:</label>
-              <input
+              <Input
                 required
                 onChange={(e) => {
                   handleChangeEmail(e);
                 }}
+                label={"Email"}
                 minLength="2"
-                maxLength="255"
+                maxLength="120"
                 name="email"
                 className="rounded m-3 form-group p-2 needs-validation"
                 type="text"
                 value={updateUser.email}
+              />
+            </div>
+            <div className="d-flex flex-column">
+              <Input
+                label={"Password"}
+                required
+                onChange={(e) => {
+                  handleChangePassword(e);
+                }}
+                eye
+                minLength="8"
+                maxLength="255"
+                name="password"
+                className="rounded m-3 form-group p-2 needs-validation"
+                type="password"
+                value={updateUser.password}
               />
             </div>
           </div>
