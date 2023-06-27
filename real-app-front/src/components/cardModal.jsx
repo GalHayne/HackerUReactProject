@@ -63,7 +63,7 @@ const CardModal = ({
           alt={bizName}
         />
 
-        <h5 className="card-title">
+        <h5 className="card-title" title={bizName}>
           Name:
           {bizName.length > " " +  60 ? bizName.substring(0, 60) + "..." : " " + bizName}
         </h5>
@@ -71,19 +71,19 @@ const CardModal = ({
       <hr></hr>
       <div className="card-body d-flex justify-content-around align-items-center">
         <div>
-          <p className="card-text">
+          <p className="card-text" title={bizDescription}>
             <span className="bold">Description: </span>
             {bizDescription.length > 100
               ? bizDescription.substring(0, 100) + "..."
               : bizDescription}
           </p>
-          <p className="card-text">
+          <p className="card-text" title={bizAddress}>
             <span className="bold">Address: </span>
             {bizAddress.length > 100
               ? bizAddress.substring(0, 100) + "..."
               : bizAddress}
           </p>
-          <p className="card-text">
+          <p className="card-text" title={bizPhone}>
             <span className="bold">Phone: </span>
             {bizPhone.length > 100
               ? bizPhone.substring(0, 100) + "..."

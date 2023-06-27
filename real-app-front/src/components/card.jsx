@@ -77,24 +77,24 @@ const Card = ({ card,
           className=" card-img-top my-1 p-1 w-50 rounded-circle"
           alt={bizName}
         />
-        <h5 className="card-title">
+        <h5 className="card-title" title={bizName}>
           {bizName.length > 12 ? bizName.substring(0, 12) + "..." : bizName}
         </h5>
       </div>
       <div className="card-body">
-        <p className="card-text">
+        <p className="card-text" title={bizDescription}>
           <span className="bold">Description: </span> :{" "}
           {bizDescription.length > 32
             ? bizDescription.substring(0, 32) + "..."
             : bizDescription}
         </p>
-        <p className="card-text">
+        <p className="card-text" title={bizAddress}>
           <span className="bold">Address: </span> :
           {bizAddress.length > 32
             ? bizAddress.substring(0, 32) + "..."
             : bizAddress}
         </p>
-        <p className="card-text">
+        <p className="card-text" title={bizPhone}>
           <span className="bold">Phone: </span> :{" "}
           {bizPhone.length > 32 ? bizPhone.substring(0, 32) + "..." : bizPhone}
         </p>
