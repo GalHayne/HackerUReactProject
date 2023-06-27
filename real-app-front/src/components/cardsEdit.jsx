@@ -119,13 +119,9 @@ const CardsEdit = () => {
           error={form.touched.bizImage && form.errors.bizImage}
         />
 
-        <p className="text-danger">
-          Note The fields marked with an * are mandatory
-        </p>
-
         <div className="my-2 d-flex justify-content-between">
           <button
-          title="update card"
+            title="update card"
             type="submit"
             disabled={!form.isValid}
             className={`btn btn-primary ${theme}`}
@@ -133,11 +129,11 @@ const CardsEdit = () => {
             Update Card
           </button>
           <button
-          title="cancel"
+            title="cancel"
             onClick={() => navigate('/my-cards')}
             className={`btn btn-secondary`}
           >
-            Cancel 
+            Cancel
           </button>
         </div>
       </form>

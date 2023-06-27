@@ -69,7 +69,7 @@ const CardsCreate = () => {
     try {
       const res = usersService.getMe(user?._id);
       res
-        .then((res) => {})
+        .then((res) => { })
         .catch((res) => {
           if (res.response.status === 404) {
             toast.error("The user does not exist please sign up");
@@ -123,9 +123,6 @@ const CardsCreate = () => {
           error={form.touched.bizImage && form.errors.bizImage}
         />
 
-        <p className="text-danger">
-          Note The fields marked with an * are mandatory
-        </p>
         <div className="my-2 d-flex justify-content-between">
           <button
             type="submit"
