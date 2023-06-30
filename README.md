@@ -46,4 +46,6 @@ cd real-app-server
 npm run dev
 ```
 
-
+## Starting work
+> After the installation was successful, the site opened, tell the main screen of the site
+![Alt text](real-app-front/src/imgs/Hayne's_cards_Home.JPG)
