@@ -8,7 +8,7 @@ const UserFormPassword = ({ theme, handleToggleShowEdit, handlePassword }) => {
   const [newPass2, setNewPass2] = useState("");
 
   const regularExpression =
-    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,255}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@%$#^&*\-_])(?=(.*\d){4,})[a-zA-Z!@%$#^&*\-_\d]{8,}$/;
 
   const handleCheckValid = ({ newPass, newPass2 }) => {
     if (newPass === "" || newPass2 === "") {

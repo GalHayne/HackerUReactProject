@@ -20,6 +20,9 @@ const SignIn = ({ redirect = "/" }) => {
 
   const navigate = useNavigate();
 
+  const regularExpression =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@%$#^&*\-_])(?=(.*\d){4,})[a-zA-Z!@%$#^&*\-_\d]{8,}$/;
+
   const form = useFormik({
     validateOnMount: true,
     initialValues: {
@@ -33,12 +36,20 @@ const SignIn = ({ redirect = "/" }) => {
         .required()
         .email({ tlds: { allow: false } })
         .label("Email"),
-      password: Joi.string().min(6).max(1024).required().label("Password"),
+      password: Joi.string()
+        .min(6)
+        .max(1024)
+        .required()
+        .regex(
+          regularExpression,
+          "The password must have at least one uppercase English letter, one lowercase English letter, at least 4 numbers and one special character. The minimum length of the password is 8 characters"
+        )
+        .label("Password"),
     }),
     async onSubmit(values) {
       try {
         const res = await login(values);
-        showTheResponse(res)
+        showTheResponse(res);
         if (res.response.data !== 200) {
           setError(res.response.data);
           return;
@@ -47,7 +58,6 @@ const SignIn = ({ redirect = "/" }) => {
         toast.success(`You have successfully connected to the system`);
         navigate(redirect);
       }
-
     },
   });
 

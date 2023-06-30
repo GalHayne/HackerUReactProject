@@ -18,7 +18,7 @@ const SignupAdmin = ({ redirect = "/sign-in" }) => {
   const { user, createUser } = useAuth();
 
   const regularExpression =
-    /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,255}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@%$#^&*\-_])(?=(.*\d){4,})[a-zA-Z!@%$#^&*\-_\d]{8,}$/;
 
   const form = useFormik({
     validateOnMount: true,
@@ -35,7 +35,10 @@ const SignupAdmin = ({ redirect = "/sign-in" }) => {
         .required()
         .email({ tlds: { allow: false } })
         .label("Email"),
-      password: Joi.string().min(6).max(1024).required().label("Password"),
+      password: Joi.string().min(6).max(1024).regex(
+        regularExpression,
+        "The password must have at least one uppercase English letter, one lowercase English letter, at least 4 numbers and one special character. The minimum length of the password is 8 characters"
+      ).required().label("Password"),
     }),
     async onSubmit(values) {
       if (regularExpression.test(values.password)) {
