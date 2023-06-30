@@ -211,6 +211,7 @@ router.patch("/cards", auth, async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
+  console.log(req.user);
   try {
     const user = await User.findById(req.user._id).select("-password");
     res.send(user);

@@ -1,7 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import { ToastContainer } from "react-toastify";
 
@@ -22,9 +22,17 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import UserDeatils from "./components/userDetails";
 import useDarkContext from "./hooks/useDarkModa-context";
 import SignupAdmin from "./components/signupAdmin";
+import { useEffect } from "react";
+import usersService from "./services/usersService";
 
 function App() {
   const { theme } = useDarkContext();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/sign-out");
+  }, []);
 
   return (
     <div className="app d-flex flex-column min-vh-100" id={theme}>
@@ -48,11 +56,14 @@ function App() {
           <Route path="sign-in" element={<SignIn redirect="/" />} />
           <Route path="sign-out" element={<SignOut redirect="/" />} />
           <Route path="user-details" element={<UserDeatils redirect="/" />} />
-          <Route path="my-cards" element={
-            <ProtectedRoute>
-              <MyCards />
-            </ProtectedRoute>
-          } />
+          <Route
+            path="my-cards"
+            element={
+              <ProtectedRoute>
+                <MyCards />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="users"
             element={
