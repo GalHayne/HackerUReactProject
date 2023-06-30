@@ -2,13 +2,12 @@ import { useState } from "react";
 import Input from "./common/input";
 import { toast } from "react-toastify";
 
-
 const UserFormPassword = ({ theme, handleToggleShowEdit, handlePassword }) => {
   const [newPass, setNewPass] = useState("");
   const [newPass2, setNewPass2] = useState("");
 
   const regularExpression =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@%$#^&*\-_])(?=(.*\d){4,})[a-zA-Z!@%$#^&*\-_\d]{8,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@%$#^&*\-_])(?=(.*\d){4,})[a-zA-Z!@%$#^&*\-_\d]{8,}$/;
 
   const handleCheckValid = ({ newPass, newPass2 }) => {
     if (newPass === "" || newPass2 === "") {
@@ -31,7 +30,7 @@ const UserFormPassword = ({ theme, handleToggleShowEdit, handlePassword }) => {
       return false;
     }
 
-    handlePassword(newPass)
+    handlePassword(newPass);
   };
 
   return (
@@ -68,7 +67,12 @@ const UserFormPassword = ({ theme, handleToggleShowEdit, handlePassword }) => {
         </div>
 
         <div className="d-flex w-100">
-          <button className={`btn btn-primary ${theme} m-3`} disabled={newPass2 === "" || newPass === ""}>Update</button>
+          <button
+            className={`btn btn-primary ${theme} m-3`}
+            disabled={newPass2 === "" || newPass === ""}
+          >
+            Update
+          </button>
           <button
             className={`btn btn-danger ${theme} m-3`}
             onClick={() => handleToggleShowEdit()}
