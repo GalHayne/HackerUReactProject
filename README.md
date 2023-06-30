@@ -26,7 +26,7 @@ npm i --force
 ```
 
 > Note that you must have mongoDB on your computer:
-[MongoDB installation](https://tomchentw.github.io/react-google-maps/#installation)
+[MongoDB installation](https://www.mongodb.com/docs/manual/installation/)
 
 ## Run The Project
 > In first terminal (real-app-front) write npm run start
