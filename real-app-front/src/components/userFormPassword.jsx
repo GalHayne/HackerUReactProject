@@ -39,7 +39,7 @@ const UserFormPassword = ({ theme, handleToggleShowEdit, handlePassword }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(handleCheckValid({ newPass, newPass2 }));
+          handleCheckValid({ newPass, newPass2 });
         }}
       >
         <div className="w-100">

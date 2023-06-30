@@ -24,14 +24,28 @@ import useDarkContext from "./hooks/useDarkModa-context";
 import SignupAdmin from "./components/signupAdmin";
 import { useEffect } from "react";
 import usersService from "./services/usersService";
+import { useAuth } from "./context/auth.context";
 
 function App() {
   const { theme } = useDarkContext();
 
   const navigate = useNavigate();
 
+  const { user } = useAuth();
+
   useEffect(() => {
-    navigate("/sign-out");
+
+    try{
+
+      const res = usersService.getMe(user?._id)
+      res
+      .catch(() => navigate("/sign-out"))
+    }catch(err){
+      navigate("/sign-out");
+      console.log(err);
+    }
+    
+
   }, []);
 
   return (
