@@ -42,3 +42,5 @@ npm run dev
 ## Starting work
 > After the installation is successful, the site opens on the main screen of the site
 ![Alt text](real-app-front/src/imgs/Hayne's_cards_Home.JPG)
+
+### Enjoy :D
