@@ -3,25 +3,24 @@
 
 ## Creating a new project
 
-First use [create-react-app] to create your project:
+>First you will open a new folder from which you want to run the project
+>
+>Enter to visual code to the folder that you created before
+>
+>Open terminal and use git clone command:
 
 ```sh
-npx create-react-app my-app
-cd my-app
+git clone https://github.com/GalHayne/HackerUReactProject.git
+cd .\HackerUReactProject\
 ```
 
-> npx comes with npm 5.2+ and higher, if you have an older version you will need
-> to install `create-react-app` globally instead
-
-Or with `yarn`:
-
+>Open 2 terminals one for the front and the other for the server
 ```sh
-yarn create react-app my-app
-cd my-app
+cd .\real-app-front\
+cd .\real-app-server\
 ```
 
-
-> to install all framework use `npm i --force` inside real-app-fron and inside real-app-server
+> You need install all framework use `npm i --force` inside real-app-fron and inside real-app-server
 ```sh
 npm i --force 
 ```
@@ -30,22 +29,16 @@ npm i --force
 [MongoDB installation](https://tomchentw.github.io/react-google-maps/#installation)
 
 ## Run The Project
-> Open 2 Terminal
-```sh
-(Ctrl+Shift+`)
-```
-> In first terminal enter to `real-app-front` and start
-```sh
-cd real-app-front
+> In first terminal (real-app-front) write npm run start
+ ```sh
 npm run start
 ```
 
-> In other terminal enter to `real-app-server` and start the server
-```sh
-cd real-app-server
+> In other terminal (real-app-server) write npm run dev
+ ```sh
 npm run dev
 ```
 
 ## Starting work
-> After the installation was successful, the site opened, tell the main screen of the site
+> After the installation is successful, the site opens on the main screen of the site
 ![Alt text](real-app-front/src/imgs/Hayne's_cards_Home.JPG)
