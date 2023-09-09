@@ -9,7 +9,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 mongoose
-  .connect("mongodb://localhost/hayne_cards")
+  .connect("mongodb://127.0.0.1/hayne_cards")
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB..."));
 
