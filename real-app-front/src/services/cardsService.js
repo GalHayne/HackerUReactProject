@@ -5,6 +5,7 @@ export function createCard(card) {
 }
 
 export function getAll() {
+  console.log('im here');
   return httpService.get("/cards");
 }
 
